@@ -1,0 +1,11 @@
+/home/fanycaz/Proyectos/tso/bin/Debug/netcoreapp3.1/tso
+/home/fanycaz/Proyectos/tso/bin/Debug/netcoreapp3.1/tso.deps.json
+/home/fanycaz/Proyectos/tso/bin/Debug/netcoreapp3.1/tso.runtimeconfig.json
+/home/fanycaz/Proyectos/tso/bin/Debug/netcoreapp3.1/tso.runtimeconfig.dev.json
+/home/fanycaz/Proyectos/tso/bin/Debug/netcoreapp3.1/tso.dll
+/home/fanycaz/Proyectos/tso/bin/Debug/netcoreapp3.1/tso.pdb
+/home/fanycaz/Proyectos/tso/obj/Debug/netcoreapp3.1/tso.csprojAssemblyReference.cache
+/home/fanycaz/Proyectos/tso/obj/Debug/netcoreapp3.1/tso.AssemblyInfoInputs.cache
+/home/fanycaz/Proyectos/tso/obj/Debug/netcoreapp3.1/tso.AssemblyInfo.cs
+/home/fanycaz/Proyectos/tso/obj/Debug/netcoreapp3.1/tso.dll
+/home/fanycaz/Proyectos/tso/obj/Debug/netcoreapp3.1/tso.pdb
