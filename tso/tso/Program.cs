@@ -72,13 +72,23 @@ namespace tso
             nodosRecorridos.Add(nodoInicial);
             while (i < 8)
             {
+                i++;
                 Console.WriteLine("PRIMER PASO\n");
                 res = NodoCosto(matrix, auxiliar, nodosRecorridos);
-                nodoFinal = res[1];
-                costo += res[0];
-                nodosRecorridos.Add(nodoFinal);
-                i++;
-                Console.WriteLine("Resultados costoTotal: {0} - nodoFinal: {1} - min: {2}\n", costo, nodoFinal, res[0]);
+                if(res[1] != -1)
+                {
+                    nodoFinal = res[1];
+                    costo += res[0];
+                    nodosRecorridos.Add(nodoFinal);
+                    auxiliar = nodoFinal;
+                    Console.WriteLine("Resultados costoTotal: {0} - nodoFinal: {1} - min: {2}\n", costo, nodoFinal, res[0]);
+                }
+                else
+                {
+                    i = 0;
+
+                }
+                
             }
             //Console.WriteLine("SEGUNDO PASO\n");
             //res = NodoCosto(matrix, nodoFinal, nodosRecorridos);
