@@ -47,7 +47,6 @@ namespace tso
                         min = matriz[nodoInicial][i];
                     }
                 }
-
             }
 
             MostrarLista(nodosRecorridos);
@@ -56,17 +55,26 @@ namespace tso
         }
         static void Main(string[] args)
         {
-            int[][] matrix = new int[][] {  new int[] {0,3,5,2,0,0,0,10},
+            /*int[][] matrix = new int[][] {  new int[] {0,3,5,2,0,0,0,10},
                                         new int[] {3,0,5,8,4,0,6,6},
                                         new int[] {5,5,0,0,1,7,9,0},
                                         new int[] {2,8,0,0,12,0,0,14},
                                         new int[] {0,4,1,12,0,0,15,0},
                                         new int[] {0,0,7,0,0,0,0,9},
                                         new int[] {0,6,9,0,15,0,0,3},
-                                        new int[] {10,6,0,14,0,9,3,0} };
+                                        new int[] {10,6,0,14,0,9,3,0} };*/
+
+            int[][] matrix = new int[][] {  new int[] {0,3,5,2,0,0,0,10},
+                                            new int[] {3,0,5,8,4,0,6,6},
+                                            new int[] {5,5,0,0,1,7,9,0},
+                                            new int[] {2,8,0,0,12,0,0,14},
+                                            new int[] {0,4,1,12,0,0,15,0},
+                                            new int[] {0,0,7,0,0,0,0,9},
+                                            new int[] {0,6,9,0,15,0,0,3},
+                                            new int[] {10,6,0,14,0,9,3,0} };
 
             List<int> nodosRecorridos = new List<int>();
-            int nodoInicial = 3, distancia = 0 ,nodoFinal=int.MinValue;
+            int nodoInicial = 3 ,nodoFinal=int.MinValue;
             int costo = 0, i = 0, auxiliar=nodoInicial;
             int[] res;
             nodosRecorridos.Add(nodoInicial);
@@ -82,31 +90,17 @@ namespace tso
                     nodosRecorridos.Add(nodoFinal);
                     auxiliar = nodoFinal;
                     Console.WriteLine("Resultados costoTotal: {0} - nodoFinal: {1} - min: {2}\n", costo, nodoFinal, res[0]);
-                }
-                else
-                {
-                    i = 0;
 
+                }
+                else{
+                    Console.WriteLine("NO ES EL CAMINO");
+                    i = 0;
+                    auxiliar = nodosRecorridos.ElementAt(1);
+                    nodosRecorridos.Clear();
                 }
                 
             }
-            //Console.WriteLine("SEGUNDO PASO\n");
-            //res = NodoCosto(matrix, nodoFinal, nodosRecorridos);
-            //nodoFinal = res[1];
-            //nodosRecorridos.Add(nodoFinal);
-            //costo += res[0];
-            //Console.WriteLine("Resultados {0} - {1}\n", costo, nodoFinal);
-            //Console.WriteLine("TERCER PASO\n");
-            //res = NodoCosto(matrix, nodoFinal, nodosRecorridos);
-            //nodoFinal = res[1];
-            //nodosRecorridos.Add(nodoFinal);
-            //costo += res[0];
-            //Console.WriteLine("Resultados {0} - {1}\n", costo, nodoFinal);
-
-            //for (int j = 0; j < nodosRecorridos.Count(); j++)
-            //{
-            //    Console.Write("\theyy {0}", nodosRecorridos[j]);
-            //}
+         
         }
     }
 }
