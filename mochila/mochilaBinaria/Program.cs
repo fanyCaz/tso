@@ -7,10 +7,11 @@ namespace mochilaBinaria
     public class CombinacionValida{
         public int b;
         public int p;
-        public string numComb;
-        public CombinacionValida(int b, int p){
+        public int[] combinacion;
+        public CombinacionValida(int b, int p, int[] combinacion){
             this.b = b;
             this.p = p;
+            this.combinacion = combinacion;
         }
     }
     class Program
@@ -33,27 +34,29 @@ namespace mochilaBinaria
         {
             int numeroObjetos = 8;
             int capacidad = 60;
+            int pesoComb = 0,benefComb = 0;
+            char[] nombreArticulo = new char[]{'A','B','C','D','E','F','G','H'};
             int[] pesos = new int[] {15,12,10,13,22,16,10,14};
             int[] beneficios = new int[] {40,28,22,30,54,38,24,35};
             int numCombinaciones = (int)Math.Pow((double)(numeroObjetos * 2),2);
-            Console.WriteLine(numCombinaciones);
+
             List<CombinacionValida> comb = new List<CombinacionValida>();
-            int[] benefiTotales = new int[numCombinaciones];
             for(int i = 0; i < numCombinaciones; i++){
                 int[] binario = binary(i,numeroObjetos);
                 //suma producto de pesos por el binario de esta combinacion
-                int pesoComb = pesos.Zip(binario, (p,b) => p*b).Sum();
-                benefiTotales[i] = beneficios.Zip(binario,(be,bi) => be*bi ).Sum();
+                pesoComb = pesos.Zip(binario, (p,b) => p*b).Sum();
+                benefComb = beneficios.Zip(binario,(be,bi) => be*bi ).Sum();
                 if(pesoComb <= capacidad){
-                    comb.Add(new CombinacionValida(benefiTotales[i],pesoComb));
+                    comb.Add(new CombinacionValida(benefComb,pesoComb,binario));
                 }
             }
-            
-            var ordered = comb.OrderBy(x => x.p).OrderBy(y => y.b);
-            foreach(var i in ordered){
-                Console.WriteLine($"peso {i.p} y beneficio {i.b}");
+            var ordered = comb.OrderBy(x => x.p).OrderBy(y => y.b).Last();
+            Console.WriteLine($"Se pueden llevar los articulos : ");
+            for(int i = 0; i < ordered.combinacion.Length; i++){
+                if(ordered.combinacion[i] == 1)
+                    Console.Write(nombreArticulo[i]);   
             }
-            
+            Console.WriteLine($" Con el beneficio {ordered.b} y el peso {ordered.p}");
         }
     }
 }
