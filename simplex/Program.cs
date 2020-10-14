@@ -6,7 +6,7 @@ namespace simplex
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Simplex.Init();
         }
     }
 }
