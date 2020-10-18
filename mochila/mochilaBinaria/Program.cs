@@ -61,25 +61,25 @@ namespace mochilaBinaria
         }
 
         static int[] unidades(int iteracion, int numObj){
-            Queue<int> s = new Queue<int>();
             int contador=1;
             while(iteracion > (256*contador)){
                 contador+=1;
             }
-            Console.WriteLine($" {contador}");
-            int quotient= (iteracion <= (256*contador)) ? iteracion : iteracion-256;
-            int remainder = 0,parada = (256*contador) - 256;
-            do{
-                remainder = quotient%2;
-                quotient /= 2;
-                Console.WriteLine($"remainder : {remainder}  quotient {quotient}");
-                s.Enqueue(remainder*contador);
-            }while(quotient > 0);
-            for(int i = s.Count; i < numObj; i++){
-                s.Enqueue(0);
+            int send;
+            if(iteracion < 256){
+                send = iteracion;
             }
-            while(numObj < s.Count) s.Dequeue();//hay error aqui
-            return s.Reverse().ToArray();
+            else{
+                send = (iteracion%(256*contador)==0) ? iteracion-(256*contador) : iteracion-(256*(contador-1));
+            }
+            
+            int[] u = binary(send,numObj);
+            //Console.WriteLine($"longitud u {u.Length} objeto {numObj} itetacion {send} contador {contador}");
+            for(int i = 0; i < u.Length; i++){
+                //Console.WriteLine($"valor u {u[i]}");
+                u[i] = u[i] * contador;
+            }
+            return u;
         }
         
         static void multiunidad(List<Articulo> articulos, int capacidad, int numeroObjetos){
@@ -93,11 +93,12 @@ namespace mochilaBinaria
                 numCombinaciones *= cantPosible[i];
             }
             Console.WriteLine($"num combinaciones {numCombinaciones}");
-            var res = unidades(257,articulos.Count);
+            var res = unidades(767,articulos.Count);
             foreach(var i in res){
                 Console.Write($" {i} - ");
             }
             Console.Write($"\n");
+
         }
         
         static void Main(string[] args)
