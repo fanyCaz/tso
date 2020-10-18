@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace mochilaBinaria
@@ -30,10 +32,12 @@ namespace mochilaBinaria
         static char[] nombreArticulo = new char[]{'A','B','C','D','E','F','G','H'};
         static int[] pesos;
         static int[] beneficios;
+        static int[] cantPosible;
+        static List<CombinacionValida> comb = new List<CombinacionValida>();
+        static bool parada = false;
         static CombinacionValida binaria(int[] pesos, int[] beneficios,int capacidad, int numeroObjetos){
             int numCombinaciones = (int)Math.Pow((double)(numeroObjetos * 2),2);
             int pesoComb = 0,benefComb = 0;
-            List<CombinacionValida> comb = new List<CombinacionValida>();
             for(int i = 0; i < numCombinaciones; i++){
                 int[] binario = binary(i,numeroObjetos);
                 //suma producto de pesos por el binario de esta combinacion
@@ -63,7 +67,22 @@ namespace mochilaBinaria
             return s.ToArray();
         }
 
-        static int[] unidades(int iteracion, int numObj){
+        static long[] binaryLong(long number, int numObj){
+            Stack<long> s = new Stack<long>();
+            long quotient = number,remainder = 0;
+            do{
+                remainder = quotient%2;
+                quotient = quotient/2;
+                s.Push(remainder);
+            }while(quotient > 0);
+            //rellenar numeros que faltan
+            for(int i = s.Count; i < numObj; i++){
+                s.Push(0);
+            }
+            return s.ToArray();
+        }
+
+        static int[] unidades(long iteracion, int numObj){
             int contador=1;
             while(iteracion > (256*contador)){
                 //contador indica en que bloque de numero esta
@@ -71,7 +90,7 @@ namespace mochilaBinaria
                 //256 - 511 es 2 etc, para indicar el numero de articulos que puede llevar de cada uno
                 contador+=1;
             }
-            int send;
+            long send;
             if(iteracion < 256){
                 send = iteracion;
             }
@@ -79,37 +98,47 @@ namespace mochilaBinaria
                 send = (iteracion%(256*contador)==0) ? iteracion-(256*contador) : iteracion-(256*(contador-1));
             }
             
-            int[] u = binary(send,numObj);
+            int[] u = binary((int)send,numObj);
+            int contPosiblesMax = 0;
             //Console.WriteLine($"longitud u {u.Length} objeto {numObj} itetacion {send} contador {contador}");
             for(int i = 0; i < u.Length; i++){
                 //Console.WriteLine($"valor u {u[i]}");
-                if(contador > pesos[i])
-                    u[i] = pesos[i];
+                //valida que no pueda llevar mas objetos de ese articulo de los que puede
+                if(contador > cantPosible[i]){
+                    u[i] = pesos[i]; contPosiblesMax++;
+                }
                 else
                     u[i] *= contador;
             }
+            if(contPosiblesMax == numObj) parada=true;
             return u;
         }
         //Espera una iteracion min desde la que iniciará y max hasta donde ira
-        static CombinacionValida ResultadoParcial(int numObjetos, int capacidad, int min, int max){
-            int pesoComb = 0,benefComb = 0;
-            List<CombinacionValida> comb = new List<CombinacionValida>();
-            for(int i = min; i < max; i++){
-                int[] cantUnidades = unidades(i,numObjetos);
-                //suma producto de pesos por el binario de esta combinacion
-                pesoComb = pesos.Zip(cantUnidades, (p,u) => p*u).Sum();
-                benefComb = beneficios.Zip(cantUnidades,(be,u) => be*u ).Sum();
-                if(pesoComb <= capacidad){
-                    //el binario que se agrega es que objetos entran y que no
-                    comb.Add(new CombinacionValida(benefComb,pesoComb,cantUnidades));
+        static Object obj = new object();
+        static void ResultadoParcial(int numObjetos, int capacidad, long min, long max){
+            lock(obj){
+                
+                if(parada) return;
+               // List<CombinacionValida> localList = new List<CombinacionValida>();
+                int pesoComb = 0,benefComb = 0;
+                for(long i = min; i < max; i++){
+                    int[] cantUnidades = unidades(i,numObjetos);
+                    //suma producto de pesos por el array de cantidades de esta combinacion
+                    pesoComb = pesos.Zip(cantUnidades, (p,u) => p*u).Sum();
+                    benefComb = beneficios.Zip(cantUnidades,(be,u) => be*u ).Sum();
+                    if(pesoComb <= capacidad){
+                        //el binario que se agrega es que objetos entran y que no
+                        Console.WriteLine($" beneficio added {benefComb} ");
+                        comb.Add(new CombinacionValida(benefComb,pesoComb,cantUnidades));
+                    }
                 }
+                //return localList.OrderBy(x=> x.b).OrderBy(y=>y.p).Last();
             }
-            return comb.OrderBy(x => x.p).OrderBy(y => y.b).Last();
         }
         
         static CombinacionValida multiunidad(int[] pesos, int[] beneficios, int capacidad, int numeroObjetos){
             //cantidad posible para cada objeto
-            int[] cantPosible = new int[numeroObjetos];
+            cantPosible = new int[numeroObjetos];
             long numCombinaciones = 1;
             for(int i = 0; i < numeroObjetos; i++){
                 //el redondeo es hacia abajo para llevar objetos enteros + la posibilidad de no llevar alguno
@@ -117,10 +146,25 @@ namespace mochilaBinaria
                 //obtener el numero de combinaciones
                 numCombinaciones *= cantPosible[i];
             }
-            Console.WriteLine($"num combinaciones {numCombinaciones}");
             
-
-            
+            long numHilos = numCombinaciones/2000000;
+            Console.WriteLine($"num combinaciones {numCombinaciones} hilos {numHilos}");
+            long min=0, max=2000000, temp1 = min, temp2 = max;
+            for(int i=0; i < numHilos; i++){
+                
+                Thread hilo = new Thread(()=>{
+                    ResultadoParcial(numeroObjetos,capacidad,temp1,temp2);
+                    //comb.Add( res );
+                });
+                hilo.Start();
+                hilo.Join();
+                //if(parada) break;             
+                
+                temp1 = min + temp2;
+                temp2 = (i == numHilos -1) ? numCombinaciones : max + temp2;
+            }
+            return comb.OrderBy(x=> x.p).OrderBy(y=>y.b).Last();
+            //return comb.First();
         }
         
         static void Main(string[] args)
