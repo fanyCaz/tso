@@ -46,8 +46,8 @@ namespace mochilaBinaria
                 pesoComb = pesos.Zip(binario, (p,b) => p*b).Sum();
                 benefComb = beneficios.Zip(binario,(be,bi) => be*bi ).Sum();
                 if(pesoComb <= capacidad){
-                    Misc.imprimirArreglo(binario, "binario");
                     //el binario que se agrega es que objetos entran y que no
+                    Misc.imprimirArreglo(binario,"binario");
                     comb.Add(new CombinacionValida(benefComb,pesoComb,binario));
                 }
             }
@@ -172,10 +172,8 @@ namespace mochilaBinaria
             int numeroObjetos = Misc.obtenerCantidad("número de objetos");
             int capacidad = Misc.obtenerCantidad("capacidad");
             int tipoMochila = Misc.obtenerTipoMochila();
-            //pesos = Misc.obtenerValoresArticulos(numeroObjetos, "pesos");
-            pesos = new int[] {15,12,10,13};
-            beneficios = new int[] {40,28,22,30};
-            //beneficios = Misc.obtenerValoresArticulos(numeroObjetos, "beneficios");
+            pesos = Misc.obtenerValoresArticulos(numeroObjetos, "pesos");
+            beneficios = Misc.obtenerValoresArticulos(numeroObjetos, "beneficios");
             var tiempo = 0;
             switch(tipoMochila){
                 case 1:
@@ -194,7 +192,7 @@ namespace mochilaBinaria
             }
 
             Console.WriteLine($"Se pueden llevar los articulos : ");
-            for(int i = 0; i < ordered.combinacion.Length; i++){
+            for(int i = 0; i < numeroObjetos; i++){
                 //si el articulo de esa posicion si esta en la combinacion, se muestra
                 if(ordered.combinacion[i] > 0)
                     Console.WriteLine($"Articulo {nombreArticulo[i]} Cantidad : {ordered.combinacion[i]}");

@@ -3,7 +3,7 @@ using System;
 namespace mochilaBinaria{
     class Misc{
         public static void imprimirArreglo(int[] arr, string nombre){
-            Console.WriteLine($"{nombre}");
+            Console.WriteLine($"{nombre} length : {arr.Length}");
             for(int i = 0; i < arr.Length; i++){
                 Console.Write($"{arr[i]} - ");
             }
