@@ -72,31 +72,29 @@ namespace mochilaBinaria
 
         static int[] unidades(long iteracion, int numObj){
             int contador=1;
-            while(iteracion > (256*contador)){
+            int numDivisor = (int)Math.Pow((double)(numObj * 2),2);//256
+            while(iteracion > (numDivisor*contador)){
                 //contador indica en que bloque de numero esta
                 //donde 0 a 255 es 1
-                //256 - 511 es 2 etc, para indicar el numero de articulos que puede llevar de cada uno
+                //numDivisor - 511 es 2 etc, para indicar el numero de articulos que puede llevar de cada uno
                 contador+=1;
             }
             long send;
-            if(iteracion < 256){
+            if(iteracion < numDivisor){
                 send = iteracion;
             }
             else{
-                send = (iteracion%(256*contador)==0) ? iteracion-(256*contador) : iteracion-(256*(contador-1));
+                send = (iteracion%(numDivisor*contador)==0) ? iteracion-(numDivisor*contador) : iteracion-(numDivisor*(contador-1));
             }
             
             int[] u = binary((int)send,numObj);
             
             int contPosiblesMax = 0;
-            //Console.WriteLine($"longitud u {u.Length} objeto {numObj} itetacion {send} contador {contador}");
-            for(int i = 0; i < u.Length; i++){
-                //Console.WriteLine($"valor u {u[i]}");
+            for(int i = 0; i < numObj; i++){
                 //valida que no pueda llevar mas objetos de ese articulo de los que puede
                 if(contador > cantPosible[i]){
                     u[i] = pesos[i];
                     contPosiblesMax++;
-                    
                 }
                 else{
                     u[i] *= contador;
@@ -106,14 +104,15 @@ namespace mochilaBinaria
             if(contPosiblesMax == numObj){
                 parada=true;
             }
-            //Console.WriteLine($" iteracion {iteracion} ");
             return u;
         }
         //Espera una iteracion min desde la que iniciará y max hasta donde ira
         static Object obj = new object();
+        static int conttaa=0;
         static void ResultadoParcial(int numObjetos, int capacidad, long min, long max){
             lock(obj){
-                
+                conttaa+=1;
+                Console.WriteLine($"en res parcial {min}");
                 //if(parada) return;
                // List<CombinacionValida> localList = new List<CombinacionValida>();
                 int pesoComb = 0,benefComb = 0;
@@ -142,10 +141,15 @@ namespace mochilaBinaria
                 //obtener el numero de combinaciones
                 numCombinaciones *= cantPosible[i];
             }
-            //validar el dividendo
-            long numHilos = numCombinaciones/10000000;
-            Console.WriteLine($"num combinaciones {numCombinaciones} hilos {numHilos}");
-            long min=0, max=10000000, temp1 = min, temp2 = max;
+            
+            //la cantidad de hilos que se puede llegar a hacer es ridicula, 
+            //investigar por mejor forma,
+            //por ahora, es la manera más ''rapida'' de hacerlo y que considere todas
+            //todas hasta que alcance el máximo posible de cada objeto
+            long dividendo = (numCombinaciones >= 1000000) ? (long)Math.Floor(numCombinaciones*.0000001) : numCombinaciones;
+            long numHilos = numCombinaciones/dividendo;
+            Console.WriteLine($"Número de combinaciones {numCombinaciones} hilos {numHilos}");
+            long min=0, max=dividendo, temp1 = min, temp2 = max;
             for(int i=0; i < numHilos; i++){
                 
                 Thread hilo = new Thread(()=>{
@@ -153,11 +157,17 @@ namespace mochilaBinaria
                 });
                 hilo.Start();
                 hilo.Join();
-                if(parada) break;
+                //Si al hacer el arreglo de unidades que puede llevar
+                //se ha llegado ya al maximo en todas, 
+                //entonces se detiene
+                if(parada){
+                    break;
+                }
                 
                 temp1 = min + temp2;
                 temp2 = (i == numHilos -1) ? numCombinaciones : max + temp2;
             }
+            Console.WriteLine($"contador total {conttaa}");
             return comb.OrderBy(x=> x.p).OrderBy(y=>y.b).Last();
             //return comb.First();
         }
@@ -165,12 +175,12 @@ namespace mochilaBinaria
         static void Main(string[] args)
         {
             
-            //pesos = new int[] {15,12,10,13,22,16,10,14};
-            //beneficios = new int[] {40,28,22,30,54,38,24,35};
+            //pesos = new int[] {15,12,10,13,22,16,10,14}; //22,16,10,14
+            //beneficios = new int[] {40,28,22,30,54,38,24,35};//,54,38,24,35
             CombinacionValida ordered = new CombinacionValida(0,0,new int[]{0});
             
-            int numeroObjetos = Misc.obtenerCantidad("número de objetos");
-            int capacidad = Misc.obtenerCantidad("capacidad");
+            int numeroObjetos = Misc.obtenerCantidad("número de objetos posibles");
+            int capacidad = Misc.obtenerCantidad("capacidad de mochila");
             int tipoMochila = Misc.obtenerTipoMochila();
             pesos = Misc.obtenerValoresArticulos(numeroObjetos, "pesos");
             beneficios = Misc.obtenerValoresArticulos(numeroObjetos, "beneficios");
@@ -197,7 +207,7 @@ namespace mochilaBinaria
                 if(ordered.combinacion[i] > 0)
                     Console.WriteLine($"Articulo {nombreArticulo[i]} Cantidad : {ordered.combinacion[i]}");
             }
-            Console.WriteLine($" Con el beneficio {ordered.b} y el peso {ordered.p}");
+            Console.WriteLine($" Con el beneficio {ordered.b} y el peso {ordered.p} tiempo {tiempo}");
         }
     }
 }

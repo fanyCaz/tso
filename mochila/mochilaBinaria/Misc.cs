@@ -12,15 +12,10 @@ namespace mochilaBinaria{
 
         public static int[] obtenerValoresArticulos(int cantidad, string nombre){
             Console.WriteLine($"Ingresar {nombre}");
-            int valor = -1;
             int[] valores = new int[cantidad];
-            Console.WriteLine($"--- {cantidad} ---- {valores.Length}");
+            //Console.WriteLine($"--- {cantidad} ---- {valores.Length}");
             for(int i = 0; i < cantidad; i++){
-                //while(valor < 0){
-                    Console.WriteLine($"Ingresa el valor positivo {i}");
-                    valor = int.Parse(Console.ReadLine());
-                //}
-                valores[i] = valor;
+                valores[i] = obtenerCantidad($"el valor de objeto {i+1}");
             }
             return valores;
         }
