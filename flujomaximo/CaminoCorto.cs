@@ -6,6 +6,18 @@ namespace flujomaximo{
     public class CaminoPosible{
         List<int> nodosVisitados = new List<int>();
         int costoTotal = 0;
+        int id;
+        public CaminoPosible(int nodo,int costo){
+            //this.id=id;
+            this.nodosVisitados.Add(nodo);
+            this.costoTotal = costo;
+        }
+        public void setId(int id){
+            this.id = id;
+        }
+        public int getId(){
+            return this.id;
+        }
         public void setCostoTotal(int costo){
             this.costoTotal += costo;
         }
@@ -34,47 +46,62 @@ namespace flujomaximo{
         }
         static List<Tuple<int,int>> camino = new List<Tuple<int, int>>();
         static int idCaminos = 0;
-        static Dictionary<int,CaminoPosible> caminos = new Dictionary<int, CaminoPosible>();
+        static List<CaminoPosible> caminos = new List<CaminoPosible>();
         static void caminosVarios(int nI,int nF){
             if(nI == nF){
                 Console.WriteLine("No puedes visitarte a ti mismo");
                 return;
             }
-            int at = nI;
-            //Toma los vecinos de ese nodo
-            var vecinos = g[at];
-            foreach(var i in vecinos){
-                Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} visit? {visitados[i.Item1]}");
-                //verifica si ya se ha visitado ese nodo
-                if(!visitados[i.Item1]){
-                    visitados[i.Item1] = true;
-                    CaminoPosible cp = new CaminoPosible();
-                    cp.setCostoTotal(i.Item2);
-                    cp.addNodo(i.Item1);
-                    caminos.Add(idCaminos,cp);
-                    idCaminos+=1;
+            //caminos.Add(new CaminoPosible(nI,nI,0));
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(nI); int nodoAnterior = -1;
+            visitados[nI] = true;   //marcar el nodo inicial como visitado
+            //while(q.Count > 0){
+            for(int j = 0; j < 2; j++){
+                //initializeArrays(8);
+                if(nodoAnterior > -1){
+                    visitados[nodoAnterior] = true;
+                }
+                int nodo = q.Dequeue();
+                
+                //Toma los vecinos de ese nodo
+                var vecinos = g[nodo];
+                foreach(var i in vecinos){
+                    Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} visit? {nodoAnterior != i.Item1}");
+                    //verifica si ya se ha visitado ese nodo
+                    //if(!visitados[i.Item1]){
+                    if(nodoAnterior != i.Item1){
+                        q.Enqueue(i.Item1);
+                        //visitados[i.Item1] = true;
+                        //var w = caminos.Find(x => x.getId() == nodoAnterior );
+                        
+                        CaminoPosible w = new CaminoPosible(i.Item1,i.Item2);
+                        /* cp.setCostoTotal(i.Item2);
+                        cp.addNodo(i.Item1);
+                        cp.setId(i.Item1); */
+                        //caminos.Add(cp);
+                        idCaminos+=1;
+                    }
+                }
+                nodoAnterior = nodo;
+                var nodoCostoMayor = caminos.OrderBy(x=>x.getCostoTotal()).Last();
+                Console.WriteLine( $"llave de costo mas alto {nodoCostoMayor.getId()}" );
+                caminos.Remove(nodoCostoMayor);
+                foreach(var i in caminos){
+                    Console.WriteLine($"--------camino {i.getId()}------");
+                    List<int> n = i.getNodosVisitados();
+                    Console.WriteLine($"costo {i.getCostoTotal()}");
+                    foreach(var k in n){
+                        Console.WriteLine($"nodo {k}");
+                    }
                 }
             }
-            foreach(var i in caminos){
-                Console.WriteLine($"--------camino {i.Key}------");
-                List<int> n = i.Value.getNodosVisitados();
-                Console.WriteLine($"costo {i.Value.getCostoTotal()}");
-                foreach(var j in n){
-                    Console.WriteLine($"nodo {j}");
-                }
-            }
-
-            var w = caminos.OrderBy(x=>x.Value.getCostoTotal()).Last();
-            Console.WriteLine( $"llave de costo mas alto {w.Key}" );
-            caminos.Remove(w.Key);
-            foreach(var i in caminos){
-                Console.WriteLine($"--------camino {i.Key}------");
-                List<int> n = i.Value.getNodosVisitados();
-                Console.WriteLine($"costo {i.Value.getCostoTotal()}");
-                foreach(var j in n){
-                    Console.WriteLine($"nodo {j}");
-                }
-            }
+            /* var t = caminos.Find(x => nodo == x.getNodosVisitados().Find(y=> y == nodo));
+            if(t != null){
+                //t.setId(nodo);
+                t.addNodo(nodoAnterior);
+            } */
+            
         }
         static void greedySearch(int nI,int nF){
             if(nI == nF){
