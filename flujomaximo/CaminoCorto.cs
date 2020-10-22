@@ -31,9 +31,33 @@ namespace flujomaximo{
             return this.nodosVisitados;
         }
     }
+    public class Camino{
+        int costo = 0;
+        List<int> nodos = new List<int>();
+        public void agregarNodo(int nodo){
+            this.nodos.Add(nodo);
+        }
+        public void agregarCosto(int costo){
+            this.costo += costo;
+        }
+        public void mostrarCamino(){
+            this.nodos.Reverse();
+            foreach(var i in this.nodos){
+                if(i == this.nodos.Last()){
+                    Console.Write($"{i}");
+                }
+                else{
+                    Console.Write($"{i} -> ");
+                }
+            }
+            Console.WriteLine();
+        }
+        public void mostrarCosto(){
+            Console.WriteLine($"Costo del Camino {this.costo}");
+        }
+    }
     class CaminoCorto{
         static AdjacencyList g;
-        static int costo = 0;
         static bool[] visitados;
         static int?[] path;
         static void initializeArrays(int n){
@@ -47,6 +71,8 @@ namespace flujomaximo{
         static List<Tuple<int,int>> camino = new List<Tuple<int, int>>();
         static int idCaminos = 0;
         static List<CaminoPosible> caminos = new List<CaminoPosible>();
+        //pathethic 
+        //trato de modificar el bfs para almacenar los caminos
         static void caminosVarios(int nI,int nF){
             if(nI == nF){
                 Console.WriteLine("No puedes visitarte a ti mismo");
@@ -72,14 +98,7 @@ namespace flujomaximo{
                     //if(!visitados[i.Item1]){
                     if(nodoAnterior != i.Item1){
                         q.Enqueue(i.Item1);
-                        //visitados[i.Item1] = true;
-                        //var w = caminos.Find(x => x.getId() == nodoAnterior );
-                        
                         CaminoPosible w = new CaminoPosible(i.Item1,i.Item2);
-                        /* cp.setCostoTotal(i.Item2);
-                        cp.addNodo(i.Item1);
-                        cp.setId(i.Item1); */
-                        //caminos.Add(cp);
                         idCaminos+=1;
                     }
                 }
@@ -115,8 +134,14 @@ namespace flujomaximo{
         }
         
         static void EdmondsKarp(AdjacencyListCapacity graph,int source, int sink, int nodos){
+            if(source == sink){
+                Console.WriteLine("No puedes visitarte a ti mismo");
+                return;
+            }
             List<Vertice> pred = inicializarPred(nodos);
             int flujo = 0;
+            Camino camino = new Camino();
+            //esto es bfs pero se agrega la decision de reconstruccion
             do{
                 Queue<int> q = new Queue<int>();
                 q.Enqueue(source);
@@ -133,20 +158,30 @@ namespace flujomaximo{
                         }
                     }
                 }
+                
                 if(pred[sink] != null){
                     int df = int.MaxValue;
-                    
+                    //Se busca en el pred[nullables] los nodos del camino
+                    //El df es el flujo/costo que puede pasar aka la resta de lo que lleva con lo que puede
                     for(Vertice e = pred[sink]; e!=null; e = pred[e.source]){
                         df = Math.Min(df,e.capacidad - e.flujo);
                     }
                     for(Vertice e = pred[sink]; e != null; e = pred[e.source]){
+                        //Actualiza el flujo que pasa por este vertice
                         e.flujo = e.flujo + df;
-                        //e.
+                        //Actualiza el camino
+                        camino.agregarNodo(e.sink);
+                        camino.agregarCosto(e.capacidad);
                     }
+                    //Se suma al flujo total
                     flujo += df;
                 }
             }while(pred[sink] == null);
-            Console.WriteLine($"flujo {flujo}");
+            camino.agregarNodo(source);
+            
+            camino.mostrarCamino();
+            camino.mostrarCosto();
+            //Console.WriteLine($"Flujo Máximo {flujo}");
         }
         static void greedySearch(int nI,int nF){
             if(nI == nF){
@@ -187,30 +222,8 @@ namespace flujomaximo{
             g = Graphs.CyclicGraph8Nodes();
             AdjacencyListCapacity graph = Graphs.Cyclic8Nodes();
             initializeArrays(nodes);
-            //caminosVarios(nInicial,nFinal);
-            /* List<Vertice> m = new List<Vertice>();
-            m.Add(null);
-            m.Add(new Vertice(4,2,1,0));
-            m[0] = new Vertice(8,1,9,7); */
-            //foreach(var i in m){
-                /* if(m[0] != null){
-                    Console.WriteLine($"sinkk { m[0].sink}");
-                }
-                else{
-                    Console.WriteLine($"sinkk { m[1].sink}");
-                } */
-                //Console.WriteLine($"nodo : {i.sink} peso: {i.source}");
-                
-            //}
+            // :) //
             EdmondsKarp(graph,nInicial,nFinal,nodes);
-            costo = 0;
-            /* Console.WriteLine($"Recorrido");
-            Console.WriteLine($"nodo : {nInicial} ");
-            foreach(var i in camino){
-                Console.WriteLine($"nodo : {i.Item1} peso: {i.Item2}");
-                costo += i.Item2;
-            }
-            Console.WriteLine($"Costo Final {costo}"); */
         }
     }
 }
