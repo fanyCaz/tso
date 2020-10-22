@@ -57,6 +57,17 @@ namespace flujomaximo{
             return h;
         }
 
+        public static AdjacencyListCapacity crearGrafica(int nodos){
+            AdjacencyListCapacity g = new AdjacencyListCapacity(nodos);
+            int vertices = Misc.obtenerNumero(" el número de vertices");
+            for(int i = 0; i < vertices; i++){
+                int nInicial = Misc.obtenerNumero(" el nodo");
+                int nAdyacente = Misc.obtenerNumero($" el nodo adyacente a el nodo {nInicial}");
+                int capacidad = Misc.obtenerNumero(" el costo de este vertice");
+                g.agregaVertice(nInicial,nAdyacente,capacidad, 0);
+            }
+            return g;
+        }
         public static AdjacencyListCapacity Cyclic8Nodes(){
             AdjacencyListCapacity h = new AdjacencyListCapacity(8);
             h.agregaVertice(0,1,3,0);

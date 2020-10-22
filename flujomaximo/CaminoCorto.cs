@@ -218,10 +218,32 @@ namespace flujomaximo{
             greedySearch(at,nF);
         }
         public static void Init(){
-            int nodes = 8,nInicial=4,nFinal=7;
-            g = Graphs.CyclicGraph8Nodes();
-            AdjacencyListCapacity graph = Graphs.Cyclic8Nodes();
+            int nodes = 0,nInicial=4,nFinal=7;
+            //g = Graphs.CyclicGraph8Nodes();
+            int usarGrafoDefinido = Misc.obtenerNumero(" 1 si agregar un grafo o 2 si usar uno predeterminado");
+            
+            AdjacencyListCapacity graph = new AdjacencyListCapacity(nodes);
+            switch(usarGrafoDefinido){
+                case 1:
+                    nodes = Misc.obtenerNumero(" número de nodos");
+                    graph = Graphs.crearGrafica(nodes);
+                    break;
+                case 2:
+                    graph = Graphs.Cyclic8Nodes();
+                    nodes = 8;
+                    break;
+                default:
+                    Console.WriteLine("hhhh");
+                    break;
+            }
+            
+            //AdjacencyListCapacity graph = Graphs.Cyclic8Nodes();
+            graph.mostrarListaAdyacencia();
             initializeArrays(nodes);
+
+            nInicial = Misc.validarNodosRecorrido(graph, "inicial");
+            
+            nFinal   = Misc.validarNodosRecorrido(graph, "final");
             // :) //
             EdmondsKarp(graph,nInicial,nFinal,nodes);
         }
