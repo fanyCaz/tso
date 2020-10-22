@@ -56,5 +56,44 @@ namespace flujomaximo{
             h.agregaVertice(7,3,14);
             return h;
         }
+
+        public static AdjacencyListCapacity Cyclic8Nodes(){
+            AdjacencyListCapacity h = new AdjacencyListCapacity(8);
+            h.agregaVertice(0,1,3,0);
+            h.agregaVertice(0,2,5,0);
+            h.agregaVertice(0,3,2,0);
+            h.agregaVertice(0,7,10,0);
+            h.agregaVertice(1,0,3,0);
+            h.agregaVertice(1,2,5,0);
+            h.agregaVertice(1,4,4,0);
+            h.agregaVertice(1,6,6,0);
+            h.agregaVertice(1,3,8,0);
+            h.agregaVertice(1,7,6,0);
+            h.agregaVertice(2,0,5,0);
+            h.agregaVertice(2,1,5,0);
+            h.agregaVertice(2,6,9,0);
+            h.agregaVertice(2,4,1,0);
+            h.agregaVertice(2,5,7,0);
+            h.agregaVertice(3,7,14,0);
+            h.agregaVertice(3,0,2,0);
+            h.agregaVertice(3,1,8,0);
+            h.agregaVertice(3,4,12,0);
+            h.agregaVertice(4,2,1,0);
+            h.agregaVertice(4,1,4,0);
+            h.agregaVertice(4,3,12,0);
+            h.agregaVertice(4,6,15,0);
+            h.agregaVertice(5,2,7,0);
+            h.agregaVertice(5,7,9,0);
+            h.agregaVertice(6,1,6,0);
+            h.agregaVertice(6,2,9,0);
+            h.agregaVertice(6,4,15,0);
+            h.agregaVertice(6,7,3,0);
+            h.agregaVertice(7,0,10,0);
+            h.agregaVertice(7,5,9,0);
+            h.agregaVertice(7,1,6,0);
+            h.agregaVertice(7,6,3,0);
+            h.agregaVertice(7,3,14,0);
+            return h;
+        }
     }
 }

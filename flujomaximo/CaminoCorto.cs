@@ -103,6 +103,51 @@ namespace flujomaximo{
             } */
             
         }
+        static List<Vertice> inicializarPred(int nodos){
+            int?[] res = new int?[nodos];
+            List<Vertice> l = new List<Vertice>();
+            
+            for(int i=0; i < nodos; i++){
+                res[i] = null;
+                l.Add(null);
+            }
+            return l;
+        }
+        
+        static void EdmondsKarp(AdjacencyListCapacity graph,int source, int sink, int nodos){
+            List<Vertice> pred = inicializarPred(nodos);
+            int flujo = 0;
+            do{
+                Queue<int> q = new Queue<int>();
+                q.Enqueue(source);
+                
+                //graph.mostrarListaAdyacencia();
+                while(q.Count > 0){
+                    int cur = q.Dequeue();
+                    int[] x =new int[]{1,2,1,3,5};
+                    var vecinos = graph[cur];
+                    foreach(var edge in vecinos){
+                        if( pred[edge.sink] == null && edge.sink != source && edge.capacidad > edge.flujo ){
+                            pred[edge.sink] = edge;
+                            q.Enqueue(edge.sink);
+                        }
+                    }
+                }
+                if(pred[sink] != null){
+                    int df = int.MaxValue;
+                    
+                    for(Vertice e = pred[sink]; e!=null; e = pred[e.source]){
+                        df = Math.Min(df,e.capacidad - e.flujo);
+                    }
+                    for(Vertice e = pred[sink]; e != null; e = pred[e.source]){
+                        e.flujo = e.flujo + df;
+                        //e.
+                    }
+                    flujo += df;
+                }
+            }while(pred[sink] == null);
+            Console.WriteLine($"flujo {flujo}");
+        }
         static void greedySearch(int nI,int nF){
             if(nI == nF){
                 Console.WriteLine("No puedes visitarte a ti mismo");
@@ -140,8 +185,24 @@ namespace flujomaximo{
         public static void Init(){
             int nodes = 8,nInicial=4,nFinal=7;
             g = Graphs.CyclicGraph8Nodes();
+            AdjacencyListCapacity graph = Graphs.Cyclic8Nodes();
             initializeArrays(nodes);
-            caminosVarios(nInicial,nFinal);
+            //caminosVarios(nInicial,nFinal);
+            /* List<Vertice> m = new List<Vertice>();
+            m.Add(null);
+            m.Add(new Vertice(4,2,1,0));
+            m[0] = new Vertice(8,1,9,7); */
+            //foreach(var i in m){
+                /* if(m[0] != null){
+                    Console.WriteLine($"sinkk { m[0].sink}");
+                }
+                else{
+                    Console.WriteLine($"sinkk { m[1].sink}");
+                } */
+                //Console.WriteLine($"nodo : {i.sink} peso: {i.source}");
+                
+            //}
+            EdmondsKarp(graph,nInicial,nFinal,nodes);
             costo = 0;
             /* Console.WriteLine($"Recorrido");
             Console.WriteLine($"nodo : {nInicial} ");
