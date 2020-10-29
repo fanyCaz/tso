@@ -47,7 +47,7 @@ namespace mochilaBinaria
                 benefComb = beneficios.Zip(binario,(be,bi) => be*bi ).Sum();
                 if(pesoComb <= capacidad){
                     //el binario que se agrega es que objetos entran y que no
-                    Misc.imprimirArreglo(binario,"binario");
+                    //Misc.imprimirArreglo(binario,"binario");
                     comb.Add(new CombinacionValida(benefComb,pesoComb,binario));
                 }
             }
@@ -91,6 +91,8 @@ namespace mochilaBinaria
             
             int contPosiblesMax = 0;
             for(int i = 0; i < numObj; i++){
+                Console.WriteLine($"contador{contador} num objetos{numObj}");
+                Misc.imprimirArreglo(cantPosible, "cant posible" );
                 //valida que no pueda llevar mas objetos de ese articulo de los que puede
                 if(contador > cantPosible[i]){
                     u[i] = pesos[i];
@@ -112,7 +114,7 @@ namespace mochilaBinaria
         static void ResultadoParcial(int numObjetos, int capacidad, long min, long max){
             lock(obj){
                 conttaa+=1;
-                Console.WriteLine($"en res parcial {min}");
+                //Console.WriteLine($"en res parcial {min}");
                 //if(parada) return;
                // List<CombinacionValida> localList = new List<CombinacionValida>();
                 int pesoComb = 0,benefComb = 0;
@@ -176,11 +178,12 @@ namespace mochilaBinaria
             double bvol = 0;
             //Beneficio sobre volumen
             double bpeso = 0;
-            //Media geométrica
+            //Media geométrica, para involucrar los dos puntos de interes
             double[] mg = new double[numeroObjetos];
             //Maximo por peso y máximo por volumen
             double maxPeso = 0, maxVol = 0;
             int[] cantPosible = new int[numeroObjetos];
+            int numCombinaciones = 1;
             for(int i = 0; i < numeroObjetos; i++){
                 bpeso = (double)beneficios[i]/pesos[i];
                 bvol = (double)beneficios[i]/volumenes[i];
@@ -188,9 +191,24 @@ namespace mochilaBinaria
                 maxPeso = (int)Math.Floor((double) capPeso/pesos[i]);
                 maxVol = (int)Math.Floor((double) capVol/volumenes[i]);
                 cantPosible[i] = (int)Math.Min(maxPeso,maxVol);
+                numCombinaciones *= cantPosible[i];
                 Console.WriteLine($" media geometrica {mg[i]:##.##} peso{maxPeso} vol{maxVol} cantidad minima {cantPosible[i]}");
             }
-
+            Console.WriteLine($"num combinaciones {numCombinaciones}");
+            for(int i = 0; i < numCombinaciones; i++){
+                int[] cantUnidades = unidades(i,numeroObjetos);
+                //Misc.imprimirArreglo(cantUnidades,"combis");
+                //suma producto de pesos por el array de cantidades de esta combinacion
+                /*pesoComb = pesos.Zip(cantUnidades, (p,u) => p*u).Sum();
+                benefComb = beneficios.Zip(cantUnidades,(be,u) => be*u ).Sum();
+                if(pesoComb <= capacidad){
+                    //el binario que se agrega es que objetos entran y que no
+                    //Console.WriteLine($" beneficio added {benefComb} ");
+                    comb.Add(new CombinacionValida(benefComb,pesoComb,cantUnidades));
+                }*/
+            }
+            //unidades();
+            //tiene que hacer combinaciones multiunidades
             comb.Add(new CombinacionValida(20,20,new int[]{2,3,4,5,5,6}));
             return comb.OrderBy(x=> x.p).OrderBy(y=>y.b).Last();
         }
