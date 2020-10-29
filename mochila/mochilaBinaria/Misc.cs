@@ -21,11 +21,11 @@ namespace mochilaBinaria{
         }
 
         public static int obtenerTipoMochila(){
-            Console.WriteLine($"Tipo Mochila : 1- Binaria , 2- Multiunidad");
+            Console.WriteLine($"Tipo Mochila : 1- Binaria , 2- Multiunidad , 3- Volumen");
             int tipoMochila = 0;
             try{
                 tipoMochila = int.Parse(Console.ReadLine());
-                if(tipoMochila < 1 || tipoMochila > 2){
+                if(tipoMochila < 1 || tipoMochila > 3){
                     Console.WriteLine("Ingrese un número dentro de las opciones, porfavor");
                     return obtenerTipoMochila();
                 }

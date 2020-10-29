@@ -169,7 +169,30 @@ namespace mochilaBinaria
             }
             Console.WriteLine($"contador total {conttaa}");
             return comb.OrderBy(x=> x.p).OrderBy(y=>y.b).Last();
-            //return comb.First();
+        }
+
+        static CombinacionValida volumen(int[] pesos, int[] beneficios, int[] volumenes, int capPeso, int capVol, int numeroObjetos){
+            //Beneficio sobre peso
+            double bvol = 0;
+            //Beneficio sobre volumen
+            double bpeso = 0;
+            //Media geométrica
+            double[] mg = new double[numeroObjetos];
+            //Maximo por peso y máximo por volumen
+            double maxPeso = 0, maxVol = 0;
+            int[] cantPosible = new int[numeroObjetos];
+            for(int i = 0; i < numeroObjetos; i++){
+                bpeso = (double)beneficios[i]/pesos[i];
+                bvol = (double)beneficios[i]/volumenes[i];
+                mg[i] = Math.Sqrt((bpeso*bvol));
+                maxPeso = (int)Math.Floor((double) capPeso/pesos[i]);
+                maxVol = (int)Math.Floor((double) capVol/volumenes[i]);
+                cantPosible[i] = (int)Math.Min(maxPeso,maxVol);
+                Console.WriteLine($" media geometrica {mg[i]:##.##} peso{maxPeso} vol{maxVol} cantidad minima {cantPosible[i]}");
+            }
+
+            comb.Add(new CombinacionValida(20,20,new int[]{2,3,4,5,5,6}));
+            return comb.OrderBy(x=> x.p).OrderBy(y=>y.b).Last();
         }
 
         static void Main(string[] args)
@@ -182,8 +205,8 @@ namespace mochilaBinaria
             int numeroObjetos = Misc.obtenerCantidad("número de objetos posibles");
             int capacidad = Misc.obtenerCantidad("capacidad de mochila");
             int tipoMochila = Misc.obtenerTipoMochila();
-            pesos = Misc.obtenerValoresArticulos(numeroObjetos, "pesos");
-            beneficios = Misc.obtenerValoresArticulos(numeroObjetos, "beneficios");
+            pesos = new int[] {240,200,250,180,235,190};//Misc.obtenerValoresArticulos(numeroObjetos, "pesos");
+            beneficios = new int[] {144,160,188,162,118,152};//Misc.obtenerValoresArticulos(numeroObjetos, "beneficios");
             var tiempo = 0;
             switch(tipoMochila){
                 case 1:
@@ -195,6 +218,12 @@ namespace mochilaBinaria
                     ordered = multiunidad(pesos,beneficios,capacidad,numeroObjetos);
                     sw.Stop();
                     tiempo = sw.Elapsed.Milliseconds;
+                    break;
+                case 3:
+                    int capacidadVolumen = Misc.obtenerCantidad("volumen");
+                    //int[] volumenes = Misc.obtenerValoresArticulos(numeroObjetos, "volumenes");
+                    int[] volumenes = new int[] {60,80,75,95,50,80};
+                    ordered = volumen(pesos,beneficios,volumenes,capacidad,capacidadVolumen,numeroObjetos);
                     break;
                 default:
                     Console.Write("hey");
