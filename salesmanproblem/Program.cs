@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace salesmanproblem
@@ -62,14 +63,23 @@ namespace salesmanproblem
                 Console.WriteLine($"Nodo : {i} {letras[i]}");
             }        
         }
+
+        static bool estanTodosVisitados(){
+            //RETORNA VERDADERO CUANDO TODOS HAN SIDO VISITADOS,
+            //FALSO, SI NO HAY AL MENOS UNO QUE SEA FALSO
+            return visitados.All(x => x);
+        }
         static int veces = 10;
-        static int busqueda(int nodo, int? nodoVecino = null){
+        static int busqueda(int raiz,int nodo, int? nodoVecino = null){
             // veces--;
             // System.Console.WriteLine($"veces {veces}");
-            //llego a un limite y ya no puede seguir ese caminio, no es feasible
-            if(nodo == -1){
+            //llego a un limite (no tiene vecinos restantes) 
+            //y ya no puede seguir ese caminio, no es feasible
+            //modificar a que cheque si el siguiente es el nodo inicial
+            /* if(nodo == -1){
+                Console.WriteLine( estanTodosVisitados() );
                 return nodo;
-            }
+            } */
 
             int nodoInicial = nodo;
             visitados[nodoInicial] = true;
@@ -79,7 +89,9 @@ namespace salesmanproblem
             int nodoSiguiente = -1;
             if(nodoVecino is int){
                 System.Console.WriteLine("si es entero");
-                return busqueda(nodoVecino );
+                //return 1;
+                int nv = nodoVecino ?? default(int);
+                return busqueda(raiz,nv);
             }
             foreach(var i in vecinos){
                 if(!visitados[i.Item1]){
@@ -92,7 +104,27 @@ namespace salesmanproblem
             }
             Console.WriteLine($" nodo siguiente : {nodoSiguiente}");
             imprimirCamino(camino);
-            return busqueda(nodoSiguiente);
+            //RETORNA 200 SI ES FEASIBLE
+            //RETORNA 500 SI NO FEASIBLE
+            //ANTES DE HACER BUSQUEDA DE NUEVO , HAY QUE CHECAR SI TODOS LOS VECINOS ESTAN VISITADOS
+            //SI TODOS LOS VECINOS VISITADOS
+            if( estanTodosVisitados() ){
+                //CHECAR SI EL NODO INICIAL DEL GRAFO ESTA ENTRE LOS VECINOS
+                var vecino = grafo[nodo];
+                foreach(var i in vecinos){
+                    //SI ESTA
+                        //RETURN "FEASIBLE"
+                    if(i.Item1 == raiz){
+                        return 200;
+                    }
+                }
+                //HACER
+                return 500;//RETURN "NO FEASIBLE"
+            }
+                
+                    
+                
+            return busqueda(raiz,nodoSiguiente);
         }
 
         static void Main(string[] args)
@@ -101,17 +133,15 @@ namespace salesmanproblem
             camino = new List<int>();
             inicializarArrVisitados(8);
             int nodoInicial = 3;
-            //for(int i = 0; i < 8; i++){   
-                var res = busqueda(nodoInicial,null);
-                System.Console.WriteLine($"response {res}");
-                if(res == -1){
-                   
-                    inicializarArrVisitados(8);
-                    camino.Clear();
-                    res = busqueda(nodoInicial, 1);
-                   System.Console.WriteLine($"response en menos uno{res}");
-                }
-
+            //PRIMERA VEZ QUE SE MANDA A LLAMAR
+            var res = busqueda(nodoInicial,nodoInicial);
+            System.Console.WriteLine($"response {res}");
+            if(res == -1){      //NECESITAS HACER OTRA VEZ LA BUSQUEDA
+                inicializarArrVisitados(8);
+                camino.Clear();
+                res = busqueda(nodoInicial,nodoInicial, 1);
+                System.Console.WriteLine($"response en menos uno{res}");
+            }
             //}
             // Console.WriteLine("segunda vuelta");
             // visitados[nodoSiguiente] = true;
