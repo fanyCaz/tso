@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/fanycaz/Proyectos/tso/tso.csproj": {}
+    "c:\\Users\\estef\\PROYECTOS\\tso\\tso.csproj": {}
   },
   "projects": {
-    "/home/fanycaz/Proyectos/tso/tso.csproj": {
+    "c:\\Users\\estef\\PROYECTOS\\tso\\tso.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fanycaz/Proyectos/tso/tso.csproj",
+        "projectUniqueName": "c:\\Users\\estef\\PROYECTOS\\tso\\tso.csproj",
         "projectName": "tso",
-        "projectPath": "/home/fanycaz/Proyectos/tso/tso.csproj",
-        "packagesPath": "/home/fanycaz/.nuget/packages/",
-        "outputPath": "/home/fanycaz/Proyectos/tso/obj/",
+        "projectPath": "c:\\Users\\estef\\PROYECTOS\\tso\\tso.csproj",
+        "packagesPath": "C:\\Users\\estef\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\estef\\PROYECTOS\\tso\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/fanycaz/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\estef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -50,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/3.1.106/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
