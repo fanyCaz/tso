@@ -5,6 +5,27 @@ using System.Collections.Generic;
 
 namespace aco
 {
+    public class CaminoOptimo{
+        int id;
+        List<int> camino;
+        int costo =0;
+        public int getId(){
+            return this.id;
+        }
+        public void imprimirCamino(){
+            Console.WriteLine($"Nodo Inicial : {id}");
+            Program.imprimirCamino(this.camino);
+            Console.WriteLine($"Costo de recorrido : {costo}");
+        }
+        public void actualizaCosto(int c ){
+            this.costo += c;
+        }
+        public CaminoOptimo(int id,List<int> c, int cost){
+            this.camino = c;
+            this.costo = cost;
+            this.id = id;
+        }
+    }
     class Program
     {
         static bool[] visitados;
@@ -34,7 +55,7 @@ namespace aco
             }
         }
 
-        static void imprimirCamino(List<int> camino){
+        public static void imprimirCamino(List<int> camino){
             char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
             foreach(var i in camino)
             {
@@ -61,7 +82,7 @@ namespace aco
             int nodoSiguiente = -1;
             foreach(var i in vecinos){
                 if(!visitados[i.Item1]){
-                    Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} costoMinimo? {costoMinimo}");
+                    //Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} costoMinimo? {costoMinimo}");
                     if(i.Item2 < costoMinimo){
                         costoMinimo = i.Item2;
                         nodoSiguiente = i.Item1;
@@ -73,11 +94,6 @@ namespace aco
             //RETORNA 500 SI NO FEASIBLE
             //ANTES DE HACER BUSQUEDA DE NUEVO , HAY QUE CHECAR SI TODOS LOS VECINOS ESTAN VISITADOS
             //SI TODOS LOS VECINOS VISITADOS
-
-            Console.WriteLine( estanTodosVisitados() );
-            for(int x = 0; x < visitados.Length; x++){
-                Console.WriteLine($"nodo visitado {x} - {visitados[x]}");
-            }
             if( estanTodosVisitados() ){
                 //CHECAR SI EL NODO INICIAL DEL GRAFO ESTA ENTRE LOS VECINOS
                 var vecino = grafo[nodo];
@@ -98,7 +114,7 @@ namespace aco
                 return 500;
             }
             //Console.WriteLine(visitados[nodoSiguiente]);
-            Console.WriteLine($"siguiente nodo {nodoSiguiente} . costo minimo {costoMinimo}");
+            //Console.WriteLine($"siguiente nodo {nodoSiguiente} . costo minimo {costoMinimo}");
             costo += costoMinimo;
             return busqueda(raiz,nodoSiguiente);
         }
@@ -106,19 +122,27 @@ namespace aco
         {
             leerGrafo();
             grafo.mostrarListaAdyacencia();
-            camino = new List<int>();
-            inicializarArrVisitados(grafo.tamanioGrafo());
+            
             int raiz = 0;
             //SE BUSCA EN TODOS LOS VECINOS UN CAMINO
             var nodosVecinos = grafo[raiz];
             int nodoInicial = raiz;
             var res = 0;
-            camino.Clear();
-            visitados[raiz] = true;
-            res = busqueda(raiz,raiz);
-            if(res == 200){
-                imprimirCamino(camino);
-                Console.WriteLine($"Costo del camino : {costo}");
+            
+            List<CaminoOptimo> caminos = new List<CaminoOptimo>();
+            for(int i = 0; i < grafo.tamanioGrafo(); i++){
+                raiz = i;
+                camino = new List<int>();
+                costo = 0;
+                inicializarArrVisitados(grafo.tamanioGrafo());
+                visitados[raiz] = true;
+                res = busqueda(raiz,raiz);
+                if(res == 200){
+                    caminos.Add(new CaminoOptimo(raiz,camino,costo));
+                }
+            }
+            foreach(var i in caminos){
+                i.imprimirCamino();
             }
             Console.WriteLine("Hello World!");
         }
