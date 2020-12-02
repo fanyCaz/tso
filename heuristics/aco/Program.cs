@@ -7,7 +7,7 @@ namespace aco
 {
     public class CaminoOptimo{
         int id;
-        public List<Dictionary<int,int>> arcos;
+        public List<Tuple<int,int>> arcos;
         List<int> camino;
         List<int> costos;
         int costoTotal =0;
@@ -16,24 +16,21 @@ namespace aco
         }
         public void imprimirCamino(){
             Console.WriteLine($"Nodo Inicial : {id}");
-            //Program.imprimirCamino(this.camino);
-            foreach(var i in this.costos)
+            Program.imprimirCamino(this.camino);
+            /* foreach(var i in this.costos)
             {
                 Console.WriteLine($"Costo : {i}");
-            }
+            } */
             foreach (var i in this.arcos)
             {
-                foreach(var j in i.Keys){
-                    i.TryGetValue(j,out int val);
-                    Console.WriteLine($"de {j} a {val}");
-                }
+                Console.WriteLine($"de {i.Item1} a {i.Item2}");
             }
             Console.WriteLine($"Costo de recorrido : {costoTotal}");
         }
         public void actualizaCosto(int c ){
             this.costoTotal += c;
         }
-        public CaminoOptimo(int id,List<int> c, int cost, List<int> costs, List<Dictionary<int,int>> arcs){
+        public CaminoOptimo(int id,List<int> c, int cost, List<int> costs, List<Tuple<int,int>> arcs){
             this.camino = c;
             this.costos = costs;
             this.costoTotal = cost;
@@ -45,7 +42,7 @@ namespace aco
     {
         static bool[] visitados;
         static AdjacencyList grafo;
-        static List<Dictionary<int,int>> arcs;
+        static List<Tuple<int,int>> arcs;
         static List<int> camino;
         static List<int> costos;
         static int costo = 0;
@@ -118,7 +115,9 @@ namespace aco
                     //SI ESTA
                     //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
-
+                        //AGREGA: -NODO INICIAL AL FINAL DEL CAMINO -ARCO FINAL
+                        //var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
+                        arcs.Add( new Tuple<int, int>(nodo,raiz) );
                         camino.Add(raiz);
                         return 200;
                     }
@@ -135,8 +134,7 @@ namespace aco
             //Console.WriteLine($"siguiente nodo {nodoSiguiente} . costo minimo {costoMinimo}");
             costo += costoMinimo;
             costos.Add(costoMinimo);
-            var a = new Dictionary<int, int>();//ARCO POR EL QUE ESTA PASANDO
-            a.Add(raiz,nodoSiguiente);
+            var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
             arcs.Add( a );
             return busqueda(raiz,nodoSiguiente);
         }
@@ -156,7 +154,7 @@ namespace aco
                 raiz = i;
                 camino = new List<int>();
                 costos = new List<int>();
-                arcs = new List<Dictionary<int, int>>();
+                arcs = new List<Tuple<int, int>>();
                 costo = 0;
                 inicializarArrVisitados(grafo.tamanioGrafo());
                 visitados[raiz] = true;
@@ -164,7 +162,7 @@ namespace aco
                 if(res == 200){ //TRAJO UN CAMINO COMPLETO
                     caminos.Add(new CaminoOptimo(raiz,camino,costo,costos,arcs));
                 }else if(res == 500){
-                    return;
+                    return; //TERMINA PROGRAMA
                 }
             }
             foreach(var i in caminos){
