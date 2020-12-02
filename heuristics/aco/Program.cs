@@ -7,34 +7,51 @@ namespace aco
 {
     public class CaminoOptimo{
         int id;
+        public List<Dictionary<int,int>> arcos;
         List<int> camino;
-        int costo =0;
+        List<int> costos;
+        int costoTotal =0;
         public int getId(){
             return this.id;
         }
         public void imprimirCamino(){
             Console.WriteLine($"Nodo Inicial : {id}");
-            Program.imprimirCamino(this.camino);
-            Console.WriteLine($"Costo de recorrido : {costo}");
+            //Program.imprimirCamino(this.camino);
+            foreach(var i in this.costos)
+            {
+                Console.WriteLine($"Costo : {i}");
+            }
+            foreach (var i in this.arcos)
+            {
+                foreach(var j in i.Keys){
+                    i.TryGetValue(j,out int val);
+                    Console.WriteLine($"de {j} a {val}");
+                }
+            }
+            Console.WriteLine($"Costo de recorrido : {costoTotal}");
         }
         public void actualizaCosto(int c ){
-            this.costo += c;
+            this.costoTotal += c;
         }
-        public CaminoOptimo(int id,List<int> c, int cost){
+        public CaminoOptimo(int id,List<int> c, int cost, List<int> costs, List<Dictionary<int,int>> arcs){
             this.camino = c;
-            this.costo = cost;
+            this.costos = costs;
+            this.costoTotal = cost;
             this.id = id;
+            this.arcos = arcs;
         }
     }
     class Program
     {
         static bool[] visitados;
         static AdjacencyList grafo;
+        static List<Dictionary<int,int>> arcs;
         static List<int> camino;
+        static List<int> costos;
         static int costo = 0;
 
         static void leerGrafo(){
-            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCompleto.txt");
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCiclado.txt");
             string[] lines = File.ReadAllLines(archivoTxt);
             Console.WriteLine(lines.Length);
             grafo = new AdjacencyList( int.Parse(lines[0]) );
@@ -101,6 +118,7 @@ namespace aco
                     //SI ESTA
                     //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
+
                         camino.Add(raiz);
                         return 200;
                     }
@@ -116,6 +134,10 @@ namespace aco
             //Console.WriteLine(visitados[nodoSiguiente]);
             //Console.WriteLine($"siguiente nodo {nodoSiguiente} . costo minimo {costoMinimo}");
             costo += costoMinimo;
+            costos.Add(costoMinimo);
+            var a = new Dictionary<int, int>();//ARCO POR EL QUE ESTA PASANDO
+            a.Add(raiz,nodoSiguiente);
+            arcs.Add( a );
             return busqueda(raiz,nodoSiguiente);
         }
         static void Main(string[] args)
@@ -133,17 +155,23 @@ namespace aco
             for(int i = 0; i < grafo.tamanioGrafo(); i++){
                 raiz = i;
                 camino = new List<int>();
+                costos = new List<int>();
+                arcs = new List<Dictionary<int, int>>();
                 costo = 0;
                 inicializarArrVisitados(grafo.tamanioGrafo());
                 visitados[raiz] = true;
                 res = busqueda(raiz,raiz);
-                if(res == 200){
-                    caminos.Add(new CaminoOptimo(raiz,camino,costo));
+                if(res == 200){ //TRAJO UN CAMINO COMPLETO
+                    caminos.Add(new CaminoOptimo(raiz,camino,costo,costos,arcs));
+                }else if(res == 500){
+                    return;
                 }
             }
             foreach(var i in caminos){
                 i.imprimirCamino();
             }
+            //CONTINUAR CON HORMIGAS
+            AntColony.Init(grafo,caminos);
             Console.WriteLine("Hello World!");
         }
     }
