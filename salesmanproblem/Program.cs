@@ -1,9 +1,23 @@
 ﻿using System;
 using System.Linq;
+using System.IO;
+using System.Threading;
 using System.Collections.Generic;
 
 namespace salesmanproblem
 {
+
+    public class CaminoOptimo{
+        List<int> camino;
+        int costo =0;
+        public void actualizaCosto(int c ){
+            this.costo += c;
+        }
+        public CaminoOptimo(List<int> c, int cost){
+            this.camino = c;
+            costo = cost;
+        }
+    }
     class Program
     {
         static bool[] visitados;
@@ -49,6 +63,22 @@ namespace salesmanproblem
             h.mostrarListaAdyacencia();
             return h;
         }
+        static void leerGrafo(){
+            
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacencia.txt");
+            string[] lines = File.ReadAllLines(archivoTxt);
+            Console.WriteLine(lines.Length);
+            grafo = new AdjacencyList( int.Parse(lines[0]) );
+            foreach(var i in lines){
+                string[] j = i.Split(',');
+                int x = int.Parse(j[0]);
+                try{
+                    grafo.agregaVertice(int.Parse(j[0]),int.Parse(j[1]),int.Parse(j[2]));
+                }catch(Exception){      //PARA EVITAR LA PRIMERA LINEA QUE ES EL NUMERO DE NODOS
+                    continue;
+                }
+            }
+        }
         static void inicializarArrVisitados(int n){
             visitados = new bool[n];
             for(int i =0; i < n;i++){
@@ -69,30 +99,26 @@ namespace salesmanproblem
             //FALSO, SI NO HAY AL MENOS UNO QUE SEA FALSO
             return visitados.All(x => x);
         }
-        static int veces = 10;
+        /*
+        * raiz -> nodo desde que se empieza la busqueda inicial
+        * nodo -> nodo que continua con la busqueda
+        * nodoVecino -> se manda cuando quieres que 'nodo' no busque desde el de menor costo
+        */
+        //VECINO MÁS CERCANO
         static int busqueda(int raiz,int nodo, int? nodoVecino = null){
-            // veces--;
-            // System.Console.WriteLine($"veces {veces}");
-            //llego a un limite (no tiene vecinos restantes) 
-            //y ya no puede seguir ese caminio, no es feasible
-            //modificar a que cheque si el siguiente es el nodo inicial
-            /* if(nodo == -1){
-                Console.WriteLine( estanTodosVisitados() );
-                return nodo;
-            } */
-
             int nodoInicial = nodo;
             visitados[nodoInicial] = true;
             camino.Add(nodoInicial);
             var vecinos = grafo[nodoInicial];
             int costoMinimo = int.MaxValue;
             int nodoSiguiente = -1;
-            if(nodoVecino is int){
-                System.Console.WriteLine("si es entero");
+            /* if(nodoVecino is int){
+                //System.Console.WriteLine("si es entero");
                 //return 1;
                 int nv = nodoVecino ?? default(int);
-                return busqueda(raiz,nv);
-            }
+                //AQUI ESTA EL ERROR, DEBES COMPARAR
+                return busqueda(raiz,nodo);
+            } */
             foreach(var i in vecinos){
                 if(!visitados[i.Item1]){
                     //Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} visit? {costoMinimo}");
@@ -102,8 +128,9 @@ namespace salesmanproblem
                     }
                 }
             }
-            Console.WriteLine($" nodo siguiente : {nodoSiguiente}");
-            imprimirCamino(camino);
+            //Console.WriteLine($" nodo siguiente : {nodoSiguiente}");
+            //NO HAY VECINOS PARA CONTINUAR CAMINO
+            
             //RETORNA 200 SI ES FEASIBLE
             //RETORNA 500 SI NO FEASIBLE
             //ANTES DE HACER BUSQUEDA DE NUEVO , HAY QUE CHECAR SI TODOS LOS VECINOS ESTAN VISITADOS
@@ -113,54 +140,52 @@ namespace salesmanproblem
                 var vecino = grafo[nodo];
                 foreach(var i in vecinos){
                     //SI ESTA
-                        //RETURN "FEASIBLE"
+                    //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
+                        camino.Add(raiz);
                         return 200;
                     }
                 }
-                //HACER
+                Console.WriteLine("NO ES UN GRAFO COMPLETAMENTE CONECTADO");
                 return 500;//RETURN "NO FEASIBLE"
             }
-                
-                    
-                
+            if(nodoSiguiente == -1){
+                //Console.WriteLine();
+                Console.WriteLine("NO SE COMPLETA EL CMAINO");
+                return 500;
+            }
             return busqueda(raiz,nodoSiguiente);
         }
 
         static void Main(string[] args)
         {
-            grafo = CyclicGraph8Nodes();
+            leerGrafo();
+            grafo.mostrarListaAdyacencia();
+            //grafo = CyclicGraph8Nodes();
             camino = new List<int>();
             inicializarArrVisitados(8);
-            int nodoInicial = 3;
-            //PRIMERA VEZ QUE SE MANDA A LLAMAR
-            var res = busqueda(nodoInicial,nodoInicial);
-            System.Console.WriteLine($"response {res}");
-            if(res == -1){      //NECESITAS HACER OTRA VEZ LA BUSQUEDA
-                inicializarArrVisitados(8);
-                camino.Clear();
-                res = busqueda(nodoInicial,nodoInicial, 1);
-                System.Console.WriteLine($"response en menos uno{res}");
-            }
-            //}
-            // Console.WriteLine("segunda vuelta");
-            // visitados[nodoSiguiente] = true;
-            // camino.Add(nodoSiguiente);
-            // vecinos = grafo[nodoSiguiente];
-            // costoMinimo = int.MaxValue;
-            // nodoSiguiente = -1;
-            // foreach(var i in vecinos){
-            //     if(!visitados[i.Item1]){
-            //         Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} visit? {costoMinimo}");
-            //         if(i.Item2 < costoMinimo){
-            //             costoMinimo = i.Item2;
-            //             nodoSiguiente = i.Item1;
-            //         }
-            //     }
-            // }
-            // imprimirCamino(camino);
+            int raiz = 5;
+            //SE BUSCA EN TODOS LOS VECINOS UN CAMINO
+            var nodosVecinos = grafo[raiz];
+            int nodoInicial = raiz;
+            var res = 0;
+            //inicializarArrVisitados(8);
+            camino.Clear();
+            visitados[raiz] = true;
+            res = busqueda(raiz,raiz);
+            if(res == 200){
+                imprimirCamino(camino);
 
+            }
             Console.WriteLine("Hello World!");
         }
     }
 }
+/* adjacencyList[0] -> 1(3)2(5)3(2)7(10)
+adjacencyList[1] -> 0(3)2(5)4(4)6(6)3(8)7(6)
+adjacencyList[2] -> 0(5)1(5)6(9)4(1)5(7)
+adjacencyList[3] -> 7(14)0(2)1(8)4(12)
+adjacencyList[4] -> 2(1)1(4)3(12)6(15)
+adjacencyList[5] -> 1(7)7(9)
+adjacencyList[6] -> 1(6)2(9)4(15)7(3)
+adjacencyList[7] -> 0(10)5(9)1(6)6(3)3(14) */
