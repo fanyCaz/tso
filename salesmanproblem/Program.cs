@@ -6,23 +6,12 @@ using System.Collections.Generic;
 
 namespace salesmanproblem
 {
-
-    public class CaminoOptimo{
-        List<int> camino;
-        int costo =0;
-        public void actualizaCosto(int c ){
-            this.costo += c;
-        }
-        public CaminoOptimo(List<int> c, int cost){
-            this.camino = c;
-            costo = cost;
-        }
-    }
     class Program
     {
         static bool[] visitados;
         static AdjacencyList grafo;
         static List<int> camino;
+        static int costo = 0;
         //7->0,3,1->2,6->4,5
         public static AdjacencyList CyclicGraph8Nodes(){
             AdjacencyList h = new AdjacencyList(8);
@@ -64,7 +53,6 @@ namespace salesmanproblem
             return h;
         }
         static void leerGrafo(){
-            
             string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacencia.txt");
             string[] lines = File.ReadAllLines(archivoTxt);
             Console.WriteLine(lines.Length);
@@ -112,24 +100,15 @@ namespace salesmanproblem
             var vecinos = grafo[nodoInicial];
             int costoMinimo = int.MaxValue;
             int nodoSiguiente = -1;
-            /* if(nodoVecino is int){
-                //System.Console.WriteLine("si es entero");
-                //return 1;
-                int nv = nodoVecino ?? default(int);
-                //AQUI ESTA EL ERROR, DEBES COMPARAR
-                return busqueda(raiz,nodo);
-            } */
             foreach(var i in vecinos){
                 if(!visitados[i.Item1]){
-                    //Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} visit? {costoMinimo}");
+                    Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} visit? {costoMinimo}");
                     if(i.Item2 < costoMinimo){
                         costoMinimo = i.Item2;
                         nodoSiguiente = i.Item1;
                     }
                 }
             }
-            //Console.WriteLine($" nodo siguiente : {nodoSiguiente}");
-            //NO HAY VECINOS PARA CONTINUAR CAMINO
             
             //RETORNA 200 SI ES FEASIBLE
             //RETORNA 500 SI NO FEASIBLE
@@ -150,10 +129,11 @@ namespace salesmanproblem
                 return 500;//RETURN "NO FEASIBLE"
             }
             if(nodoSiguiente == -1){
-                //Console.WriteLine();
-                Console.WriteLine("NO SE COMPLETA EL CMAINO");
+                Console.WriteLine("NO SE COMPLETA EL CAMINO");
                 return 500;
             }
+            Console.WriteLine($"siguiente nodo {nodoSiguiente} . costo minimo {costoMinimo}");
+            costo += costoMinimo;
             return busqueda(raiz,nodoSiguiente);
         }
 
@@ -164,18 +144,17 @@ namespace salesmanproblem
             //grafo = CyclicGraph8Nodes();
             camino = new List<int>();
             inicializarArrVisitados(8);
-            int raiz = 5;
+            int raiz = 1;
             //SE BUSCA EN TODOS LOS VECINOS UN CAMINO
             var nodosVecinos = grafo[raiz];
             int nodoInicial = raiz;
             var res = 0;
-            //inicializarArrVisitados(8);
             camino.Clear();
             visitados[raiz] = true;
             res = busqueda(raiz,raiz);
             if(res == 200){
                 imprimirCamino(camino);
-
+                Console.WriteLine($"Costo del camino : {costo}");
             }
             Console.WriteLine("Hello World!");
         }
