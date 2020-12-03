@@ -9,7 +9,7 @@ namespace aco
         int id;
         public List<Tuple<int,int>> arcos;
         List<int> camino;
-        List<int> costos;
+        public List<int> costos;
         int costoTotal =0;
         public int getId(){
             return this.id;
@@ -17,10 +17,10 @@ namespace aco
         public void imprimirCamino(){
             Console.WriteLine($"Nodo Inicial : {id}");
             Program.imprimirCamino(this.camino);
-            /* foreach(var i in this.costos)
+            foreach(var i in this.costos)
             {
                 Console.WriteLine($"Costo : {i}");
-            } */
+            }
             foreach (var i in this.arcos)
             {
                 Console.WriteLine($"de {i.Item1} a {i.Item2}");
@@ -95,7 +95,7 @@ namespace aco
 
         static bool estanTodosVisitados(){
             //RETORNA VERDADERO CUANDO TODOS HAN SIDO VISITADOS,
-            //FALSO, SI HAY AL MENOS UNO QUE SEA FALSO
+            //FALSO, SI HAY AL MENOS UNO QUE SEA NO HAYA SIDO VISITADO
             return visitados.All(x => x);
         }
         /*        //VECINO MÁS CERCANO
@@ -131,7 +131,8 @@ namespace aco
                     //SI ESTA
                     //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
-                        //AGREGA: -NODO INICIAL AL FINAL DEL CAMINO -ARCO FINAL
+                        //AGREGA: -NODO INICIAL AL FINAL DEL CAMINO -ARCO FINAL -COSTO DEL ULTIMO ARCO
+                        costos.Add(i.Item2);
                         arcs.Add( new Tuple<int, int>(nodo,raiz) );
                         camino.Add(raiz);
                         return 200;
