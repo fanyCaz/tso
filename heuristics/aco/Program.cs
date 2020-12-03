@@ -62,6 +62,22 @@ namespace aco
                 }
             }
         }
+        /*
+        *   cant -> tamaño del array
+        *   n -> numero con que se llenara el array
+        */
+        public static int[] fillArray(int cant,int n){
+            int[] array = new int[cant];
+            for(int i=0; i < cant;i++){
+                array[i] = n;
+            }
+            return array;
+        }
+        public static void imprimirArray(int[] array){
+            for(int i = 0; i < array.Length; i++){
+                Console.WriteLine($"{array[i]}");
+            }
+        }
         static void inicializarArrVisitados(int n){
             visitados = new bool[n];
             for(int i =0; i < n;i++){
@@ -116,7 +132,6 @@ namespace aco
                     //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
                         //AGREGA: -NODO INICIAL AL FINAL DEL CAMINO -ARCO FINAL
-                        //var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
                         arcs.Add( new Tuple<int, int>(nodo,raiz) );
                         camino.Add(raiz);
                         return 200;
@@ -130,10 +145,8 @@ namespace aco
                 Console.WriteLine("NO SE COMPLETA EL CAMINO");
                 return 500;
             }
-            //Console.WriteLine(visitados[nodoSiguiente]);
-            //Console.WriteLine($"siguiente nodo {nodoSiguiente} . costo minimo {costoMinimo}");
-            costo += costoMinimo;
-            costos.Add(costoMinimo);
+            costo += costoMinimo;   //PARA COSTO TOTAL
+            costos.Add(costoMinimo);//PARA COSTO DE ARCO
             var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
             arcs.Add( a );
             return busqueda(raiz,nodoSiguiente);
@@ -165,9 +178,9 @@ namespace aco
                     return; //TERMINA PROGRAMA
                 }
             }
-            foreach(var i in caminos){
+            /* foreach(var i in caminos){
                 i.imprimirCamino();
-            }
+            } */
             //CONTINUAR CON HORMIGAS
             AntColony.Init(grafo,caminos);
             Console.WriteLine("Hello World!");
