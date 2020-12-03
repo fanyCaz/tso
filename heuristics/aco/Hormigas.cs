@@ -16,6 +16,9 @@ namespace aco{
         static List<Tuple<int,int>> primerosArcos = new List<Tuple<int, int>>();
         static int[] costosPrimerosArcos;
         static int q = 1;      //ESTE VALOR NO CAMBIA
+        static double[] deltatij;
+        static double[] feromonas;
+        static double rho = 0.2;
         static double[] getNIJ(AdjacencyList g,List<CaminoOptimo> cs){
             bool[] visitados = new bool[g.tamanioGrafo()];
             char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
@@ -86,7 +89,9 @@ namespace aco{
         }
 
 //
-        static List<double[]> getdtijk(int cantArcos, int cantHormigas, List<int[]> h, int[] costosHormigas){
+        static List<double[]> getdtijk(int cantArcos, int cantHormigas, List<int[]> h, int[] costosHormigas,bool first = true){
+            deltatij = new double[cantArcos];
+            feromonas = new double[cantArcos];
             List<double[]> deltaArcos = new List<double[]>();
             for(int j = 0; j < cantArcos; j++){
                 double[] tmpArc = new double[cantHormigas];
@@ -98,6 +103,9 @@ namespace aco{
                     //Console.WriteLine($"{j} -{i} valor: {h[i].GetValue(j)} val : {x} q:{q}");
                 }
                 deltaArcos.Add(tmpArc);
+                deltatij[j] = tmpArc.Sum();
+                var r = (first) ? 0 : rho;
+                feromonas[j] = (1-r)*deltatij[j];
             }
             return deltaArcos;
         }
@@ -107,7 +115,10 @@ namespace aco{
             List<int[]> hormigas = getHormigas(primerosArcos.Count,caminos);
             int[] costos = getCostos(hormigas,hormigas.Count);      //Costos de viajes de estas hormigas
             List<double[]> deltaArcos = getdtijk(nij.Length,hormigas.Count,hormigas,costos);
-            //Program.imprimirArray(costos);
+            Console.WriteLine("deltas");
+            Program.imprimirArrayDouble(deltatij);
+            Console.WriteLine("feromonas");
+            Program.imprimirArrayDouble(feromonas);
         }
 
     }
