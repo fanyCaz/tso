@@ -148,43 +148,44 @@ namespace aco{
 
             bool[] visitados = new bool[cantHormigas];
             bool[] arcosVisitados = new bool[cantArcos];
-            foreach(int i in Enumerable.Range(0,cantHormigas)){
-                visitados[i] = false;
-            }
-            for(int i = 0; i < cantArcos; i++){
-                arcosVisitados[i] = false;
-            }
-            int columna = 0;
-            int nodo = columna;
-            int nodoSiguiente = 0;//valor x por ahora
-            for(int i = 0; i < cantHormigas; i++){
-                //columna = i;
-                visitados[nodo] = true;
-                var x  =  primerosArcos.Where(x => x.Item1 == nodo || x.Item2 == nodo);   //OBTIENE TODOS LOS ARCOS CON ESE NODO DE 'FROM' A 'TO'
-                double valMaximo = double.MinValue; int indexNodo = int.MinValue;         //valor e indice del arco por el que se movera
-                Console.WriteLine($"Nodo que busca en arcos :{nodo}"); 
-                foreach(var pA in x ){
-                    var y = primerosArcos.IndexOf(pA);      //INDEX DEL ARCO EN QUE ESTAMOS COMPARANDO
-                    double valorPr = (double)matriz[y].GetValue(columna);
-                    Console.WriteLine($"v: {valorPr}");
-                    if(valorPr > valMaximo && !arcosVisitados[y]){
-                        valMaximo = valorPr;
-                        indexNodo = y;
-                    }
-                }
-                arcosVisitados[indexNodo] = true;
-                //CONOCER A QUE NODO PERTENECE LA SIGUIENTE VUELTA
-                //nodoSiguiente = (primerosArcos[indexNodo].Item1 != nodo) ? primerosArcos[indexNodo].Item1 : primerosArcos[indexNodo].Item2;
-                Console.WriteLine($"index Nodo : {indexNodo} ");
-                nodoSiguiente = (!visitados[primerosArcos[indexNodo].Item1]) ? primerosArcos[indexNodo].Item1 : primerosArcos[indexNodo].Item2;
-                Console.WriteLine($"valor de probabilidad: {matriz[indexNodo].GetValue(columna)}  \n"
-                    + $" arco: {letras[primerosArcos[indexNodo].Item1]} y {letras[primerosArcos[indexNodo].Item2]} \n"
-                    + $" nodoSiguiente: {letras[nodoSiguiente]}");
-                Console.WriteLine($"val minomo : {valMaximo}");
-                nodo = nodoSiguiente;
-            }
-            Program.imprimirArrayBool(arcosVisitados);
             
+            for(int j = 0; j < cantHormigas; j++){  //CICLO PARA CAMBIO DE COLUMNAS
+                int columna = j;
+                int nodo = columna;
+                int nodoSiguiente = 0;//valor x por ahora
+                Console.WriteLine("nueva columna");
+                foreach(int i in Enumerable.Range(0,cantHormigas)){
+                    visitados[i] = false;
+                }
+                for(int i = 0; i < cantArcos; i++){
+                    arcosVisitados[i] = false;
+                }
+                for(int i = 0; i < cantHormigas; i++){  //CICLO PARA BÚSQUEDA DE CAMINO EN UNA COLUMNA
+                    visitados[nodo] = true;
+                    var x  =  primerosArcos.Where(x => x.Item1 == nodo || x.Item2 == nodo);   //OBTIENE TODOS LOS ARCOS CON ESE NODO DE 'FROM' A 'TO'
+                    double valMaximo = double.MinValue; int indexNodo = int.MinValue;         //valor e indice del arco por el que se movera
+                    //Console.WriteLine($"Nodo que busca en arcos :{nodo}"); 
+                    foreach(var pA in x ){      //CICLO EN LOS ARCOS QUE CONTENGAN EL ARCO QUE BUSCO PARA PASAR
+                        var y = primerosArcos.IndexOf(pA);      //INDEX DEL ARCO EN QUE ESTAMOS COMPARANDO
+                        double valorPr = (double)matriz[y].GetValue(columna);
+                        //Console.WriteLine($"v: {valorPr}");
+                        if(valorPr > valMaximo && !arcosVisitados[y]){
+                            valMaximo = valorPr;
+                            indexNodo = y;
+                        }
+                    }
+                    arcosVisitados[indexNodo] = true;
+                    //CONOCER A QUE NODO PERTENECE LA SIGUIENTE VUELTA
+                    //Console.WriteLine($"index Nodo : {indexNodo} ");
+                    nodoSiguiente = (!visitados[primerosArcos[indexNodo].Item1]) ? primerosArcos[indexNodo].Item1 : primerosArcos[indexNodo].Item2;
+                    /*Console.WriteLine($"valor de probabilidad: {matriz[indexNodo].GetValue(columna)}  \n"
+                        + $" arco: {letras[primerosArcos[indexNodo].Item1]} y {letras[primerosArcos[indexNodo].Item2]} \n"
+                        + $" nodoSiguiente: {letras[nodoSiguiente]}");
+                    Console.WriteLine($"val minomo : {valMaximo}");*/
+                    nodo = nodoSiguiente;
+                }
+                Program.imprimirArrayBool(arcosVisitados);
+            }
         }
         public static void Init(AdjacencyList grafo, List<CaminoOptimo> caminos){
             double[] nij = getNIJ(grafo,caminos);
