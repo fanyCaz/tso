@@ -15,6 +15,7 @@ namespace aco{
         //static int[] nij;
         static List<Tuple<int,int>> primerosArcos = new List<Tuple<int, int>>();
         static int[] costosPrimerosArcos;
+        static char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
         static int q = 1;      //ESTE VALOR NO CAMBIA
         static double[] deltatij;
         static double[] feromonas;
@@ -23,7 +24,7 @@ namespace aco{
         static int a = 1,b = 1;
         static double[] getNIJ(AdjacencyList g,List<CaminoOptimo> cs){
             bool[] visitados = new bool[g.tamanioGrafo()];
-            char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
+            
             foreach(int i in Enumerable.Range(0,g.tamanioGrafo())){
                 visitados[i] = false;
             }
@@ -137,43 +138,53 @@ namespace aco{
             return matriz;
         }
         static void generarNuevosCaminos(int cantArcos, int cantHormigas,List<double[]> matriz){
-            /* for(int k = 0; k < cantHormigas; k++){
-                var aux = 0;
-                for(int i = 0; i < cantHormigas;i++){
-                    // var d = primerosArcos[i].Item1;
-                    //Console.WriteLine($"mat {matriz[i].GetValue(d)}");
-                    var numArcosI = primerosArcos.Where(x => x.Item1 == i).Count() + aux;
-                    Console.WriteLine($"{i}- arcos de {primerosArcos[i].Item1} aux {aux}");
-                    for(int j = aux; j < numArcosI; j++){
-                        Console.WriteLine($"valores : {matriz[j].GetValue(k)}");
-                    }
-                    aux = numArcosI;
+            /* for(int j = 0; j < matriz[0].Length; j++){
+                Console.WriteLine($"nueva filea");
+                for(int i = 0; i < matriz.Count; i++){
+                    //Console.WriteLine($"{primerosArcos[i]}");
+                    Console.WriteLine($"{matriz[i].GetValue(j)}");
                 }
             } */
 
-            //for(int i = 0; i < cantHormigas; i++){
-                int i = 0;
-                var d = primerosArcos.Where(x => x.Item1 == i);
-                foreach(var j in d){
-                    Console.WriteLine($"index de {primerosArcos.IndexOf(j)}");
-                    var index = primerosArcos.IndexOf(j);
-                    Console.WriteLine($"valor en la matriz {matriz[index].GetValue(i)}");
-                    Console.WriteLine($"{j.Item1} - {j.Item2}");
-                    var max = matriz[index].Max();
-                    Console.WriteLine( max );
+            bool[] visitados = new bool[cantHormigas];
+            bool[] arcosVisitados = new bool[cantArcos];
+            foreach(int i in Enumerable.Range(0,cantHormigas)){
+                visitados[i] = false;
+            }
+            for(int i = 0; i < cantArcos; i++){
+                arcosVisitados[i] = false;
+            }
+            int columna = 0;
+            int nodo = columna;
+            int nodoSiguiente = 0;//valor x por ahora
+            for(int i = 0; i < cantHormigas; i++){
+                //columna = i;
+                visitados[nodo] = true;
+                var x  =  primerosArcos.Where(x => x.Item1 == nodo || x.Item2 == nodo);   //OBTIENE TODOS LOS ARCOS CON ESE NODO DE 'FROM' A 'TO'
+                double valMaximo = double.MinValue; int indexNodo = int.MinValue;         //valor e indice del arco por el que se movera
+                Console.WriteLine($"Nodo que busca en arcos :{nodo}"); 
+                foreach(var pA in x ){
+                    var y = primerosArcos.IndexOf(pA);      //INDEX DEL ARCO EN QUE ESTAMOS COMPARANDO
+                    double valorPr = (double)matriz[y].GetValue(columna);
+                    Console.WriteLine($"v: {valorPr}");
+                    if(valorPr > valMaximo && !arcosVisitados[y]){
+                        valMaximo = valorPr;
+                        indexNodo = y;
+                    }
                 }
-                //bool fromTo = primerosArcos.Contains(); //CHECA SI 'from' A 'to'
-                //bool toFrom = primerosArcos.Contains(new Tuple<int, int>(x.Item2,x.Item1)); //CHECA SI 'to' A 'from'
-                //Console.WriteLine($"{primerosArcos.IndexOf(x)}");
-            //}
-            //for(int i = 0; i < 1; i++){
-                /* int i = 0;
-                Console.WriteLine($"hormigas");
-                for(int j = 0; j < cantArcos; j++){
-                    var d = primerosArcos.Where(x => x.Item1 == i);
-                    Console.WriteLine($"valores de matriz {matriz[j].GetValue(i)}");
-                } */
-            //}
+                arcosVisitados[indexNodo] = true;
+                //CONOCER A QUE NODO PERTENECE LA SIGUIENTE VUELTA
+                //nodoSiguiente = (primerosArcos[indexNodo].Item1 != nodo) ? primerosArcos[indexNodo].Item1 : primerosArcos[indexNodo].Item2;
+                Console.WriteLine($"index Nodo : {indexNodo} ");
+                nodoSiguiente = (!visitados[primerosArcos[indexNodo].Item1]) ? primerosArcos[indexNodo].Item1 : primerosArcos[indexNodo].Item2;
+                Console.WriteLine($"valor de probabilidad: {matriz[indexNodo].GetValue(columna)}  \n"
+                    + $" arco: {letras[primerosArcos[indexNodo].Item1]} y {letras[primerosArcos[indexNodo].Item2]} \n"
+                    + $" nodoSiguiente: {letras[nodoSiguiente]}");
+                Console.WriteLine($"val minomo : {valMaximo}");
+                nodo = nodoSiguiente;
+            }
+            Program.imprimirArrayBool(arcosVisitados);
+            
         }
         public static void Init(AdjacencyList grafo, List<CaminoOptimo> caminos){
             double[] nij = getNIJ(grafo,caminos);

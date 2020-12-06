@@ -83,6 +83,11 @@ namespace aco
                 Console.WriteLine($"{array[i]}");
             }
         }
+        public static void imprimirArrayBool(bool[] array){
+            for(int i = 0; i < array.Length; i++){
+                Console.WriteLine($"{array[i]}");
+            }
+        }
         static void inicializarArrVisitados(int n){
             visitados = new bool[n];
             for(int i =0; i < n;i++){
