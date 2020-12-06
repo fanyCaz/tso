@@ -17,7 +17,6 @@ namespace aco{
         static int[] costosPrimerosArcos;
         static char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
         static int q = 1;      //ESTE VALOR NO CAMBIA
-        static double[] deltatij;
         static double[] feromonas;
         static double[] probabilidadArco;
         static double rho = 0.2;
@@ -56,9 +55,9 @@ namespace aco{
                 //GUARDAS UN '0'
         static List<int[]> getHormigas(int cantidadArcos, List<CaminoOptimo> cs){
             List<int[]> hormigas = new List<int[]>();
-            Console.WriteLine($"ARCOS");
+            //Console.WriteLine($"ARCOS");
             for(int i=0; i < cs.Count; i++){ //cs.Count
-                Console.WriteLine($"ARCOS de {cs[i].getId()}");
+                //Console.WriteLine($"ARCOS de {cs[i].getId()}");
                 int[] hormiguita = Program.fillArray(cantidadArcos,0);
                 foreach(var x in cs[i].arcos){
                     //Console.WriteLine($"de {letras[x.Item1]} a {letras[x.Item2]} ");
@@ -89,12 +88,21 @@ namespace aco{
             }
             return costos;
         }
+        /*
+        *
+        */
+        static void actualizarFeromonas(double[] delta, double r,int tamanioArr){
+            //Console.WriteLine($"rho {r}");
+            for(int i=0; i < tamanioArr; i++){
+                feromonas[i] = (1-r)*delta[i];
+                probabilidadArco[i] = Math.Pow(feromonas[i],a);
+            }
+        }
 
-//
+        //MATRIZ DE DELTAS
         static List<double[]> getdtijk(int cantArcos, int cantHormigas, List<int[]> h, int[] costosHormigas,bool first = true){
-            deltatij = new double[cantArcos];
-            feromonas = new double[cantArcos];
-            probabilidadArco = new double[cantArcos];
+            double[] deltatij = new double[cantArcos];
+            
             List<double[]> deltaArcos = new List<double[]>();
             for(int j = 0; j < cantArcos; j++){
                 double[] tmpArc = new double[cantHormigas];
@@ -106,10 +114,14 @@ namespace aco{
                 }
                 deltaArcos.Add(tmpArc);
                 deltatij[j] = tmpArc.Sum();
-                var r = (first) ? 0 : rho;
-                feromonas[j] = (1-r)*deltatij[j];
-                probabilidadArco[j] = Math.Pow(feromonas[j],a);
+                //Console.WriteLine($"gesgture dreas {deltatij[j]}");
             }
+            double r = (first) ? 0 : rho;
+            /* Console.WriteLine("delta arra");
+            Program.imprimirArrayDouble(deltatij);
+            Console.WriteLine("FIN delta arra"); */
+            actualizarFeromonas(deltatij,r,cantArcos);
+            //actualizarProbabilidadArco()
             return deltaArcos;
         }
 
@@ -137,7 +149,12 @@ namespace aco{
             }
             return matriz;
         }
-        static void generarNuevosCaminos(int cantArcos, int cantHormigas,List<double[]> matriz){
+        /*
+        * cantArcos -> cantidad arcos iniciales
+        * cantHormigas -> cantidad de hormigas
+        * matriz -> la matriz que contiene las probabilidades de caminos
+        */
+        static List<int[]> generarNuevosCaminos(int cantArcos, int cantHormigas,List<double[]> matriz){
             /* for(int j = 0; j < matriz[0].Length; j++){
                 Console.WriteLine($"nueva filea");
                 for(int i = 0; i < matriz.Count; i++){
@@ -145,12 +162,11 @@ namespace aco{
                     Console.WriteLine($"{matriz[i].GetValue(j)}");
                 }
             } */
-
+            List<int[]> nuevasHormigas = new List<int[]>();
             bool[] visitados = new bool[cantHormigas];
             bool[] arcosVisitados = new bool[cantArcos];
             
-            for(int j = 0; j < cantHormigas; j++){  //CICLO PARA CAMBIO DE COLUMNAS
-                int columna = j;
+            for(int columna = 0; columna < cantHormigas; columna++){  //CICLO PARA CAMBIO DE COLUMNAS
                 int nodo = columna;
                 int nodoSiguiente = 0;//valor x por ahora
                 Console.WriteLine("nueva columna");
@@ -160,21 +176,22 @@ namespace aco{
                 for(int i = 0; i < cantArcos; i++){
                     arcosVisitados[i] = false;
                 }
+                int[] hormiga = Program.fillArray(cantArcos ,0);
                 for(int i = 0; i < cantHormigas; i++){  //CICLO PARA BÚSQUEDA DE CAMINO EN UNA COLUMNA
                     visitados[nodo] = true;
-                    var x  =  primerosArcos.Where(x => x.Item1 == nodo || x.Item2 == nodo);   //OBTIENE TODOS LOS ARCOS CON ESE NODO DE 'FROM' A 'TO'
+                    var x  =  primerosArcos.Where(x => x.Item1 == nodo || x.Item2 == nodo);   //OBTIENE TODOS LOS ARCOS CON ESE NODO DE 'FROM' A 'TO' Y DE 'TO' A 'FROM'
                     double valMaximo = double.MinValue; int indexNodo = int.MinValue;         //valor e indice del arco por el que se movera
                     //Console.WriteLine($"Nodo que busca en arcos :{nodo}"); 
                     foreach(var pA in x ){      //CICLO EN LOS ARCOS QUE CONTENGAN EL ARCO QUE BUSCO PARA PASAR
                         var y = primerosArcos.IndexOf(pA);      //INDEX DEL ARCO EN QUE ESTAMOS COMPARANDO
                         double valorPr = (double)matriz[y].GetValue(columna);
-                        //Console.WriteLine($"v: {valorPr}");
-                        if(valorPr > valMaximo && !arcosVisitados[y]){
+                        if(valorPr > valMaximo && !arcosVisitados[y]){  //ASEGURARSE QUE ESE ARCO NO HAYA SIDO USADO
                             valMaximo = valorPr;
                             indexNodo = y;
                         }
                     }
                     arcosVisitados[indexNodo] = true;
+                    hormiga[indexNodo] = 1;
                     //CONOCER A QUE NODO PERTENECE LA SIGUIENTE VUELTA
                     //Console.WriteLine($"index Nodo : {indexNodo} ");
                     nodoSiguiente = (!visitados[primerosArcos[indexNodo].Item1]) ? primerosArcos[indexNodo].Item1 : primerosArcos[indexNodo].Item2;
@@ -183,23 +200,57 @@ namespace aco{
                         + $" nodoSiguiente: {letras[nodoSiguiente]}");
                     Console.WriteLine($"val minomo : {valMaximo}");*/
                     nodo = nodoSiguiente;
+                    Console.WriteLine($"{letras[nodo]}");
                 }
-                Program.imprimirArrayBool(arcosVisitados);
+                nuevasHormigas.Add(hormiga);
+                //Program.imprimirArrayBool(arcosVisitados);
             }
+            return nuevasHormigas;
         }
         public static void Init(AdjacencyList grafo, List<CaminoOptimo> caminos){
             double[] nij = getNIJ(grafo,caminos);
             List<int[]> hormigas = getHormigas(primerosArcos.Count,caminos);
-            int[] costos = getCostos(hormigas,hormigas.Count);      //Costos de viajes de estas hormigas
-            List<double[]> deltaArcos = getdtijk(nij.Length,hormigas.Count,hormigas,costos);
-            /* Console.WriteLine("deltas");
+            feromonas = new double[nij.Length]; //INICIALIZA FEROMONAS AL INICIO
+            probabilidadArco = new double[nij.Length];
+            //CICLAR HASTA ??
+            int[] costos = new int[hormigas.Count];
+            List<double[]> deltaArcos;
+            List<double[]> matrizCaminosNuevos;
+                costos = getCostos(hormigas,hormigas.Count);      //Costos de viajes de estas hormigas
+                deltaArcos = getdtijk(nij.Length,hormigas.Count,hormigas,costos);
+                matrizCaminosNuevos = getNuevaMatriz(nij.Length,hormigas.Count,nij,hormigas);
+                hormigas = generarNuevosCaminos(nij.Length,hormigas.Count,matrizCaminosNuevos);
+            for(int i = 0; i < 20; i++){
+                costos = getCostos(hormigas,hormigas.Count);      //Costos de viajes de estas hormigas
+                deltaArcos = getdtijk(nij.Length,hormigas.Count,hormigas,costos,false);
+                matrizCaminosNuevos = getNuevaMatriz(nij.Length,hormigas.Count,nij,hormigas);
+                hormigas = generarNuevosCaminos(nij.Length,hormigas.Count,matrizCaminosNuevos);
+                foreach (var hormiga in hormigas)
+                {
+                    foreach(var nodo in hormiga){
+                        Console.Write($"{nodo} -");
+                    }
+                    Console.WriteLine("");
+                }
+                /* Console.WriteLine($"{letras[primerosArcos[indexNodo].Item1]} y {letras[primerosArcos[indexNodo].Item2]} \n"
+                        + $" nodoSiguiente: {letras[nodoSiguiente]}"); */
+            }
+            foreach(var x in costos){
+                Console.WriteLine($"costo {x}");
+            }
+            Program.guardarHormigas(hormigas);
+            Program.imprimirArrayDouble(feromonas);
+            /* foreach(var i in hormigas){
+                Console.WriteLine($"nueva hormiga");
+                Program.imprimirArray(i);
+            } */
+        }
+    }
+}
+
+/* Console.WriteLine("deltas");
             Program.imprimirArrayDouble(deltatij);
             Console.WriteLine("feromonas");
             Program.imprimirArrayDouble(feromonas);
             Console.WriteLine("probabilidades");
             Program.imprimirArrayDouble(probabilidadArco); */
-            List<double[]> matrizCaminosNuevos = getNuevaMatriz(nij.Length,hormigas.Count,nij,hormigas);
-            generarNuevosCaminos(nij.Length,hormigas.Count,matrizCaminosNuevos);
-        }
-    }
-}

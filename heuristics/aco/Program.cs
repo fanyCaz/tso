@@ -102,7 +102,18 @@ namespace aco
                 Console.WriteLine($"Nodo : {i} {letras[i]}");
             }        
         }
-
+        //Guardar caminos en txt
+        public static void guardarHormigas(List<int[]> h){
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"resultados.txt");
+            StreamWriter sw = new StreamWriter(archivoTxt);
+            foreach(var i in h){
+                foreach(var j in i){
+                    sw.Write(j + " - ");
+                }
+                sw.WriteLine("");
+            }
+            sw.Close();
+        }
         static bool estanTodosVisitados(){
             //RETORNA VERDADERO CUANDO TODOS HAN SIDO VISITADOS,
             //FALSO, SI HAY AL MENOS UNO QUE SEA NO HAYA SIDO VISITADO
@@ -166,7 +177,6 @@ namespace aco
         {
             leerGrafo();
             grafo.mostrarListaAdyacencia();
-            
             int raiz = 0;
             //SE BUSCA EN TODOS LOS VECINOS UN CAMINO
             var nodosVecinos = grafo[raiz];
