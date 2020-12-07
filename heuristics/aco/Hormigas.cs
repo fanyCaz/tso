@@ -152,6 +152,7 @@ namespace aco{
             } */
 
             //for(int i = 0; i < cantHormigas; i++){
+                //ESTO DEBE DE VER QUE ARCO, SI NO ES DIRIGIDO, PUES PA TODOS
                 int i = 0;
                 var d = primerosArcos.Where(x => x.Item1 == i);
                 foreach(var j in d){
