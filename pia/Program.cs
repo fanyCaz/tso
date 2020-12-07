@@ -1,14 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
 using System.Threading;
 using System.Collections.Generic;
 
 namespace pia
 {
     public class Mememplex{
-        Rana[] ranas;
-        public Mememplex(Rana[] r){
+        List<Rana> ranas;
+        public Mememplex(List<Rana> r){
             this.ranas = r;
         }
     }
@@ -174,16 +175,20 @@ namespace pia
             return busqueda(raiz,nodoSiguiente,visitados);
         }
         static object  ob = new object();
-        public static Rana[] obtenerRanas(int cont, List<Rana> ranas, int n){
-            lock(ob){
-                List<Rana> ranasSub = new List<Rana>();
-                for(int j = 0; j < n; j++){
-                    //Estas ranas van a este submemeplex
-                    ranasSub.Add(ranas[cont]);
-                    cont++;
+        public static List<Camino> obtenerCaminos(int q, List<Camino> caminos){
+            //lock(ob){
+                Random rnd = new Random();
+                Camino[] cams = new Camino[q];
+                int nC = caminos.Count();
+                //var caminosRana = new List<Camino>();
+                for(int j = 0; j < q; j++){
+                    Console.WriteLine($"cmaions que pidieron {q}");
+                    int indexCamino = rnd.Next( nC );
+                    cams[j] = caminos[indexCamino];
                 }
-                return ranasSub.ToArray();
-            }
+                //ranas.Add(new Rana(caminosRana));
+                return cams.ToList();
+            //}
         }
         static void Main(string[] args)
         {
@@ -208,8 +213,8 @@ namespace pia
             List<int> costos = new List<int>();
             //List<CaminoOptimo> caminos = new List<CaminoOptimo>();
             /*Variables algoritmo*/
-            int m = 5;
-            int f = 50;
+            int m = 2;
+            int f = 20;
             int n = f/m;
             int q = n/2;
             int cantNodos = grafo.tamanioGrafo();
@@ -235,31 +240,38 @@ namespace pia
                 }
             }
             //AQUI TIENE EL PROBLEMA
-            Random rnd = new Random();
+            
             List<Rana> ranas = new List<Rana>();
             //GENERA F CANTIDAD DE RANAS
+            /* TimeSpan tiempo = new TimeSpan();
+                    Stopwatch sw = Stopwatch.StartNew();     */
             for(int i = 0; i < f; i++){
                 //a cada rana, asignarle una lista de caminos
-                int indexCamino = rnd.Next( caminos.Count() );
-                var caminosRana = new List<Camino>();
-                for(int j = 0; j < q; q++){
-                    caminosRana.Add(caminos[indexCamino]);
-                }
-                ranas.Add(new Rana(caminosRana));
+                //Thread x = new Thread(()=>{
+                    Console.WriteLine($"caminos que quiero {q} numero de rana {i}");
+                    ranas.Add(new Rana(obtenerCaminos(q,caminos)) );
+                /* });
+                x.Start();
+                x.Join(); */
+                //tiempo += sw.Elapsed;
                 //EVALUAR EL FITNESS ??? aqui ya hice el fitness de cada camino
             }
-            Console.WriteLine("genera ranas ya");
+            Console.WriteLine($"genera ranas ya");
             List<Mememplex> memeplexes = new List<Mememplex>();
             
             //CONSTRUIR M MEMEPLEXES
             int cont = 0;
             for(int i = 0; i < m; i++){
-                Thread t = new Thread(()=>{
-                    memeplexes.Add(new Mememplex( obtenerRanas(cont,ranas,n) ) );
-                    cont += n;
-                });
-
+                List<Rana> ranasSub = new List<Rana>();
+                for(int j = 0; j < n; j++){
+                    //Estas ranas van a este memeplex
+                    ranasSub.Add(ranas[cont]);
+                    cont++;
+                }
+                memeplexes.Add(new Mememplex( ranasSub ) );
             }
+
+            //LOCAL EXPLORATION
 
             
             //var rOrdered = ranas.OrderBy(x => x.fitness);
