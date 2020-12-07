@@ -8,6 +8,7 @@ namespace pia
     public class Rana{
         int id;
         List<int[]> caminos;
+        public int fitness;
         public int getId(){
             return this.id;
         }
@@ -32,8 +33,8 @@ namespace pia
         static AdjacencyList grafo;
         static List<Tuple<int,int>> arcs = new List<Tuple<int, int>>();
         static List<int> camino = new List<int>();
-        static List<int> costos = new List<int>();
-        static int costo = 0;
+        //static List<int> costos = new List<int>();
+        static int costo;
         
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
@@ -99,6 +100,12 @@ namespace pia
                 Console.WriteLine($"Nodo : {i} {letras[i]}");
             }
         }
+        static int calcCosto(){
+            return 1;
+        }
+        static int getFitness(int costo){
+            return 1/costo;
+        }
         static bool estanTodosVisitados(bool[] visitados){
             //RETORNA VERDADERO CUANDO TODOS HAN SIDO VISITADOS,
             //FALSO, SI HAY AL MENOS UNO QUE SEA NO HAYA SIDO VISITADO
@@ -139,7 +146,7 @@ namespace pia
                     //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
                         //AGREGA: -NODO INICIAL AL FINAL DEL CAMINO -ARCO FINAL -COSTO DEL ULTIMO ARCO
-                        costos.Add(i.Item2);
+                        //costos.Add(i.Item2);
                         arcs.Add( new Tuple<int, int>(nodo,raiz) );
                         camino.Add(raiz);
                         return 200;
@@ -154,7 +161,7 @@ namespace pia
                 return 500;
             }
             costo += costoMinimo;   //PARA COSTO TOTAL
-            costos.Add(costoMinimo);//PARA COSTO DE ARCO
+            //costos.Add(costoMinimo);//PARA COSTO DE ARCO
             var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
             arcs.Add( a );
             return busqueda(raiz,nodoSiguiente,visitados);
@@ -180,44 +187,57 @@ namespace pia
             grafo = leerGrafo();
             bool[] visitados = fillArrayBool(grafo.tamanioGrafo());
             List<int[]> caminos = new List<int[]>();
+            List<int> costos = new List<int>();
             //List<CaminoOptimo> caminos = new List<CaminoOptimo>();
             /*Variables algoritmo*/
             int m = 6;
             int f = 60;
             int n = f/m;
-            List<Rana[]> memeplexes = new List<Rana[]>();
-            Console.WriteLine($"{grafo.tamanioGrafo()}  Numero de ranas : {f} .\n Numeros memeples {m} \n Numero de ranas por memeplex {n}");
+            int cantNodos = grafo.tamanioGrafo();
+            Console.WriteLine($"{cantNodos}  Numero de ranas : {f} .\n Numeros memeples {m} \n Numero de ranas por memeplex {n}");
 
             //3.1 POSITION OF INDIVIDUAL FROG
             //CAMINOS OPTIMOS POSIBLES
-            //int[] camino = new int[grafo.tamanioGrafo()];
+            //int[] camino = new int[cantNodos];
             //OBTENER TODOS LOS CAMINOS POSIBLES
             //DE MANERA ALEATORIA ASIGNARLOS A DIFERENTES RANAS
             //CADA RANA AL PRINCIPIO TENDRÁ UN CAMINO IGUAL ->CADA SUBMEMEPLEX SERÁ IGUAL
             caminos.Clear();
-            for(int i = 0; i < grafo.tamanioGrafo(); i++){
+            for(int i = 0; i < cantNodos; i++){
                 camino.Clear();
-                visitados = fillArrayBool(grafo.tamanioGrafo());
+                costo = 0;
+                visitados = fillArrayBool(cantNodos);
                 int res = busqueda(i,i,visitados);
+                costos.Add(costo);
                 if(res == 200){
                     caminos.Add(camino.ToArray() );
                 }
             }
             Random rnd = new Random();
-            for(int k = 0; k < m; k++){
-                Rana[] ranas = new Rana[n];
-                //ranas en cada memeplex
-                for(int i = 0; i < n; i++){
-                    //a cada rana, asignarle una lista de caminos
-                    int indexCamino = rnd.Next( caminos.Count() );
-                    var caminosRana = new List<int[]>();
-                    for(int j = 0; j < n - 1; j++){
-                        caminosRana.Add(caminos[indexCamino].ToArray());
-                    }
-                    ranas[i] = new Rana(i,caminosRana);
-                }
-                memeplexes.Add(ranas);
+            Rana[] ranas = new Rana[f];
+            //GENERA F CANTIDAD DE RANAS
+            for(int i = 0; i < f; i++){
+                //a cada rana, asignarle una lista de caminos
+                int indexCamino = rnd.Next( caminos.Count() );
+                var caminosRana = new List<int[]>();
+                    caminosRana.Add(caminos[indexCamino].ToArray());
+                ranas[i] = new Rana(i,caminosRana);
+                //EVALUAR EL FITNESS
+                ranas[i].fitness = getFitness(costos[indexCamino]);
             }
+            List<Rana[]> memeplexes = new List<Rana[]>();
+            
+            //CONSTRUIR M MEMEPLEXES
+            int cont = 0;
+            for(int i = 0; i < m; i++){
+                Rana[] tmpR = new Rana[n];
+                for(int j = 0; j < n; j++){
+                    tmpR[j] = ranas[cont];
+                    cont++;
+                }
+                memeplexes.Add(tmpR);
+            }
+            //var rOrdered = ranas.OrderBy(x => x.fitness);
 
             foreach(var rns in memeplexes){
                 Console.WriteLine($"memeplex ");
