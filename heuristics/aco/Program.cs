@@ -83,6 +83,11 @@ namespace aco
                 Console.WriteLine($"{array[i]}");
             }
         }
+        public static void imprimirArrayBool(bool[] array){
+            for(int i = 0; i < array.Length; i++){
+                Console.WriteLine($"{array[i]}");
+            }
+        }
         static void inicializarArrVisitados(int n){
             visitados = new bool[n];
             for(int i =0; i < n;i++){
@@ -97,7 +102,18 @@ namespace aco
                 Console.WriteLine($"Nodo : {i} {letras[i]}");
             }        
         }
-
+        //Guardar caminos en txt
+        public static void guardarHormigas(List<int[]> h){
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"resultados.txt");
+            StreamWriter sw = new StreamWriter(archivoTxt);
+            foreach(var i in h){
+                foreach(var j in i){
+                    sw.Write(j + " - ");
+                }
+                sw.WriteLine("");
+            }
+            sw.Close();
+        }
         static bool estanTodosVisitados(){
             //RETORNA VERDADERO CUANDO TODOS HAN SIDO VISITADOS,
             //FALSO, SI HAY AL MENOS UNO QUE SEA NO HAYA SIDO VISITADO
@@ -161,7 +177,6 @@ namespace aco
         {
             leerGrafo();
             grafo.mostrarListaAdyacencia();
-            
             int raiz = 0;
             //SE BUSCA EN TODOS LOS VECINOS UN CAMINO
             var nodosVecinos = grafo[raiz];
@@ -180,9 +195,9 @@ namespace aco
                 res = busqueda(raiz,raiz);
                 if(res == 200){ //TRAJO UN CAMINO COMPLETO
                     caminos.Add(new CaminoOptimo(raiz,camino,costo,costos,arcs));
-                }else if(res == 500){
+                /*else if(res == 500){
                     return; //TERMINA PROGRAMA
-                }
+                }*/
             }
             /* foreach(var i in caminos){
                 i.imprimirCamino();

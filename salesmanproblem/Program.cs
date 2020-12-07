@@ -84,15 +84,14 @@ namespace salesmanproblem
 
         static bool estanTodosVisitados(){
             //RETORNA VERDADERO CUANDO TODOS HAN SIDO VISITADOS,
-            //FALSO, SI NO HAY AL MENOS UNO QUE SEA FALSO
+            //FALSO, SI HAY AL MENOS UNO QUE SEA FALSO
             return visitados.All(x => x);
         }
-        /*
+        /*        //VECINO MÁS CERCANO
         * raiz -> nodo desde que se empieza la busqueda inicial
         * nodo -> nodo que continua con la busqueda
         * nodoVecino -> se manda cuando quieres que 'nodo' no busque desde el de menor costo
         */
-        //VECINO MÁS CERCANO
         static int busqueda(int raiz,int nodo, int? nodoVecino = null){
             int nodoInicial = nodo;
             visitados[nodoInicial] = true;
