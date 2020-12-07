@@ -104,11 +104,12 @@ namespace pia
         public static void imprimirCamino(Camino camino){
             char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
             Console.WriteLine($"camino{camino.ToString()}");
-            /* foreach(var i in camino.camino)
-            {
-                Console.WriteLine($"Nodo : {i} {letras[i]}");
-            } */
             Console.WriteLine($"fitness {camino.fitness}");
+            foreach(var i in camino.camino)
+            {
+                Console.Write($"{letras[i]} - ");
+            }
+            
         }
         static double getFitness(double costo){
             return 1/costo;
@@ -174,14 +175,15 @@ namespace pia
             return busqueda(raiz,nodoSiguiente,visitados);
         }
         static void ActualizarPeorRana(Camino peor, Camino mejor){
-            int nodoNuevo1 = 0;
-            int nodoNuevo2 = 0;
+            int nodoNuevo1 = peor.camino[0];
+            int nodoNuevo2 = peor.camino[0];
             int cantNodos = mejor.camino.Length;
+            int indNuevo = 0;
             //con eso aseguras que no selecciones el principio y final del camino original
             while(nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]){
                 Random rnd = new Random();
                 Console.WriteLine($"num nodos {mejor.camino.Length}");
-                int indNuevo = rnd.Next( cantNodos-1 ); //tiene que evitar usar el primer y ultimo arco
+                indNuevo = rnd.Next( cantNodos-1 ); //tiene que evitar usar el primer y ultimo arco
                 nodoNuevo1 = mejor.camino[indNuevo];
                 nodoNuevo2 = mejor.camino[indNuevo+1];
             }
@@ -189,10 +191,23 @@ namespace pia
             //El principio y final no se cambian
             nuevoCamino[0] = peor.camino[0];
             nuevoCamino[cantNodos-1] = peor.camino[0];
+            //imprimirCamino(mejor);
+            //imprimirCamino(peor);
+            //Console.WriteLine($"nodo a cambiar : {indNuevo}");
             for(int i = 1; i < cantNodos-1;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
-                
+                if(nodoNuevo1 == peor.camino[i]){
+                    int tmpAnt = peor.camino[i];
+                    //i es el index donde esta el nodo que quieres cambiar
+                    peor.camino[i] = peor.camino[indNuevo];
+                    peor.camino[indNuevo] = tmpAnt;
+                }else if(nodoNuevo2 == peor.camino[i]){
+                    int tmpAnt = peor.camino[i];
+                    peor.camino[i] = peor.camino[indNuevo+1];
+                    peor.camino[indNuevo+1] = tmpAnt;
+                }
             }
+            //imprimirCamino(peor);
         }
         static void localSearch(List<Mememplex> memes){
             //BUSCAR POR MEMEPLEX, HACER UNA BUSQUEDA DE LAS RANAS
@@ -201,7 +216,7 @@ namespace pia
             foreach(Mememplex meme in memes){
                 foreach(Rana r in meme.ranas){
                     //A cada rana le acomoda sus caminos por fitness
-                    Console.WriteLine($"rana {meme.ranas.IndexOf(r)} num caminos {r.caminos.Count}");
+                    //Console.WriteLine($"rana {meme.ranas.IndexOf(r)} num caminos {r.caminos.Count}");
                     //meme.ranas.ForEach(x => x.caminos.OrderBy(y => y.fitness));
                     //Rana tmp = new Rana(r.caminos.OrderBy(y => y.fitness).ToList());
                     var ordenados = r.caminos.OrderBy(y => y.fitness);
@@ -209,13 +224,6 @@ namespace pia
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
                     ActualizarPeorRana(peorRana,mejorRana);
-                    //r.caminos
-                    //r.caminos[inx] = new Camino(peorRana.camino,0);
-                    //meme.ranas = tmp;
-                    foreach(Camino c in r.caminos){
-                        Console.WriteLine($" fitnes {c.fitness} menor {peorRana.fitness}");
-                    }/*
-                    meme.ranas.ForEach(x => x.caminos.ForEach(y => Console.WriteLine( $"caminos {}")));*/
                 }
             }
         }
