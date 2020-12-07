@@ -5,45 +5,39 @@ using System.Collections.Generic;
 
 namespace pia
 {
-    public class CaminoOptimo{
+    public class Rana{
         int id;
-        public List<Tuple<int,int>> arcos;
-        List<int> camino;
-        public List<int> costos;
-        int costoTotal =0;
+        List<int[]> caminos;
         public int getId(){
             return this.id;
         }
         public void imprimirCamino(){
-            Console.WriteLine($"Nodo Inicial : {id}");
-            Program.imprimirCamino(this.camino);
-            foreach(var i in this.costos)
-            {
-                Console.WriteLine($"Costo : {i}");
+            Console.WriteLine($"Rana : {id}");
+            foreach(var i in this.caminos){
+                for(int j = 0; j < i.Length; j++){
+                    Console.Write($"{i[j]}");
+                }
+                Console.WriteLine("");
             }
-            foreach (var i in this.arcos)
-            {
-                Console.WriteLine($"de {i.Item1} a {i.Item2}");
-            }
-            Console.WriteLine($"Costo de recorrido : {costoTotal}");
         }
-        public void actualizaCosto(int c ){
-            this.costoTotal += c;
-        }
-        public CaminoOptimo(int id,List<int> c, int cost, List<int> costs, List<Tuple<int,int>> arcs){
-            this.camino = c;
-            this.costos = costs;
-            this.costoTotal = cost;
+        
+        public Rana(int id,List<int[]> c){
             this.id = id;
-            this.arcos = arcs;
+            this.caminos = c;
         }
     }
     
     class Program
     {
         static AdjacencyList grafo;
-        static void leerGrafo(){
-            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCiclado.txt");
+        static List<Tuple<int,int>> arcs = new List<Tuple<int, int>>();
+        static List<int> camino = new List<int>();
+        static List<int> costos = new List<int>();
+        static int costo = 0;
+        
+        static AdjacencyList leerGrafo(){
+            AdjacencyList grafo;
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCompleto.txt");
             string[] lines = File.ReadAllLines(archivoTxt);
             Console.WriteLine(lines.Length);
             grafo = new AdjacencyList( int.Parse(lines[0]) );
@@ -56,6 +50,7 @@ namespace pia
                     continue;
                 }
             }
+            return grafo;
         }
         /*
         *   cant -> tamaño del array
@@ -104,27 +99,25 @@ namespace pia
                 Console.WriteLine($"Nodo : {i} {letras[i]}");
             }
         }
-        public void construirMemeplexes(int ranas){
-            List<int[]> memeplex = new List<int[]>();
-            for(int i = 0; i < ranas; i++){
-                var tmp = ;
-                memeplex.Add(tmp);
-            }
+        static bool estanTodosVisitados(bool[] visitados){
+            //RETORNA VERDADERO CUANDO TODOS HAN SIDO VISITADOS,
+            //FALSO, SI HAY AL MENOS UNO QUE SEA NO HAYA SIDO VISITADO
+            return visitados.All(x => x);
         }
-        
         /*VECINO MÁS CERCANO
             * raiz -> nodo desde que se empieza la busqueda inicial
             * nodo -> nodo que continua con la busqueda
-            * nodoVecino -> se manda cuando quieres que 'nodo' no busque desde el de menor costo
         */
-        static int busqueda(int raiz,int nodo, int? nodoVecino = null, bool[] visitados){
+        static int busqueda(int raiz,int nodo, bool[] visitados){
             int nodoInicial = nodo;
             visitados[nodoInicial] = true;
             camino.Add(nodoInicial);
+            
             var vecinos = grafo[nodoInicial];
             int costoMinimo = int.MaxValue;
             int nodoSiguiente = -1;
             foreach(var i in vecinos){
+                
                 if(!visitados[i.Item1]){
                     //Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} costoMinimo? {costoMinimo}");
                     if(i.Item2 < costoMinimo){
@@ -138,7 +131,7 @@ namespace pia
             //RETORNA 500 SI NO FEASIBLE
             //ANTES DE HACER BUSQUEDA DE NUEVO , HAY QUE CHECAR SI TODOS LOS VECINOS ESTAN VISITADOS
             //SI TODOS LOS VECINOS VISITADOS
-            if( estanTodosVisitados() ){
+            if( estanTodosVisitados(visitados) ){
                 //CHECAR SI EL NODO INICIAL DEL GRAFO ESTA ENTRE LOS VECINOS
                 var vecino = grafo[nodo];
                 foreach(var i in vecinos){
@@ -164,8 +157,9 @@ namespace pia
             costos.Add(costoMinimo);//PARA COSTO DE ARCO
             var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
             arcs.Add( a );
-            return busqueda(raiz,nodoSiguiente);
+            return busqueda(raiz,nodoSiguiente,visitados);
         }
+    
         static void Main(string[] args)
         {
             //Initialize parameters
@@ -183,16 +177,54 @@ namespace pia
             //i -> number of iterations
             //wth is U(i) -> vector de la hormiga i
             //Variables miscelaneas
-            bool[] visitados = fillArrayBool();
-            /**/
-            int m = 4;
-            int f = 200;
+            grafo = leerGrafo();
+            bool[] visitados = fillArrayBool(grafo.tamanioGrafo());
+            List<int[]> caminos = new List<int[]>();
+            //List<CaminoOptimo> caminos = new List<CaminoOptimo>();
+            /*Variables algoritmo*/
+            int m = 6;
+            int f = 60;
             int n = f/m;
-            Console.WriteLine($" Numero de ranas : {f} .\n Numeros memeples {m} \n Numero de ranas por memeplex {n}");
+            List<Rana[]> memeplexes = new List<Rana[]>();
+            Console.WriteLine($"{grafo.tamanioGrafo()}  Numero de ranas : {f} .\n Numeros memeples {m} \n Numero de ranas por memeplex {n}");
 
+            //3.1 POSITION OF INDIVIDUAL FROG
+            //CAMINOS OPTIMOS POSIBLES
+            //int[] camino = new int[grafo.tamanioGrafo()];
+            //OBTENER TODOS LOS CAMINOS POSIBLES
+            //DE MANERA ALEATORIA ASIGNARLOS A DIFERENTES RANAS
+            //CADA RANA AL PRINCIPIO TENDRÁ UN CAMINO IGUAL ->CADA SUBMEMEPLEX SERÁ IGUAL
+            caminos.Clear();
+            for(int i = 0; i < grafo.tamanioGrafo(); i++){
+                camino.Clear();
+                visitados = fillArrayBool(grafo.tamanioGrafo());
+                int res = busqueda(i,i,visitados);
+                if(res == 200){
+                    caminos.Add(camino.ToArray() );
+                }
+            }
+            Random rnd = new Random();
+            for(int k = 0; k < m; k++){
+                Rana[] ranas = new Rana[n];
+                //ranas en cada memeplex
+                for(int i = 0; i < n; i++){
+                    //a cada rana, asignarle una lista de caminos
+                    int indexCamino = rnd.Next( caminos.Count() );
+                    var caminosRana = new List<int[]>();
+                    for(int j = 0; j < n - 1; j++){
+                        caminosRana.Add(caminos[indexCamino].ToArray());
+                    }
+                    ranas[i] = new Rana(i,caminosRana);
+                }
+                memeplexes.Add(ranas);
+            }
 
-
-
+            foreach(var rns in memeplexes){
+                Console.WriteLine($"memeplex ");
+                foreach(var rn in rns){
+                    rn.imprimirCamino();
+                }
+            }
         }
     }
 }
