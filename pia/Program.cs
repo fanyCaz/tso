@@ -1,29 +1,26 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Collections.Generic;
 
 namespace pia
 {
     public class Mememplex{
-        List<Submemeplex> submemeplexes;
-        public Mememplex(List<Submemeplex> s){
-            this.submemeplexes = s;
-        }
-    }
-    public class Submemeplex{
-        int idMemeplex;
-        List<Rana> ranas;
-        public Submemeplex(int im,List<Rana> r){
-            this.idMemeplex = im;
+        Rana[] ranas;
+        public Mememplex(Rana[] r){
             this.ranas = r;
         }
     }
+    // public class Submemeplex{
+    //     int idMemeplex;
+    //     List<Rana> ranas;
+    //     public Submemeplex(int im,List<Rana> r){
+    //         this.idMemeplex = im;
+    //         this.ranas = r;
+    //     }
+    // }
     public class Rana{
-        int idSubmemeplex;
-        public void setSm(int idsm){
-            this.idSubmemeplex = idsm;
-        }
         List<Camino> caminos;
         public Rana(List<Camino> c){
             this.caminos = c;
@@ -176,7 +173,18 @@ namespace pia
             arcs.Add( a );
             return busqueda(raiz,nodoSiguiente,visitados);
         }
-    
+        static object  ob = new object();
+        public static Rana[] obtenerRanas(int cont, List<Rana> ranas, int n){
+            lock(ob){
+                List<Rana> ranasSub = new List<Rana>();
+                for(int j = 0; j < n; j++){
+                    //Estas ranas van a este submemeplex
+                    ranasSub.Add(ranas[cont]);
+                    cont++;
+                }
+                return ranasSub.ToArray();
+            }
+        }
         static void Main(string[] args)
         {
             //Initialize parameters
@@ -200,8 +208,8 @@ namespace pia
             List<int> costos = new List<int>();
             //List<CaminoOptimo> caminos = new List<CaminoOptimo>();
             /*Variables algoritmo*/
-            int m = 6;
-            int f = 60;
+            int m = 5;
+            int f = 50;
             int n = f/m;
             int q = n/2;
             int cantNodos = grafo.tamanioGrafo();
@@ -226,6 +234,7 @@ namespace pia
                     caminos.Add( c  );
                 }
             }
+            //AQUI TIENE EL PROBLEMA
             Random rnd = new Random();
             List<Rana> ranas = new List<Rana>();
             //GENERA F CANTIDAD DE RANAS
@@ -239,24 +248,17 @@ namespace pia
                 ranas.Add(new Rana(caminosRana));
                 //EVALUAR EL FITNESS ??? aqui ya hice el fitness de cada camino
             }
+            Console.WriteLine("genera ranas ya");
             List<Mememplex> memeplexes = new List<Mememplex>();
             
             //CONSTRUIR M MEMEPLEXES
             int cont = 0;
             for(int i = 0; i < m; i++){
-                cont = 0;
-                List<Submemeplex> sm = new List<Submemeplex>();
-                //CONSTRUIR SUBMEMEPLEX
-                for(int j = 0; j < n/q; j++){
-                    //Estas ranas van a este submemeplex
-                    List<Rana> ranasSub = new List<Rana>();
-                    for(int k = 0; k < q; k++){
-                        cont++;
-                        ranasSub.Add(ranas[cont]);
-                    }
-                    sm.Add( new Submemeplex(i,ranasSub) );
-                }
-                memeplexes.Add(new Mememplex(sm));
+                Thread t = new Thread(()=>{
+                    memeplexes.Add(new Mememplex( obtenerRanas(cont,ranas,n) ) );
+                    cont += n;
+                });
+
             }
 
             
