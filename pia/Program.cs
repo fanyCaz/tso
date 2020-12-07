@@ -5,26 +5,36 @@ using System.Collections.Generic;
 
 namespace pia
 {
+    public class Mememplex{
+        List<Submemeplex> submemeplexes;
+        public Mememplex(List<Submemeplex> s){
+            this.submemeplexes = s;
+        }
+    }
+    public class Submemeplex{
+        int idMemeplex;
+        List<Rana> ranas;
+        public Submemeplex(int im,List<Rana> r){
+            this.idMemeplex = im;
+            this.ranas = r;
+        }
+    }
     public class Rana{
-        int id;
-        List<int[]> caminos;
-        public int fitness;
-        public int getId(){
-            return this.id;
+        int idSubmemeplex;
+        public void setSm(int idsm){
+            this.idSubmemeplex = idsm;
         }
-        public void imprimirCamino(){
-            Console.WriteLine($"Rana : {id}");
-            foreach(var i in this.caminos){
-                for(int j = 0; j < i.Length; j++){
-                    Console.Write($"{i[j]}");
-                }
-                Console.WriteLine("");
-            }
-        }
-        
-        public Rana(int id,List<int[]> c){
-            this.id = id;
+        List<Camino> caminos;
+        public Rana(List<Camino> c){
             this.caminos = c;
+        }
+    }
+    public class Camino{
+        int[] camino;
+        int fitness;
+        public Camino(int[] c,int f){
+            this.camino = c;
+            this.fitness = f;
         }
     }
     
@@ -175,7 +185,7 @@ namespace pia
             //Each memeplex consists of n frogs that F = mn
             //f(i) -> fitness
             //n -> number of frogs in each memeplex
-            //q -> number of frogs in a submemeplex
+            //q -> number of paths in a submemeplex of a frog
             //Px -> position of a frog
             //PB -> best solution
             //PW -> worst solution
@@ -186,13 +196,14 @@ namespace pia
             //Variables miscelaneas
             grafo = leerGrafo();
             bool[] visitados = fillArrayBool(grafo.tamanioGrafo());
-            List<int[]> caminos = new List<int[]>();
+            List<Camino> caminos = new List<Camino>();
             List<int> costos = new List<int>();
             //List<CaminoOptimo> caminos = new List<CaminoOptimo>();
             /*Variables algoritmo*/
             int m = 6;
             int f = 60;
             int n = f/m;
+            int q = n/2;
             int cantNodos = grafo.tamanioGrafo();
             Console.WriteLine($"{cantNodos}  Numero de ranas : {f} .\n Numeros memeples {m} \n Numero de ranas por memeplex {n}");
 
@@ -210,41 +221,54 @@ namespace pia
                 int res = busqueda(i,i,visitados);
                 costos.Add(costo);
                 if(res == 200){
-                    caminos.Add(camino.ToArray() );
+                    int fit = getFitness(costo);
+                    Camino c = new Camino( camino.ToArray(),fit );
+                    caminos.Add( c  );
                 }
             }
             Random rnd = new Random();
-            Rana[] ranas = new Rana[f];
+            List<Rana> ranas = new List<Rana>();
             //GENERA F CANTIDAD DE RANAS
             for(int i = 0; i < f; i++){
                 //a cada rana, asignarle una lista de caminos
                 int indexCamino = rnd.Next( caminos.Count() );
-                var caminosRana = new List<int[]>();
-                    caminosRana.Add(caminos[indexCamino].ToArray());
-                ranas[i] = new Rana(i,caminosRana);
-                //EVALUAR EL FITNESS
-                ranas[i].fitness = getFitness(costos[indexCamino]);
+                var caminosRana = new List<Camino>();
+                for(int j = 0; j < q; q++){
+                    caminosRana.Add(caminos[indexCamino]);
+                }
+                ranas.Add(new Rana(caminosRana));
+                //EVALUAR EL FITNESS ??? aqui ya hice el fitness de cada camino
             }
-            List<Rana[]> memeplexes = new List<Rana[]>();
+            List<Mememplex> memeplexes = new List<Mememplex>();
             
             //CONSTRUIR M MEMEPLEXES
             int cont = 0;
             for(int i = 0; i < m; i++){
-                Rana[] tmpR = new Rana[n];
-                for(int j = 0; j < n; j++){
-                    tmpR[j] = ranas[cont];
-                    cont++;
+                cont = 0;
+                List<Submemeplex> sm = new List<Submemeplex>();
+                //CONSTRUIR SUBMEMEPLEX
+                for(int j = 0; j < n/q; j++){
+                    //Estas ranas van a este submemeplex
+                    List<Rana> ranasSub = new List<Rana>();
+                    for(int k = 0; k < q; k++){
+                        cont++;
+                        ranasSub.Add(ranas[cont]);
+                    }
+                    sm.Add( new Submemeplex(i,ranasSub) );
                 }
-                memeplexes.Add(tmpR);
+                memeplexes.Add(new Mememplex(sm));
             }
+
+            
             //var rOrdered = ranas.OrderBy(x => x.fitness);
 
-            foreach(var rns in memeplexes){
+            /* foreach(var rns in memeplexes){
                 Console.WriteLine($"memeplex ");
                 foreach(var rn in rns){
                     rn.imprimirCamino();
                 }
-            }
+            } */
+            //Console.WriteLine($"num memeplexes {memeplexes.Count} num frogs {memeplexes[memeplexes.Count - 1].Length}");
         }
     }
 }
