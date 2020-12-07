@@ -185,9 +185,11 @@ namespace aco{
                     foreach(var pA in x ){      //CICLO EN LOS ARCOS QUE CONTENGAN EL ARCO QUE BUSCO PARA PASAR
                         var y = primerosArcos.IndexOf(pA);      //INDEX DEL ARCO EN QUE ESTAMOS COMPARANDO
                         double valorPr = (double)matriz[y].GetValue(columna);
+                        
                         if(valorPr > valMaximo && !arcosVisitados[y]){  //ASEGURARSE QUE ESE ARCO NO HAYA SIDO USADO
                             valMaximo = valorPr;
                             indexNodo = y;
+                            Console.WriteLine($"{primerosArcos[y].Item1} - {primerosArcos[y].Item2}");
                         }
                     }
                     arcosVisitados[indexNodo] = true;
@@ -200,7 +202,7 @@ namespace aco{
                         + $" nodoSiguiente: {letras[nodoSiguiente]}");
                     Console.WriteLine($"val minomo : {valMaximo}");*/
                     nodo = nodoSiguiente;
-                    Console.WriteLine($"{letras[nodo]}");
+                    
                 }
                 nuevasHormigas.Add(hormiga);
                 //Program.imprimirArrayBool(arcosVisitados);

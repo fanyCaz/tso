@@ -195,9 +195,9 @@ namespace aco
                 res = busqueda(raiz,raiz);
                 if(res == 200){ //TRAJO UN CAMINO COMPLETO
                     caminos.Add(new CaminoOptimo(raiz,camino,costo,costos,arcs));
-                }else if(res == 500){
+                /*else if(res == 500){
                     return; //TERMINA PROGRAMA
-                }
+                }*/
             }
             /* foreach(var i in caminos){
                 i.imprimirCamino();
