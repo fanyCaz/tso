@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace pia
 {
     public class Mememplex{
-        List<Rana> ranas;
+        public List<Rana> ranas;
         public Mememplex(List<Rana> r){
             this.ranas = r;
         }
@@ -22,15 +22,15 @@ namespace pia
     //     }
     // }
     public class Rana{
-        List<Camino> caminos;
+        public List<Camino> caminos;
         public Rana(List<Camino> c){
             this.caminos = c;
         }
     }
     public class Camino{
-        int[] camino;
-        int fitness;
-        public Camino(int[] c,int f){
+        public int[] camino;
+        public double fitness;
+        public Camino(int[] c,double f){
             this.camino = c;
             this.fitness = f;
         }
@@ -101,17 +101,16 @@ namespace pia
             } */
         }
 
-        public static void imprimirCamino(List<int> camino){
+        public static void imprimirCamino(Camino camino){
             char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
-            foreach(var i in camino)
+            Console.WriteLine($"camino{camino.ToString()}");
+            /* foreach(var i in camino.camino)
             {
                 Console.WriteLine($"Nodo : {i} {letras[i]}");
-            }
+            } */
+            Console.WriteLine($"fitness {camino.fitness}");
         }
-        static int calcCosto(){
-            return 1;
-        }
-        static int getFitness(int costo){
+        static double getFitness(double costo){
             return 1/costo;
         }
         static bool estanTodosVisitados(bool[] visitados){
@@ -174,21 +173,63 @@ namespace pia
             arcs.Add( a );
             return busqueda(raiz,nodoSiguiente,visitados);
         }
+        static void ActualizarPeorRana(Camino peor, Camino mejor){
+            int nodoNuevo1 = 0;
+            int nodoNuevo2 = 0;
+            int cantNodos = mejor.camino.Length;
+            //con eso aseguras que no selecciones el principio y final del camino original
+            while(nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]){
+                Random rnd = new Random();
+                Console.WriteLine($"num nodos {mejor.camino.Length}");
+                int indNuevo = rnd.Next( cantNodos-1 ); //tiene que evitar usar el primer y ultimo arco
+                nodoNuevo1 = mejor.camino[indNuevo];
+                nodoNuevo2 = mejor.camino[indNuevo+1];
+            }
+            int[] nuevoCamino = new int[cantNodos];
+            //El principio y final no se cambian
+            nuevoCamino[0] = peor.camino[0];
+            nuevoCamino[cantNodos-1] = peor.camino[0];
+            for(int i = 1; i < cantNodos-1;i++){
+                //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
+                
+            }
+        }
+        static void localSearch(List<Mememplex> memes){
+            //BUSCAR POR MEMEPLEX, HACER UNA BUSQUEDA DE LAS RANAS
+                //ORDENAR POR FITNESS
+                //LA PEOR, TIENE QUE SER ACTUALIZADA
+            foreach(Mememplex meme in memes){
+                foreach(Rana r in meme.ranas){
+                    //A cada rana le acomoda sus caminos por fitness
+                    Console.WriteLine($"rana {meme.ranas.IndexOf(r)} num caminos {r.caminos.Count}");
+                    //meme.ranas.ForEach(x => x.caminos.OrderBy(y => y.fitness));
+                    //Rana tmp = new Rana(r.caminos.OrderBy(y => y.fitness).ToList());
+                    var ordenados = r.caminos.OrderBy(y => y.fitness);
+                    Camino peorRana = ordenados.First();
+                    Camino mejorRana = r.caminos.Last();
+                    int inx = r.caminos.IndexOf(peorRana);
+                    ActualizarPeorRana(peorRana,mejorRana);
+                    //r.caminos
+                    //r.caminos[inx] = new Camino(peorRana.camino,0);
+                    //meme.ranas = tmp;
+                    foreach(Camino c in r.caminos){
+                        Console.WriteLine($" fitnes {c.fitness} menor {peorRana.fitness}");
+                    }/*
+                    meme.ranas.ForEach(x => x.caminos.ForEach(y => Console.WriteLine( $"caminos {}")));*/
+                }
+            }
+        }
         static object  ob = new object();
         public static List<Camino> obtenerCaminos(int q, List<Camino> caminos){
-            //lock(ob){
-                Random rnd = new Random();
-                Camino[] cams = new Camino[q];
-                int nC = caminos.Count();
-                //var caminosRana = new List<Camino>();
-                for(int j = 0; j < q; j++){
-                    Console.WriteLine($"cmaions que pidieron {q}");
-                    int indexCamino = rnd.Next( nC );
-                    cams[j] = caminos[indexCamino];
-                }
-                //ranas.Add(new Rana(caminosRana));
-                return cams.ToList();
-            //}
+            Random rnd = new Random();
+            Camino[] cams = new Camino[q];
+            int nC = caminos.Count();
+            //var caminosRana = new List<Camino>();
+            for(int j = 0; j < q; j++){
+                int indexCamino = rnd.Next( nC );
+                cams[j] = caminos[indexCamino];
+            }
+            return cams.ToList();
         }
         static void Main(string[] args)
         {
@@ -234,7 +275,7 @@ namespace pia
                 int res = busqueda(i,i,visitados);
                 costos.Add(costo);
                 if(res == 200){
-                    int fit = getFitness(costo);
+                    double fit = getFitness(costo);
                     Camino c = new Camino( camino.ToArray(),fit );
                     caminos.Add( c  );
                 }
@@ -243,17 +284,9 @@ namespace pia
             
             List<Rana> ranas = new List<Rana>();
             //GENERA F CANTIDAD DE RANAS
-            /* TimeSpan tiempo = new TimeSpan();
-                    Stopwatch sw = Stopwatch.StartNew();     */
             for(int i = 0; i < f; i++){
                 //a cada rana, asignarle una lista de caminos
-                //Thread x = new Thread(()=>{
-                    Console.WriteLine($"caminos que quiero {q} numero de rana {i}");
-                    ranas.Add(new Rana(obtenerCaminos(q,caminos)) );
-                /* });
-                x.Start();
-                x.Join(); */
-                //tiempo += sw.Elapsed;
+                ranas.Add(new Rana(obtenerCaminos(q,caminos)) );
                 //EVALUAR EL FITNESS ??? aqui ya hice el fitness de cada camino
             }
             Console.WriteLine($"genera ranas ya");
@@ -272,7 +305,7 @@ namespace pia
             }
 
             //LOCAL EXPLORATION
-
+            localSearch(memeplexes);
             
             //var rOrdered = ranas.OrderBy(x => x.fitness);
 
