@@ -239,17 +239,10 @@ namespace pia
             Console.WriteLine($" nodo obj2 {nObj2} temp 2: {tmpInd2}");
             nuevoCamino[tmpInd2] = nObj2;
             nuevoCamino[indNuevo2] = nodoNuevo2;
-            // Console.WriteLine($"peor camino primer nodo {tmpInd1}");
-            //AQUI ESTA PASANDO ALGO QUE NO ENTIENDO, Y ES
-            //QUE HAY NODOS REPETIDOS, Y HAY QUE VALIDAR QUE NO HAYA
-            // nuevoCamino[indNuevo] = nodoNuevo1;
-            // nuevoCamino[tmpInd1] = peor.camino[indNuevo];
-            // nuevoCamino[indNuevo+1] = nodoNuevo2;
-            // nuevoCamino[tmpInd2] = peor.camino[indNuevo+1];
             
             int cst = getCosto(nuevoCamino);
-            Console.WriteLine($" costo {cst}");
-            Camino c = new Camino(nuevoCamino,0,0);
+            double fit = getFitness(cst);
+            Camino c = new Camino(nuevoCamino,fit,cst);
             return c;
         }
         static void localSearch(List<Mememplex> memes){
@@ -270,7 +263,7 @@ namespace pia
                     // foreach(Camino c in r.caminos){
                     //     imprimirArray(c.camino);
                     // }
-                    ActualizarPeorRana(peorRana,mejorRana);
+                    r.caminos[inx] = ActualizarPeorRana(peorRana,mejorRana);
                 }
             }
         }
