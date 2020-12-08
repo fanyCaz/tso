@@ -13,14 +13,6 @@ namespace pia
             this.ranas = r;
         }
     }
-    // public class Submemeplex{
-    //     int idMemeplex;
-    //     List<Rana> ranas;
-    //     public Submemeplex(int im,List<Rana> r){
-    //         this.idMemeplex = im;
-    //         this.ranas = r;
-    //     }
-    // }
     public class Rana{
         public List<Camino> caminos;
         public Rana(List<Camino> c){
@@ -43,9 +35,7 @@ namespace pia
         static AdjacencyList grafo;
         static List<Tuple<int,int>> arcs = new List<Tuple<int, int>>();
         static List<int> camino = new List<int>();
-        //static List<int> costos = new List<int>();
         static int costo;
-        
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
             string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCompleto.txt");
@@ -97,12 +87,6 @@ namespace pia
                 Console.WriteLine($"{array[i]}");
             }
         }
-        static void inicializarArrVisitados(int n){
-            /* visitados = new bool[n];
-            for(int i =0; i < n;i++){
-                visitados[i] = false;
-            } */
-        }
 
         public static void imprimirCamino(Camino camino){
             char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
@@ -112,19 +96,15 @@ namespace pia
             {
                 Console.Write($"{letras[i]} - ");
             }
-            
         }
         static int getCosto(int[] camino){
             int costoCamino = 0;
             imprimirArray(camino);
             for(int i = 0; i < camino.Length-1; i++){
                 var vecinos = grafo[camino[i]];
-                
                 var x = vecinos.Where(x => x.Item1 == camino[i+1]);
-                //Console.WriteLine( $"camino nuevo {x.First().Item1}");
                 costoCamino += x.First().Item2;
             }
-            //Console.WriteLine($" costo {costoCamino}");
             return costoCamino;
         }
         static double getFitness(double costo){
@@ -143,21 +123,17 @@ namespace pia
             int nodoInicial = nodo;
             visitados[nodoInicial] = true;
             camino.Add(nodoInicial);
-            
             var vecinos = grafo[nodoInicial];
             int costoMinimo = int.MaxValue;
             int nodoSiguiente = -1;
             foreach(var i in vecinos){
-                
                 if(!visitados[i.Item1]){
-                    //Console.WriteLine($" nodo : {i.Item1} costo: {i.Item2} costoMinimo? {costoMinimo}");
                     if(i.Item2 < costoMinimo){
                         costoMinimo = i.Item2;
                         nodoSiguiente = i.Item1;
                     }
                 }
             }
-            
             //RETORNA 200 SI ES FEASIBLE
             //RETORNA 500 SI NO FEASIBLE
             //ANTES DE HACER BUSQUEDA DE NUEVO , HAY QUE CHECAR SI TODOS LOS VECINOS ESTAN VISITADOS
@@ -170,7 +146,6 @@ namespace pia
                     //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
                         //AGREGA: -NODO INICIAL AL FINAL DEL CAMINO -ARCO FINAL -COSTO DEL ULTIMO ARCO
-                        //costos.Add(i.Item2);
                         arcs.Add( new Tuple<int, int>(nodo,raiz) );
                         camino.Add(raiz);
                         return 200;
@@ -196,8 +171,6 @@ namespace pia
             int cantNodos = mejor.camino.Length - 1;
             int indNuevo = 0, indNuevo2 = 0;
             Console.WriteLine($"num nodos {mejor.camino.Length}");
-            // imprimirArray(peor.camino);
-            // imprimirArray(mejor.camino);
             //con eso aseguras que no selecciones el principio y final del camino original
             //porque esos son la base del tsp
             while((nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]) ||
@@ -208,16 +181,12 @@ namespace pia
                 nodoNuevo1 = mejor.camino[indNuevo];
                 nodoNuevo2 = mejor.camino[indNuevo2];
             }
-            // Console.WriteLine($"peor camino primer nodo {peor.camino[0]}");
-            // Console.WriteLine($"indxnuevo1 {indNuevo} indxNuevo2 {indNuevo2}");
-            // Console.WriteLine($"nodonuevo1 {nodoNuevo1} nodoNuevo2 {nodoNuevo2}");
             int[] nuevoCamino = new int[cantNodos+1];
             nuevoCamino = peor.camino;
             int tmpInd1 = 0, tmpInd2 = 0; int nObj = 0, nObj2 = 0;
             //Para primer nodo
             for(int i = 0; i < cantNodos + 1;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
-                //nuevoCamino[i] = peor.camino[i];
                 if(peor.camino[i] == nodoNuevo1){
                     tmpInd1 = i;
                     nObj = nuevoCamino[indNuevo];
@@ -228,11 +197,8 @@ namespace pia
                 }
             }
             //Para segundo nodo
-            // Console.WriteLine("nuevo camino antes de segundo nodo");
-            // imprimirArray(nuevoCamino);
             for(int i = 0; i < cantNodos + 1;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
-                //nuevoCamino[i] = peor.camino[i];
                 if(nuevoCamino[i] == nodoNuevo2){
                     tmpInd2 = i;
                     nObj2 = nuevoCamino[indNuevo2];
@@ -246,7 +212,7 @@ namespace pia
             Camino c = new Camino(nuevoCamino,fit,cst);
             return c;
         }
-        static void localSearch(List<Mememplex> memes){
+        static List<Mememplex> localSearch(List<Mememplex> memes){
             //BUSCAR POR MEMEPLEX, HACER UNA BUSQUEDA DE LAS RANAS
                 //ORDENAR POR FITNESS
                 //LA PEOR, TIENE QUE SER ACTUALIZADA
@@ -254,9 +220,6 @@ namespace pia
                 Console.WriteLine("memeplex otro");
                 foreach(Rana r in meme.ranas){
                     //A cada rana le acomoda sus caminos por fitness
-                    //Console.WriteLine($"rana {meme.ranas.IndexOf(r)} num caminos {r.caminos.Count}");
-                    //meme.ranas.ForEach(x => x.caminos.OrderBy(y => y.fitness));
-                    //Rana tmp = new Rana(r.caminos.OrderBy(y => y.fitness).ToList());
                     var ordenados = r.caminos.OrderBy(y => y.fitness);
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
@@ -264,6 +227,7 @@ namespace pia
                     r.caminos[inx] = ActualizarPeorRana(peorRana,mejorRana);
                 }
             }
+            return memes;
         }
         static object  ob = new object();
         /*
@@ -355,9 +319,7 @@ namespace pia
             }
 
             //LOCAL EXPLORATION
-            localSearch(memeplexes);
-            
-            //var rOrdered = ranas.OrderBy(x => x.fitness);
+            memeplexes = localSearch(memeplexes);
 
             /* foreach(var rns in memeplexes){
                 Console.WriteLine($"memeplex ");
@@ -365,7 +327,6 @@ namespace pia
                     rn.imprimirCamino();
                 }
             } */
-            //Console.WriteLine($"num memeplexes {memeplexes.Count} num frogs {memeplexes[memeplexes.Count - 1].Length}");
         }
     }
 }
