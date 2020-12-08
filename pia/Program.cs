@@ -196,7 +196,7 @@ namespace pia
         static void ActualizarPeorRana(Camino peor, Camino mejor){
             int nodoNuevo1 = peor.camino[0];
             int nodoNuevo2 = peor.camino[0];
-            int cantNodos = mejor.camino.Length;
+            int cantNodos = mejor.camino.Length - 1;
             int indNuevo = 0;
             Console.WriteLine($"num nodos {mejor.camino.Length}");
             //con eso aseguras que no selecciones el principio y final del camino original
@@ -206,35 +206,28 @@ namespace pia
                 nodoNuevo1 = mejor.camino[indNuevo];
                 nodoNuevo2 = mejor.camino[indNuevo+1];
             }
-            Console.WriteLine($"index 1 {indNuevo} index 2 {indNuevo+1}");
-            Console.WriteLine($"nodoUno {nodoNuevo1}");
-            Console.WriteLine($"nodoUno {nodoNuevo2}");
-            //imprimirCamino(mejor);
-            //imprimirCamino(peor);
-            int[] nuevoCamino = new int[cantNodos];
+            /* Console.WriteLine($"index 1: {indNuevo} nodoUno {nodoNuevo1}");
+            Console.WriteLine($"index 2: {indNuevo+1} nodoDos {mejor.camino[indNuevo+1]}"); */
+            int[] nuevoCamino = new int[cantNodos+1];
+            int tmpInd1 = 0, tmpInd2 = 0;
             //Console.WriteLine($"nodo a cambiar : {indNuevo}");
-            for(int i = 0; i < cantNodos;i++){
+            for(int i = 0; i < cantNodos + 1;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
-                //Console.Write($"{i}->");HAY ERROOOOOOR
-                if(nodoNuevo1 == peor.camino[i]){
-                    int tmpAnt = peor.camino[i];
-                    Console.Write($"{nodoNuevo1}-");
-                    nuevoCamino[i] = nodoNuevo1;
-                    //i es el index donde esta el nodo que quieres cambiar
-                    /* peor.camino[i] = peor.camino[indNuevo];
-                    peor.camino[indNuevo] = tmpAnt; */
-                }else if(nodoNuevo2 == peor.camino[i]){
-                    nuevoCamino[i] = nodoNuevo2;
-                    Console.Write($"{nodoNuevo2}-");
-                    /* int tmpAnt = peor.camino[i];
-                    peor.camino[i] = peor.camino[indNuevo+1];
-                    peor.camino[indNuevo+1] = tmpAnt; */
-                }else{
-                    Console.Write($" {peor.camino[i]}-");
-                    nuevoCamino[i] = peor.camino[i];
+                nuevoCamino[i] = peor.camino[i];
+                if(peor.camino[i] == nodoNuevo1){
+                    tmpInd1 = i;
+                }else if(peor.camino[i] == nodoNuevo2){
+                    tmpInd2 = i;
                 }
-                
             }
+            /* Console.WriteLine($"index1 en peor: {tmpInd1} nodoUno {peor.camino[tmpInd1]}");
+            Console.WriteLine($"index2 en peor: {tmpInd2} nodoUno {peor.camino[tmpInd2]}"); */
+            nuevoCamino[indNuevo] = nodoNuevo1;
+            nuevoCamino[tmpInd1] = peor.camino[indNuevo];
+            nuevoCamino[indNuevo+1] = nodoNuevo2;
+            nuevoCamino[tmpInd2] = peor.camino[indNuevo+1];
+            /* peor.camino[indNuevo] = nodoNuevo1;
+            peor.camino[indNuevo+1] = nodoNuevo2; */
             Console.WriteLine("");
             getCosto(peor.camino);
             getCosto(mejor.camino);
