@@ -30,9 +30,11 @@ namespace pia
     public class Camino{
         public int[] camino;
         public double fitness;
-        public Camino(int[] c,double f){
+        public int costo;
+        public Camino(int[] c,double f, int cost){
             this.camino = c;
             this.fitness = f;
+            this.costo = cost;
         }
     }
     
@@ -81,8 +83,9 @@ namespace pia
         }
         public static void imprimirArray(int[] array){
             for(int i = 0; i < array.Length; i++){
-                Console.WriteLine($"{array[i]}");
+                Console.Write($"{array[i]} -");
             }
+            Console.WriteLine("");
         }
         public static void imprimirArrayDouble(double[] array){
             for(int i = 0; i < array.Length; i++){
@@ -110,6 +113,22 @@ namespace pia
                 Console.Write($"{letras[i]} - ");
             }
             
+        }
+        static int getCosto(int[] camino){
+            int costoCamino = 0;
+            imprimirArray(camino);
+            /* for(int i = 0; i < camino.Length - 1; i++){
+                var vecinos = grafo[camino[i]];
+                Console.WriteLine( $"camino nuevo");
+                
+                 //foreach(var j in vecinos){
+                  //  Console.WriteLine( $"endonde {camino[i]} camino {camino[i+1]} vecino {j.Item1}");
+                //}
+                var x = vecinos.Where(x => x.Item1 == camino[i+1]);
+                costoCamino += x.First().Item2;
+            }
+            Console.WriteLine($" costo {costoCamino}"); */
+            return costoCamino;
         }
         static double getFitness(double costo){
             return 1/costo;
@@ -179,34 +198,47 @@ namespace pia
             int nodoNuevo2 = peor.camino[0];
             int cantNodos = mejor.camino.Length;
             int indNuevo = 0;
+            Console.WriteLine($"num nodos {mejor.camino.Length}");
             //con eso aseguras que no selecciones el principio y final del camino original
             while(nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]){
                 Random rnd = new Random();
-                Console.WriteLine($"num nodos {mejor.camino.Length}");
-                indNuevo = rnd.Next( cantNodos-1 ); //tiene que evitar usar el primer y ultimo arco
+                indNuevo = rnd.Next( cantNodos - 1 ); //tiene que evitar usar el primer y ultimo arco
                 nodoNuevo1 = mejor.camino[indNuevo];
                 nodoNuevo2 = mejor.camino[indNuevo+1];
             }
-            int[] nuevoCamino = new int[cantNodos];
-            //El principio y final no se cambian
-            nuevoCamino[0] = peor.camino[0];
-            nuevoCamino[cantNodos-1] = peor.camino[0];
+            Console.WriteLine($"index 1 {indNuevo} index 2 {indNuevo+1}");
+            Console.WriteLine($"nodoUno {nodoNuevo1}");
+            Console.WriteLine($"nodoUno {nodoNuevo2}");
             //imprimirCamino(mejor);
             //imprimirCamino(peor);
+            int[] nuevoCamino = new int[cantNodos];
             //Console.WriteLine($"nodo a cambiar : {indNuevo}");
-            for(int i = 1; i < cantNodos-1;i++){
+            for(int i = 0; i < cantNodos;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
+                //Console.Write($"{i}->");HAY ERROOOOOOR
                 if(nodoNuevo1 == peor.camino[i]){
                     int tmpAnt = peor.camino[i];
+                    Console.Write($"{nodoNuevo1}-");
+                    nuevoCamino[i] = nodoNuevo1;
                     //i es el index donde esta el nodo que quieres cambiar
-                    peor.camino[i] = peor.camino[indNuevo];
-                    peor.camino[indNuevo] = tmpAnt;
+                    /* peor.camino[i] = peor.camino[indNuevo];
+                    peor.camino[indNuevo] = tmpAnt; */
                 }else if(nodoNuevo2 == peor.camino[i]){
-                    int tmpAnt = peor.camino[i];
+                    nuevoCamino[i] = nodoNuevo2;
+                    Console.Write($"{nodoNuevo2}-");
+                    /* int tmpAnt = peor.camino[i];
                     peor.camino[i] = peor.camino[indNuevo+1];
-                    peor.camino[indNuevo+1] = tmpAnt;
+                    peor.camino[indNuevo+1] = tmpAnt; */
+                }else{
+                    Console.Write($" {peor.camino[i]}-");
+                    nuevoCamino[i] = peor.camino[i];
                 }
+                
             }
+            Console.WriteLine("");
+            getCosto(peor.camino);
+            getCosto(mejor.camino);
+            getCosto(nuevoCamino);
             //imprimirCamino(peor);
         }
         static void localSearch(List<Mememplex> memes){
@@ -214,6 +246,7 @@ namespace pia
                 //ORDENAR POR FITNESS
                 //LA PEOR, TIENE QUE SER ACTUALIZADA
             foreach(Mememplex meme in memes){
+                Console.WriteLine("memeplex otro");
                 foreach(Rana r in meme.ranas){
                     //A cada rana le acomoda sus caminos por fitness
                     //Console.WriteLine($"rana {meme.ranas.IndexOf(r)} num caminos {r.caminos.Count}");
@@ -254,7 +287,7 @@ namespace pia
             //S  -> the updated step size of the frog-leaping
             //Smax -> maximum step size allowed by a frog after being affected
             //i -> number of iterations
-            //wth is U(i) -> vector de la hormiga i
+            //wth is U(i) -> vector de la rana i
             //Variables miscelaneas
             grafo = leerGrafo();
             bool[] visitados = fillArrayBool(grafo.tamanioGrafo());
@@ -284,11 +317,10 @@ namespace pia
                 costos.Add(costo);
                 if(res == 200){
                     double fit = getFitness(costo);
-                    Camino c = new Camino( camino.ToArray(),fit );
+                    Camino c = new Camino( camino.ToArray(),fit,costo );
                     caminos.Add( c  );
                 }
             }
-            //AQUI TIENE EL PROBLEMA
             
             List<Rana> ranas = new List<Rana>();
             //GENERA F CANTIDAD DE RANAS
