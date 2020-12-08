@@ -121,10 +121,10 @@ namespace pia
                 var vecinos = grafo[camino[i]];
                 
                 var x = vecinos.Where(x => x.Item1 == camino[i+1]);
-                Console.WriteLine( $"camino nuevo {x.First().Item1}");
+                //Console.WriteLine( $"camino nuevo {x.First().Item1}");
                 costoCamino += x.First().Item2;
             }
-            Console.WriteLine($" costo {costoCamino}");
+            //Console.WriteLine($" costo {costoCamino}");
             return costoCamino;
         }
         static double getFitness(double costo){
@@ -194,45 +194,61 @@ namespace pia
             int nodoNuevo1 = peor.camino[0];
             int nodoNuevo2 = peor.camino[0];
             int cantNodos = mejor.camino.Length - 1;
-            int indNuevo = 0;
+            int indNuevo = 0, indNuevo2 = 0;
             Console.WriteLine($"num nodos {mejor.camino.Length}");
+            imprimirArray(peor.camino);
+            imprimirArray(mejor.camino);
             //con eso aseguras que no selecciones el principio y final del camino original
-            while(nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]){
+            while((nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]) ||
+                    (indNuevo == 0 || indNuevo2 == 0) ){
                 Random rnd = new Random();
                 indNuevo = rnd.Next( cantNodos - 1 ); //tiene que evitar usar el primer y ultimo arco
+                indNuevo2 = indNuevo + 1;
                 nodoNuevo1 = mejor.camino[indNuevo];
-                nodoNuevo2 = mejor.camino[indNuevo+1];
+                nodoNuevo2 = mejor.camino[indNuevo2];
             }
-            /* Console.WriteLine($"index 1: {indNuevo} nodoUno {nodoNuevo1}");
-            Console.WriteLine($"index 2: {indNuevo+1} nodoDos {mejor.camino[indNuevo+1]}"); */
+            Console.WriteLine($"peor camino primer nodo {peor.camino[0]}");
+            Console.WriteLine($"indxnuevo1 {indNuevo} indxNuevo2 {indNuevo2}");
+            Console.WriteLine($"nodonuevo1 {nodoNuevo1} nodoNuevo2 {nodoNuevo2}");
             int[] nuevoCamino = new int[cantNodos+1];
-            int tmpInd1 = 0, tmpInd2 = 0;
-            //Console.WriteLine($"nodo a cambiar : {indNuevo}");
+            int tmpInd1 = 0, tmpInd2 = 0; int nObj = 0, nObj2 = 0;
             for(int i = 0; i < cantNodos + 1;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
                 nuevoCamino[i] = peor.camino[i];
                 if(peor.camino[i] == nodoNuevo1){
                     tmpInd1 = i;
-                }else if(peor.camino[i] == nodoNuevo2){
+                }
+            }
+            //Para primer nodo
+            nObj = nuevoCamino[indNuevo];
+            
+            Console.WriteLine($" nodo obj1 {nObj} temp 1: {tmpInd1}");
+            nuevoCamino[tmpInd1] = nObj;
+            nuevoCamino[indNuevo] = nodoNuevo1;
+            //Para segundo nodo
+            Console.WriteLine("nuevo camino antes de segundo nodo");
+            imprimirArray(nuevoCamino);
+            for(int i = 0; i < cantNodos + 1;i++){
+                //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
+                //nuevoCamino[i] = peor.camino[i];
+                if(nuevoCamino[i] == nodoNuevo2){
                     tmpInd2 = i;
                 }
-            }//AQUI ESTA PASANDO ALGO QUE NO ENTIENDO, Y ES
+            }
+            nObj2 = nuevoCamino[indNuevo2];
+            Console.WriteLine($" nodo obj2 {nObj2} temp 2: {tmpInd2}");
+            nuevoCamino[tmpInd2] = nObj2;
+            nuevoCamino[indNuevo2] = nodoNuevo2;
+            // Console.WriteLine($"peor camino primer nodo {tmpInd1}");
+            //AQUI ESTA PASANDO ALGO QUE NO ENTIENDO, Y ES
             //QUE HAY NODOS REPETIDOS, Y HAY QUE VALIDAR QUE NO HAYA
-            /* Console.WriteLine($"index1 en peor: {tmpInd1} nodoUno {peor.camino[tmpInd1]}");
-            Console.WriteLine($"index2 en peor: {tmpInd2} nodoUno {peor.camino[tmpInd2]}"); */
-            //this is so poorly written, omg, i can't believe myself this sucks
-            nuevoCamino[indNuevo] = nodoNuevo1;
-            nuevoCamino[tmpInd1] = peor.camino[indNuevo];
-            nuevoCamino[indNuevo+1] = nodoNuevo2;
-            nuevoCamino[tmpInd2] = peor.camino[indNuevo+1];
-            /* peor.camino[indNuevo] = nodoNuevo1;
-            peor.camino[indNuevo+1] = nodoNuevo2; */
-            Console.WriteLine("");
-            /* getCosto(peor.camino);
-            getCosto(mejor.camino);
-            getCosto(nuevoCamino); */
-            //imprimirCamino(peor);
+            // nuevoCamino[indNuevo] = nodoNuevo1;
+            // nuevoCamino[tmpInd1] = peor.camino[indNuevo];
+            // nuevoCamino[indNuevo+1] = nodoNuevo2;
+            // nuevoCamino[tmpInd2] = peor.camino[indNuevo+1];
+            
             int cst = getCosto(nuevoCamino);
+            Console.WriteLine($" costo {cst}");
             Camino c = new Camino(nuevoCamino,0,0);
             return c;
         }
@@ -251,7 +267,10 @@ namespace pia
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
-                    r.caminos[inx] = ActualizarPeorRana(peorRana,mejorRana);
+                    // foreach(Camino c in r.caminos){
+                    //     imprimirArray(c.camino);
+                    // }
+                    ActualizarPeorRana(peorRana,mejorRana);
                 }
             }
         }
