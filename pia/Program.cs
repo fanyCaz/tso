@@ -196,9 +196,10 @@ namespace pia
             int cantNodos = mejor.camino.Length - 1;
             int indNuevo = 0, indNuevo2 = 0;
             Console.WriteLine($"num nodos {mejor.camino.Length}");
-            imprimirArray(peor.camino);
-            imprimirArray(mejor.camino);
+            // imprimirArray(peor.camino);
+            // imprimirArray(mejor.camino);
             //con eso aseguras que no selecciones el principio y final del camino original
+            //porque esos son la base del tsp
             while((nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]) ||
                     (indNuevo == 0 || indNuevo2 == 0) ){
                 Random rnd = new Random();
@@ -207,39 +208,39 @@ namespace pia
                 nodoNuevo1 = mejor.camino[indNuevo];
                 nodoNuevo2 = mejor.camino[indNuevo2];
             }
-            Console.WriteLine($"peor camino primer nodo {peor.camino[0]}");
-            Console.WriteLine($"indxnuevo1 {indNuevo} indxNuevo2 {indNuevo2}");
-            Console.WriteLine($"nodonuevo1 {nodoNuevo1} nodoNuevo2 {nodoNuevo2}");
+            // Console.WriteLine($"peor camino primer nodo {peor.camino[0]}");
+            // Console.WriteLine($"indxnuevo1 {indNuevo} indxNuevo2 {indNuevo2}");
+            // Console.WriteLine($"nodonuevo1 {nodoNuevo1} nodoNuevo2 {nodoNuevo2}");
             int[] nuevoCamino = new int[cantNodos+1];
+            nuevoCamino = peor.camino;
             int tmpInd1 = 0, tmpInd2 = 0; int nObj = 0, nObj2 = 0;
+            //Para primer nodo
             for(int i = 0; i < cantNodos + 1;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
-                nuevoCamino[i] = peor.camino[i];
+                //nuevoCamino[i] = peor.camino[i];
                 if(peor.camino[i] == nodoNuevo1){
                     tmpInd1 = i;
+                    nObj = nuevoCamino[indNuevo];
+                    //Console.WriteLine($" nodo obj1 {nObj} temp 1: {tmpInd1}");
+                    nuevoCamino[tmpInd1] = nObj;
+                    nuevoCamino[indNuevo] = nodoNuevo1;
+                    break;
                 }
             }
-            //Para primer nodo
-            nObj = nuevoCamino[indNuevo];
-            
-            Console.WriteLine($" nodo obj1 {nObj} temp 1: {tmpInd1}");
-            nuevoCamino[tmpInd1] = nObj;
-            nuevoCamino[indNuevo] = nodoNuevo1;
             //Para segundo nodo
-            Console.WriteLine("nuevo camino antes de segundo nodo");
-            imprimirArray(nuevoCamino);
+            // Console.WriteLine("nuevo camino antes de segundo nodo");
+            // imprimirArray(nuevoCamino);
             for(int i = 0; i < cantNodos + 1;i++){
                 //BUSCAR EL NODO NUEVO PARA PODER HACER EL INTERCAMBIO
                 //nuevoCamino[i] = peor.camino[i];
                 if(nuevoCamino[i] == nodoNuevo2){
                     tmpInd2 = i;
+                    nObj2 = nuevoCamino[indNuevo2];
+                    nuevoCamino[tmpInd2] = nObj2;
+                    nuevoCamino[indNuevo2] = nodoNuevo2;
+                    break;
                 }
             }
-            nObj2 = nuevoCamino[indNuevo2];
-            Console.WriteLine($" nodo obj2 {nObj2} temp 2: {tmpInd2}");
-            nuevoCamino[tmpInd2] = nObj2;
-            nuevoCamino[indNuevo2] = nodoNuevo2;
-            
             int cst = getCosto(nuevoCamino);
             double fit = getFitness(cst);
             Camino c = new Camino(nuevoCamino,fit,cst);
@@ -260,14 +261,16 @@ namespace pia
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
-                    // foreach(Camino c in r.caminos){
-                    //     imprimirArray(c.camino);
-                    // }
                     r.caminos[inx] = ActualizarPeorRana(peorRana,mejorRana);
                 }
             }
         }
         static object  ob = new object();
+        /*
+        * Obtener caminos que serán asignados a las ranas
+        * q -> cantidad de caminos
+        * caminos -> caminos posibles a elegir, ya son soluciones tsp
+        */
         public static List<Camino> obtenerCaminos(int q, List<Camino> caminos){
             Random rnd = new Random();
             Camino[] cams = new Camino[q];
