@@ -117,17 +117,14 @@ namespace pia
         static int getCosto(int[] camino){
             int costoCamino = 0;
             imprimirArray(camino);
-            /* for(int i = 0; i < camino.Length - 1; i++){
+            for(int i = 0; i < camino.Length-1; i++){
                 var vecinos = grafo[camino[i]];
-                Console.WriteLine( $"camino nuevo");
                 
-                 //foreach(var j in vecinos){
-                  //  Console.WriteLine( $"endonde {camino[i]} camino {camino[i+1]} vecino {j.Item1}");
-                //}
                 var x = vecinos.Where(x => x.Item1 == camino[i+1]);
+                Console.WriteLine( $"camino nuevo {x.First().Item1}");
                 costoCamino += x.First().Item2;
             }
-            Console.WriteLine($" costo {costoCamino}"); */
+            Console.WriteLine($" costo {costoCamino}");
             return costoCamino;
         }
         static double getFitness(double costo){
@@ -193,7 +190,7 @@ namespace pia
             arcs.Add( a );
             return busqueda(raiz,nodoSiguiente,visitados);
         }
-        static void ActualizarPeorRana(Camino peor, Camino mejor){
+        static Camino ActualizarPeorRana(Camino peor, Camino mejor){
             int nodoNuevo1 = peor.camino[0];
             int nodoNuevo2 = peor.camino[0];
             int cantNodos = mejor.camino.Length - 1;
@@ -219,9 +216,11 @@ namespace pia
                 }else if(peor.camino[i] == nodoNuevo2){
                     tmpInd2 = i;
                 }
-            }
+            }//AQUI ESTA PASANDO ALGO QUE NO ENTIENDO, Y ES
+            //QUE HAY NODOS REPETIDOS, Y HAY QUE VALIDAR QUE NO HAYA
             /* Console.WriteLine($"index1 en peor: {tmpInd1} nodoUno {peor.camino[tmpInd1]}");
             Console.WriteLine($"index2 en peor: {tmpInd2} nodoUno {peor.camino[tmpInd2]}"); */
+            //this is so poorly written, omg, i can't believe myself this sucks
             nuevoCamino[indNuevo] = nodoNuevo1;
             nuevoCamino[tmpInd1] = peor.camino[indNuevo];
             nuevoCamino[indNuevo+1] = nodoNuevo2;
@@ -229,10 +228,13 @@ namespace pia
             /* peor.camino[indNuevo] = nodoNuevo1;
             peor.camino[indNuevo+1] = nodoNuevo2; */
             Console.WriteLine("");
-            getCosto(peor.camino);
+            /* getCosto(peor.camino);
             getCosto(mejor.camino);
-            getCosto(nuevoCamino);
+            getCosto(nuevoCamino); */
             //imprimirCamino(peor);
+            int cst = getCosto(nuevoCamino);
+            Camino c = new Camino(nuevoCamino,0,0);
+            return c;
         }
         static void localSearch(List<Mememplex> memes){
             //BUSCAR POR MEMEPLEX, HACER UNA BUSQUEDA DE LAS RANAS
@@ -249,7 +251,7 @@ namespace pia
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
-                    ActualizarPeorRana(peorRana,mejorRana);
+                    r.caminos[inx] = ActualizarPeorRana(peorRana,mejorRana);
                 }
             }
         }
