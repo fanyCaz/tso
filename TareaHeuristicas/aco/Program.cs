@@ -104,7 +104,7 @@ namespace aco
         }
         //Guardar caminos en txt
         public static void guardarHormigas(List<int[]> h){
-            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"resultados.txt");
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaExamen.txt");
             StreamWriter sw = new StreamWriter(archivoTxt);
             foreach(var i in h){
                 foreach(var j in i){
@@ -195,6 +195,7 @@ namespace aco
                 res = busqueda(raiz,raiz);
                 if(res == 200){ //TRAJO UN CAMINO COMPLETO
                     caminos.Add(new CaminoOptimo(raiz,camino,costo,costos,arcs));
+                }
                 /*else if(res == 500){
                     return; //TERMINA PROGRAMA
                 }*/
@@ -208,3 +209,4 @@ namespace aco
         }
     }
 }
+
