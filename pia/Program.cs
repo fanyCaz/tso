@@ -35,7 +35,7 @@ namespace pia
         static AdjacencyList grafo;
         static List<Tuple<int,int>> arcs = new List<Tuple<int, int>>();
         static List<int> camino = new List<int>();
-        static int costo;
+        /* static int costo; */
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
             string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCompleto.txt");
@@ -97,13 +97,18 @@ namespace pia
                 Console.Write($"{letras[i]} - ");
             }
         }
+        /*
+        * Hace recorrido del grafo para obtener costos de nodos
+        * basado en los arcos por los que pasó
+        */
         static int getCosto(int[] camino){
             int costoCamino = 0;
-            imprimirArray(camino);
+            //imprimirArray(camino);
             for(int i = 0; i < camino.Length-1; i++){
                 var vecinos = grafo[camino[i]];
                 var x = vecinos.Where(x => x.Item1 == camino[i+1]);
                 costoCamino += x.First().Item2;
+                //Console.Write(x.First().Item1);
             }
             return costoCamino;
         }
@@ -119,7 +124,7 @@ namespace pia
             * raiz -> nodo desde que se empieza la busqueda inicial
             * nodo -> nodo que continua con la busqueda
         */
-        static int busqueda(int raiz,int nodo, bool[] visitados){
+        static int[] busqueda(int raiz,int nodo, bool[] visitados,int costo){
             int nodoInicial = nodo;
             visitados[nodoInicial] = true;
             camino.Add(nodoInicial);
@@ -146,31 +151,32 @@ namespace pia
                     //RETURN "FEASIBLE"
                     if(i.Item1 == raiz){
                         //AGREGA: -NODO INICIAL AL FINAL DEL CAMINO -ARCO FINAL -COSTO DEL ULTIMO ARCO
+                        costo += i.Item2;
                         arcs.Add( new Tuple<int, int>(nodo,raiz) );
                         camino.Add(raiz);
-                        return 200;
+                        return new int[]{200,costo};
                     }
                 }
                 Console.WriteLine("NO ES UN GRAFO COMPLETAMENTE CONECTADO");
-                return 500;//RETURN "NO FEASIBLE"
+                return new int[]{500,0};//RETURN "NO FEASIBLE"
             }
             
             if(nodoSiguiente == -1){
                 Console.WriteLine("NO SE COMPLETA EL CAMINO");
-                return 500;
+                return new int[]{500,0};
             }
             costo += costoMinimo;   //PARA COSTO TOTAL
             //costos.Add(costoMinimo);//PARA COSTO DE ARCO
             var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
             arcs.Add( a );
-            return busqueda(raiz,nodoSiguiente,visitados);
+            return busqueda(raiz,nodoSiguiente,visitados,costo);
         }
         static Camino ActualizarPeorRana(Camino peor, Camino mejor){
             int nodoNuevo1 = peor.camino[0];
             int nodoNuevo2 = peor.camino[0];
             int cantNodos = mejor.camino.Length - 1;
             int indNuevo = 0, indNuevo2 = 0;
-            Console.WriteLine($"num nodos {mejor.camino.Length}");
+            //Console.WriteLine($"num nodos {mejor.camino.Length}");
             //con eso aseguras que no selecciones el principio y final del camino original
             //porque esos son la base del tsp
             while((nodoNuevo1 == peor.camino[0] || nodoNuevo2 == peor.camino[0]) ||
@@ -285,14 +291,19 @@ namespace pia
             caminos.Clear();
             for(int i = 0; i < cantNodos; i++){
                 camino.Clear();
-                costo = 0;
+                int costo = 0;
                 visitados = fillArrayBool(cantNodos);
-                int res = busqueda(i,i,visitados);
-                costos.Add(costo);
-                if(res == 200){
+                int[] res = busqueda(i,i,visitados,costo);
+                //costos.Add(costo);
+                //Console.WriteLine($"costo : {res[0]}");
+                if(res[0] == 200){
                     double fit = getFitness(costo);
+                    costo = res[1];
+                    //Console.WriteLine($"costo : {res[1]}");
                     Camino c = new Camino( camino.ToArray(),fit,costo );
                     caminos.Add( c  );
+                }else if(res[0] == 500){
+                    return;
                 }
             }
             
@@ -318,15 +329,27 @@ namespace pia
                 memeplexes.Add(new Mememplex( ranasSub ) );
             }
 
+            foreach(var rns in memeplexes){
+                Console.WriteLine($"memeplex anterior");
+                foreach(var rn in rns.ranas){
+                    foreach(var c in rn.caminos){
+                        imprimirArray(c.camino);
+                        Console.WriteLine($"{c.costo}");
+                    }
+                }
+            }
             //LOCAL EXPLORATION
             memeplexes = localSearch(memeplexes);
 
-            /* foreach(var rns in memeplexes){
-                Console.WriteLine($"memeplex ");
-                foreach(var rn in rns){
-                    rn.imprimirCamino();
+            foreach(var rns in memeplexes){
+                Console.WriteLine($"memeplex nuevo");
+                foreach(var rn in rns.ranas){
+                    foreach(var c in rn.caminos){
+                        imprimirArray(c.camino);
+                        Console.WriteLine($"{c.costo}");
+                    }
                 }
-            } */
+            }
         }
     }
 }
