@@ -23,6 +23,9 @@ namespace pia
         public int[] camino;
         public double fitness;
         public int costo;
+        public void setFitness(double fit){
+            this.fitness = fit;
+        }
         public void setCosto(int cst){
             this.costo = cst;
         }
@@ -42,7 +45,7 @@ namespace pia
             AdjacencyList grafo;
             string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCompleto.txt");
             string[] lines = File.ReadAllLines(archivoTxt);
-            Console.WriteLine(lines.Length);
+            //Console.WriteLine(lines.Length);
             grafo = new AdjacencyList( int.Parse(lines[0]) );
             foreach(var i in lines){
                 string[] j = i.Split(',');
@@ -231,16 +234,13 @@ namespace pia
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
-                    
                     r.caminos[inx] = ActualizarPeorRana(peorRana,mejorRana);
-                    Console.WriteLine("DESPUES DE ACUALIZA");
-                    //imprimirArray(r.caminos[].camino);
-                    
                     foreach(Camino c in r.caminos){     //actualiza costo
-                        imprimirArray(c.camino);
-                        Console.WriteLine($"antes: {c.costo}");
+                        //imprimirArray(c.camino);
+                        //Console.WriteLine($"antes: {c.costo}");
                         c.setCosto( getCosto(c.camino) );
-                        Console.WriteLine($"after: {c.costo}");
+                        c.setFitness( getFitness(c.costo) );
+                        //Console.WriteLine($"after: {c.costo} {c.fitness}");
                     }
                 }
             }
@@ -344,29 +344,45 @@ namespace pia
                 Console.WriteLine($"memeplex anterior");
                 foreach(var rn in rns.ranas){
                     foreach(var c in rn.caminos){
-                        imprimirArray(c.camino);
+                        //imprimirArray(c.camino);
                         Console.WriteLine($"{c.costo}");
                     }
                 }
             }
             //LOCAL EXPLORATION
-            memeplexes = localSearch(memeplexes);
-
-            #region verificar resultados
-            foreach(var rns in memeplexes){ //ranas
-                Console.WriteLine($"memeplex nuevo");
-                for(int i = 0; i < 1; i++){ 
-                    foreach(var c in rns.ranas[i].caminos){ //caminos
-                        if(i == 0){
-                        Console.WriteLine("what a new paht");
-                        imprimirArray(c.camino);
-                        
-                        Console.WriteLine($"{c.costo}");
-                        getCosto(c.camino);
-                        break;
-                        }
+            for(int i = 0; i < 10; i++){
+                memeplexes = localSearch(memeplexes);
+                foreach(var mms in memeplexes){ //ranas
+                    Console.WriteLine($"memeplex nuevo");
+                    foreach(var rana in mms.ranas){
+                        /* foreach(var cms in rana.caminos){
+                            Console.WriteLine($"fit :{ cms.fitness}");
+                        } */
+                        var menosFitness = rana.caminos.OrderBy(x => x.costo);
+                        //var w = menosFitness.First(); //Menor fitness
+                        var j = menosFitness.Last();  //Mejor fitness
+                        //mejoresCaminos.Add(j);
+                        Console.WriteLine($"r : {j.costo}");
                     }
                 }
+            }
+            #region verificar resultados
+            List<Camino> mejoresCaminos = new List<Camino>();
+            foreach(var mms in memeplexes){ //ranas
+                Console.WriteLine($"memeplex nuevo");
+                foreach(var rana in mms.ranas){
+                    /* foreach(var cms in rana.caminos){
+                        Console.WriteLine($"fit :{ cms.fitness}");
+                    } */
+                    var menosFitness = rana.caminos.OrderBy(x => x.costo);
+                    var i = menosFitness.First(); //Menor fitness
+                    var j = menosFitness.Last();  //Mejor fitness
+                    mejoresCaminos.Add(j);
+                    //Console.WriteLine($"r : {i.fitness} _ {j.fitness}");
+                }
+            }
+            foreach(var i in mejoresCaminos){
+                Console.WriteLine($" costo camino {i.costo}");
             }
             #endregion
         }
