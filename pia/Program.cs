@@ -23,6 +23,9 @@ namespace pia
         public int[] camino;
         public double fitness;
         public int costo;
+        public void setCosto(int cst){
+            this.costo = cst;
+        }
         public Camino(int[] c,double f, int cost){
             this.camino = c;
             this.fitness = f;
@@ -102,23 +105,12 @@ namespace pia
         */
         static int getCosto(int[] camino){
             int costoCamino = 0;
-            imprimirArray(camino);
-            //imprimirArray(camino);
-            //Console.Write($"{camino.Length}");
             for(int i = 0; i < camino.Length - 1; i++){
                 var vecinos = grafo[camino[i]];
-                //Console.Write($"de {camino[i]} ");
-                /* foreach(var j in vecinos){
-                    Console.Write($"de {camino[i]} a {j.Item1} -\n");
-                } */
                 var x = vecinos.Where(x => x.Item1 == camino[i+1]);
-                
-                //costoCamino += x.First().Item2;
-                //Console.WriteLine($"{x.First()} cos {x.First().Item2}");
                 costoCamino += x.First().Item2;
             }
-
-            Console.WriteLine($"costo {costoCamino}");
+            //Console.WriteLine($"costo {costoCamino}");
             return costoCamino;
         }
         static double getFitness(double costo){
@@ -148,8 +140,8 @@ namespace pia
                     }
                 }
             }
-            //RETORNA 200 SI ES FEASIBLE
-            //RETORNA 500 SI NO FEASIBLE
+            //RETORNA 200 SI ES FEASIBLE Y EL COSTO
+            //RETORNA 500 SI NO FEASIBLE Y UN COSTO DE 0
             //ANTES DE HACER BUSQUEDA DE NUEVO , HAY QUE CHECAR SI TODOS LOS VECINOS ESTAN VISITADOS
             //SI TODOS LOS VECINOS VISITADOS
             if( estanTodosVisitados(visitados) ){
@@ -239,7 +231,17 @@ namespace pia
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
+                    
                     r.caminos[inx] = ActualizarPeorRana(peorRana,mejorRana);
+                    Console.WriteLine("DESPUES DE ACUALIZA");
+                    //imprimirArray(r.caminos[].camino);
+                    
+                    foreach(Camino c in r.caminos){     //actualiza costo
+                        imprimirArray(c.camino);
+                        Console.WriteLine($"antes: {c.costo}");
+                        c.setCosto( getCosto(c.camino) );
+                        Console.WriteLine($"after: {c.costo}");
+                    }
                 }
             }
             return memes;
@@ -350,19 +352,23 @@ namespace pia
             //LOCAL EXPLORATION
             memeplexes = localSearch(memeplexes);
 
-            foreach(var rns in memeplexes){
+            #region verificar resultados
+            foreach(var rns in memeplexes){ //ranas
                 Console.WriteLine($"memeplex nuevo");
-                for(int i = 0; i < 1; i++){
-                    foreach(var c in rns.ranas[i].caminos){
+                for(int i = 0; i < 1; i++){ 
+                    foreach(var c in rns.ranas[i].caminos){ //caminos
                         if(i == 0){
+                        Console.WriteLine("what a new paht");
                         imprimirArray(c.camino);
-                        getCosto(c.camino);
+                        
                         Console.WriteLine($"{c.costo}");
+                        getCosto(c.camino);
                         break;
                         }
                     }
                 }
             }
+            #endregion
         }
     }
 }
