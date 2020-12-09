@@ -35,7 +35,6 @@ namespace pia
         static AdjacencyList grafo;
         static List<Tuple<int,int>> arcs = new List<Tuple<int, int>>();
         static List<int> camino = new List<int>();
-        /* static int costo; */
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
             string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCompleto.txt");
@@ -103,13 +102,23 @@ namespace pia
         */
         static int getCosto(int[] camino){
             int costoCamino = 0;
+            imprimirArray(camino);
             //imprimirArray(camino);
-            for(int i = 0; i < camino.Length-1; i++){
+            //Console.Write($"{camino.Length}");
+            for(int i = 0; i < camino.Length - 1; i++){
                 var vecinos = grafo[camino[i]];
+                //Console.Write($"de {camino[i]} ");
+                /* foreach(var j in vecinos){
+                    Console.Write($"de {camino[i]} a {j.Item1} -\n");
+                } */
                 var x = vecinos.Where(x => x.Item1 == camino[i+1]);
+                
+                //costoCamino += x.First().Item2;
+                //Console.WriteLine($"{x.First()} cos {x.First().Item2}");
                 costoCamino += x.First().Item2;
-                //Console.Write(x.First().Item1);
             }
+
+            Console.WriteLine($"costo {costoCamino}");
             return costoCamino;
         }
         static double getFitness(double costo){
@@ -343,10 +352,14 @@ namespace pia
 
             foreach(var rns in memeplexes){
                 Console.WriteLine($"memeplex nuevo");
-                foreach(var rn in rns.ranas){
-                    foreach(var c in rn.caminos){
+                for(int i = 0; i < 1; i++){
+                    foreach(var c in rns.ranas[i].caminos){
+                        if(i == 0){
                         imprimirArray(c.camino);
+                        getCosto(c.camino);
                         Console.WriteLine($"{c.costo}");
+                        break;
+                        }
                     }
                 }
             }
