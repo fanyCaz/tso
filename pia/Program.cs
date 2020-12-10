@@ -43,7 +43,7 @@ namespace pia
         static List<int> camino = new List<int>();
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
-            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaCompleto.txt");
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaExamen.txt");
             string[] lines = File.ReadAllLines(archivoTxt);
             //Console.WriteLine(lines.Length);
             grafo = new AdjacencyList( int.Parse(lines[0]) );
@@ -382,6 +382,8 @@ namespace pia
                 }
             }
             foreach(var i in mejoresCaminos){
+                Console.WriteLine("Camino :");
+                imprimirArray(i.camino);
                 Console.WriteLine($" costo camino {i.costo}");
             }
             #endregion
