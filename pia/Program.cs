@@ -84,6 +84,13 @@ namespace pia
             }
             Console.WriteLine("");
         }
+        public static string imprimirCaminoTxt(int[] array){
+            string cam = "";
+            for(int i = 0; i < array.Length; i++){
+                cam += array[i].ToString();
+            }
+            return cam;
+        }
         public static void imprimirArrayDouble(double[] array){
             for(int i = 0; i < array.Length; i++){
                 Console.WriteLine($"{array[i]}");
@@ -285,10 +292,12 @@ namespace pia
             //List<int> costos = new List<int>();
             //List<CaminoOptimo> caminos = new List<CaminoOptimo>();
             /*Variables algoritmo*/
+            Random rnd = new Random();
+            int numRnd = rnd.Next(10,20);
+            int f = (numRnd % 2 == 0) ? numRnd : numRnd + 1;
             int m = 2;
-            int f = 20;
             int n = f/m;
-            int q = n/2;
+            int q = n/2;    //caminos por rana
             int cantNodos = grafo.tamanioGrafo();
             Console.WriteLine($"{cantNodos}  Numero de ranas : {f} .\n Numeros memeples {m} \n Numero de ranas por memeplex {n}");
 
@@ -338,7 +347,7 @@ namespace pia
                 memeplexes.Add(new Mememplex( ranasSub ) );
             }
 
-            foreach(var rns in memeplexes){
+            /* foreach(var rns in memeplexes){
                 Console.WriteLine($"memeplex anterior");
                 foreach(var rn in rns.ranas){
                     foreach(var c in rn.caminos){
@@ -346,34 +355,85 @@ namespace pia
                         Console.WriteLine($"{c.costo}");
                     }
                 }
-            }
+            } */
             //LOCAL EXPLORATION
-            List<int> costos = new List<int>();
-            for(int i = 0; i < 100; i++){
+            List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
+            int cantIteraciones = 100;
+            double[] cstsY  = new double[cantIteraciones];
+            for(int i = 0; i < cantIteraciones; i++){
                 memeplexes = localSearch(memeplexes);
-
+                List<Tuple<int,int[]>> tmps = new List<Tuple<int, int[]>>();
+                
                 foreach(var mms in memeplexes){ //ranas
-                    Console.WriteLine($"memeplex nuevo");
-                    List<int> tmps = new List<int>();
+                    //Console.WriteLine($"memeplex nuevo");
+                    
                     foreach(var rana in mms.ranas){
                         /* foreach(var cms in rana.caminos){
                             Console.WriteLine($"fit :{ cms.fitness}");
                         } */
-                        var menosFitness = rana.caminos.OrderBy(x => x.costo);
+                        var ordenadosFitness = rana.caminos.OrderByDescending(x => x.fitness);
+                        for(int x = 0; i < rana.caminos.Count; i++){
+                            
+                        }
+                        
                         //var w = menosFitness.First(); //Menor fitness
-                        var j = menosFitness.Last();  //Mejor fitness
+                        mms.ranas.IndexOf()
+                        var pj = (2*(n+1-x))/n(n+1);
                         //mejoresCaminos.Add(j);
-                        Console.WriteLine($"r : {j.costo}");
-                        tmps.Add(j.costo);
+                        //Console.WriteLine($"r : {j.costo}");
+                        tmps.Add(new Tuple<int, int[]>(j.costo,j.camino));
                     }
-                    costos.Add(tmps.Min());
+                    //costos.Add(tmps.Min());
+                    //cms.Add(tmpCam.)
+
                 }
+                posibles.Add(tmps.)
             }
-            foreach(var i in costos.OrderBy(x=>x)){
+            List<string> mejoresCaminos = new List<string>();
+            var ordenados = posibles.OrderBy(x => x.Item1).Take(cantIteraciones).ToList();
+            for(int i = 0; i < ordenados.Count; i++){
+                Console.WriteLine(ordenados[i]);
+                cstsY[i] = ordenados[i].Item1;
+                var cam = imprimirCaminoTxt(ordenados[i].Item2);
+                mejoresCaminos.Add(cam);
+            }
+            #region Guardar Caminos en TXT
+            try{
+                using(System.IO.StreamWriter file = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"caminos.txt")))
+                {
+                    foreach (string line in mejoresCaminos)
+                    {
+                        file.WriteLine(line);
+                    }
+                }
+            }catch(Exception){
+                Console.WriteLine("No se ha guardado el archivo");
+            }
+            #endregion
+            #region Crear Gráfica
+            var plt = new ScottPlot.Plot(600,400);
+            
+            int lenCostos = cstsY.Length;
+            double[] iterX = Enumerable.Range(0,lenCostos).Select(x=>(double)x).ToArray();
+            plt.PlotScatter(iterX,cstsY);
+            plt.Legend();
+            plt.Title("Costos por Iteración");
+            plt.XLabel("Número de Iteración");
+            plt.YLabel("Costo");
+            string nombreImagen = string.Format("grafica.png");
+            try{
+                plt.SaveFig(nombreImagen);
+                Console.WriteLine("si se puede");
+            }catch(Exception e){
+                Console.WriteLine("no se pudo unu");
+                Console.WriteLine(e.Message);
+            }
+            #endregion
+            /* foreach(var i in costos){
                 Console.WriteLine($"cst : {i}");
-            }
+            } */
             #region verificar resultados
-            List<Camino> mejoresCaminos = new List<Camino>();
+            /* List<Camino> mejoresCaminos = new List<Camino>();
             foreach(var mms in memeplexes){ //ranas
                 //Console.WriteLine($"memeplex nuevo");
                 foreach(var rana in mms.ranas){
@@ -382,8 +442,8 @@ namespace pia
                     var j = menosFitness.Last();  //Mejor fitness
                     mejoresCaminos.Add(j);
                 }
-            }
-            Console.WriteLine($"cant de mejores caminos {mejoresCaminos.Count}");
+            } */
+            //Console.WriteLine($"cant de mejores caminos {mejoresCaminos.Count}");
             /* foreach(var i in mejoresCaminos){
                 Console.WriteLine("Camino :");
                 imprimirArray(i.camino);
