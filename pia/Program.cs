@@ -361,10 +361,10 @@ namespace pia
             List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
             int cantIteraciones = 100;
             List<int> costos = new List<int>();
-            List<int> mejor = new List<int>();
+            List<Tuple<int,int[]>> mejor = new List<Tuple<int,int[]>>();
             for(int i = 0; i < cantIteraciones; i++){
                 memeplexes = localSearch(memeplexes);
-                List<int> tmp = new List<int>();
+                List<Tuple<int,int[]>> tmp = new List<Tuple<int,int[]>>();
                 foreach(var mms in memeplexes){ //ranas
                     Console.WriteLine($"memeplex nuevo");
                     foreach(var rana in mms.ranas){
@@ -375,33 +375,34 @@ namespace pia
                         //var w = menosFitness.First(); //Menor fitness
                         var j = menosFitness.Last();  //Mejor fitness
                         //mejoresCaminos.Add(j);
-                        tmp.Add(j.costo);
+                        tmp.Add( new Tuple<int, int[]>(j.costo,j.camino));
                     }
-                    mejor.Add( tmp.Min() );
+                    var x = tmp.OrderByDescending(z => z.Item1).First();
+                    mejor.Add( x );
                 }
             }
             
             foreach(var mej in mejor){
-                Console.WriteLine($"r : {mej}");
+                Console.WriteLine($"r : {mej.Item1}");
             }
             
-            /* return;
+            // return;
             List<string> mejoresCaminos = new List<string>();
-            var ordenados = posibles.OrderBy(x => x.Item1).Take(cantIteraciones).ToList();
-            for(int i = 0; i < ordenados.Count; i++){
-                Console.WriteLine(ordenados[i]);
-                cstsY[i] = ordenados[i].Item1;
-                var cam = imprimirCaminoTxt(ordenados[i].Item2);
-                mejoresCaminos.Add(cam);
-            } */
             double[] cstsY  = new double[mejor.Count];
+            //var ordenados = mejor.OrderBy(x => x.Item1).Take(cantIteraciones).ToList();
+            for(int i = 0; i < mejor.Count; i++){
+                Console.WriteLine(mejor[i]);
+                cstsY[i] = mejor[i].Item1;
+                var cam = imprimirCaminoTxt(mejor[i].Item2);
+                mejoresCaminos.Add(cam);
+            }
             #region Guardar Caminos en TXT
             try{
                 using(System.IO.StreamWriter file = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"caminos.txt")))
                 {
                     for(int i = 0; i < mejor.Count; i++)
                     {
-                        file.WriteLine($"Camino: {mejor[i]} Costo {cstsY[i]}");
+                        file.WriteLine($"Camino: {mejoresCaminos[i]} Costo {cstsY[i]}");
                     }
                 }
             }catch(Exception){
