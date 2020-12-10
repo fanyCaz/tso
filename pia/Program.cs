@@ -45,7 +45,7 @@ namespace pia
         static List<int> camino = new List<int>();
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
-            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaExamen.txt");
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"barrios.txt");
             string[] lines = File.ReadAllLines(archivoTxt);
             //Console.WriteLine(lines.Length);
             grafo = new AdjacencyList( int.Parse(lines[0]) );
