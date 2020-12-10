@@ -87,7 +87,7 @@ namespace pia
         public static string imprimirCaminoTxt(int[] array){
             string cam = "";
             for(int i = 0; i < array.Length; i++){
-                cam += array[i].ToString();
+                cam += (array[i].ToString() + "-");
             }
             return cam;
         }
