@@ -241,7 +241,7 @@ namespace pia
                 //Console.WriteLine("memeplex otro");
                 foreach(Rana r in meme.ranas){
                     //A cada rana le acomoda sus caminos por fitness
-                    var ordenados = r.caminos.OrderBy(y => y.fitness);
+                    var ordenados = r.caminos.OrderByDescending(y => y.fitness);
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
@@ -359,7 +359,7 @@ namespace pia
             int cantIteraciones = 100;
             List<int> costos = new List<int>();
             List<Tuple<int,int[]>> mejor = new List<Tuple<int,int[]>>();
-            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"),true);
+            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas3.txt"),true);
             for(int i = 0; i < cantIteraciones; i++){
                 memeplexes = localSearch(memeplexes);
                 archivo.WriteLine($"Iteración : {i}");
@@ -375,7 +375,7 @@ namespace pia
                         var rns = mms.ranas[k];
                         archivo.WriteLine($"    Submemeplex : {k}");
                         for(int w = 0; w < rns.caminos.Count; w++){
-                            archivo.WriteLine($"        Rana {w} : {imprimirCaminoTxt(rns.caminos[w].camino)}");
+                            archivo.WriteLine($"        Rana {w} : fitness {rns.caminos[w].fitness} {imprimirCaminoTxt(rns.caminos[w].camino)}");
                         }
                         //archivo.WriteLine($" Peor Rana {imprimirCaminoTxt(Pw.camino)}");
                         //archivo.WriteLine($" Mejor Rana {imprimirCaminoTxt(Pb.camino)}");
