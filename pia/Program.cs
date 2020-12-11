@@ -361,27 +361,35 @@ namespace pia
             int cantIteraciones = 5;
             List<int> costos = new List<int>();
             List<Tuple<int,int,Camino>> mejor = new List<Tuple<int,int,Camino>>();
-            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"),true);
+            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"));
+            Rana nuevoSubmemeplex;
             for(int i = 0; i < cantIteraciones; i++){
                 //ACTUALIZAR MEMEPLEX
                 memeplexes = localSearch(memeplexes);
                 //BUSCA MEJOR RANA
+                archivo.WriteLine($"Iteración {i}");
                 List<Tuple<int,int,Camino>> mejorMemeplex = new List<Tuple<int, int, Camino>>();
                 for(int me = 0; me < memeplexes.Count; me++){   //MEMEPLEXES
-
+                    archivo.WriteLine($"    Memeplex {me}");
                     List<Tuple<int,Camino>> mejorSubmemeplex = new List<Tuple<int, Camino>>();
                     for(int r = 0; r < memeplexes[me].ranas.Count; r++){    //SUBMEMEPLEXES
-
+                        archivo.WriteLine($"        SubMemeplex {r}");
                         int minCosto = int.MaxValue;
                         List<Camino> caminoConMenorCosto = new List<Camino>();
-                        for(int cm = 0; cm < memeplexes[me].ranas[r].caminos.Count; cm++){  //RANAS aka CAMINOS
-                            if(memeplexes[me].ranas[r].caminos[cm].costo < minCosto){
+                        List<Camino> ranasOrdenadas = memeplexes[me].ranas[r].caminos.OrderByDescending(z => z.fitness).ToList();
+                        for(int cm = 0; cm < ranasOrdenadas.Count; cm++){  //RANAS aka CAMINOS
+                            Camino at = ranasOrdenadas[cm];
+                            double pj = (double)2*(n+1-cm)/(n*(n+1));
+                            archivo.WriteLine($"            Rana {cm} : {imprimirCaminoTxt(at.camino)} | Fitness {at.fitness:#.#####} | Probabilidad {pj}");
+                            /* if(memeplexes[me].ranas[r].caminos[cm].costo < minCosto){
                                 var camTmp = memeplexes[me].ranas[r].caminos[cm];
                                 minCosto = camTmp.costo;
                                 caminoConMenorCosto.Add( camTmp );
-                            }
+                            } */
                         }
-                        mejorSubmemeplex.Add(new Tuple<int, Camino>(r, caminoConMenorCosto.Last()));
+                        //AGREGAR A ESTA RANA LAS QUE QUEDARON
+
+                        mejorSubmemeplex.Add(new Tuple<int, Camino>(r, ranasOrdenadas.First()));
                     }
                     var delSubmemeplx = mejorSubmemeplex.OrderBy(x => x.Item2.costo).First();
                     mejorMemeplex.Add( new Tuple<int, int, Camino>(me,delSubmemeplx.Item1,delSubmemeplx.Item2));
@@ -389,6 +397,8 @@ namespace pia
                 }
                 mejor.Add( mejorMemeplex.OrderBy(x => x.Item3.costo).First() );
             }
+            archivo.Close();
+            //GUARDA EN EL ARCHIVO REPORTE LAS MEJORES RANAS POR ITERACION
             try{
                 using(System.IO.StreamWriter file = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"caminos.txt")))
                 {
@@ -403,7 +413,6 @@ namespace pia
             }catch(Exception){
                 Console.WriteLine("No se ha guardado el archivo");
             }
-            //archivo.Close();
             
             /* foreach(var mej in mejor){
                 Console.WriteLine($"r : {mej.Item1}");
