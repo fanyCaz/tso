@@ -379,7 +379,7 @@ namespace pia
                         var rns = mms.ranas[k];
                         archivo.WriteLine($"        Submemeplex : {k}");
                         //PROBABILIDAD
-                        List<Camino> nuevosCaminos = new List<Camino>();
+                        Dictionary<int,Camino> nuevosCaminos = new Dictionary<int, Camino>();
                         double pj = 0.0; int numQuedan = 0;
                         for(int w = 0; w < rns.caminos.Count; w++){
                             
@@ -391,19 +391,21 @@ namespace pia
                             
                             if(pj > ranaAQuedarse){
                                 numQuedan++;
-                                nuevosCaminos.Add(rns.caminos[w]);
+                                nuevosCaminos.Add(w,rns.caminos[w]);
                             }
                             //////HAY QUE PONER SI SE ELIMINA O NO/////////////////////////
                             Console.WriteLine($"probabilidad de rana {w} :  . . ranaqueda  .  . ranas a quedarse {numQuedan}");
-                            archivo.WriteLine($"            Rana {w} : {imprimirCaminoTxt(rns.caminos[w].camino)} fitness {rns.caminos[w].fitness}Probabilidad {pj} Dado : {ranaAQuedarse}");
+                            archivo.WriteLine($"            Rana {w} : {imprimirCaminoTxt(rns.caminos[w].camino)} | Fitness {rns.caminos[w].fitness:#.######} | Probabilidad {pj:#.######} Dado : {ranaAQuedarse:#.######}");
                         }
                         var rnsDesc = rns.caminos.OrderByDescending(x => x.fitness);
-                        archivo.WriteLine($"        mejor rana : { imprimirCaminoTxt(rnsDesc.First().camino) }");
-                        archivo.WriteLine($"        peor rana  : { imprimirCaminoTxt(rnsDesc.Last().camino) }");
+                        int ind = mms.ranas[k].caminos.IndexOf(rnsDesc.First());
+                        archivo.WriteLine($"        mejor rana :{ind} -> { imprimirCaminoTxt(rnsDesc.First().camino) }");
+                        ind = mms.ranas[k].caminos.IndexOf(rnsDesc.Last());
+                        archivo.WriteLine($"        peor rana  :{ind} -> { imprimirCaminoTxt(rnsDesc.Last().camino) }");
                         Console.WriteLine($"            probabilidad {pj}");
                         if(numQuedan > 0){
-                            mms.ranas[k].caminos = nuevosCaminos.ToList();
-                            archivo.WriteLine($"    Rana que se queda ");
+                            mms.ranas[k].caminos = nuevosCaminos.Values.ToList();
+                            archivo.WriteLine($"    Rana que se queda  {  imprimirCaminoTxt(nuevosCaminos.Keys.ToArray()) }");
                         }else{
                             Rana ranaSinSuficienteFitness =mms.ranas[k];
                             mms.ranas.Remove(ranaSinSuficienteFitness);
@@ -441,7 +443,7 @@ namespace pia
             }
             #endregion
             #region Crear Gráfica
-            var plt = new ScottPlot.Plot(600,400);
+            /* var plt = new ScottPlot.Plot(600,400);
             
             int lenCostos = cstsY.Length;
             double[] iterX = Enumerable.Range(0,lenCostos).Select(x=>(double)x).ToArray();
@@ -457,7 +459,7 @@ namespace pia
             }catch(Exception e){
                 Console.WriteLine("No se pudo guardar la gráfica");
                 Console.WriteLine(e.Message);
-            }
+            } */
             #endregion
             /* foreach(var i in costos){
                 Console.WriteLine($"cst : {i}");
