@@ -348,33 +348,28 @@ namespace pia
                 memeplexes.Add(new Mememplex( ranasSub ) );
             }
 
-            /* foreach(var rns in memeplexes){
-                Console.WriteLine($"memeplex anterior");
-                foreach(var rn in rns.ranas){
-                    foreach(var c in rn.caminos){
-                        //imprimirArray(c.camino);
-                        Console.WriteLine($"{c.costo}");
-                    }
-                }
-            } */
             //LOCAL EXPLORATION
             List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
             int cantIteraciones = 100;
             List<int> costos = new List<int>();
             List<Tuple<int,int[]>> mejor = new List<Tuple<int,int[]>>();
+            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"caminos.txt"),true);
             for(int i = 0; i < cantIteraciones; i++){
                 memeplexes = localSearch(memeplexes);
+                archivo.WriteLine($"Iteración : {i}");
+                
                 List<Tuple<int,int[]>> tmp = new List<Tuple<int,int[]>>();
-                foreach(var mms in memeplexes){ //ranas
-                    Console.WriteLine($"memeplex nuevo");
-                    foreach(var rana in mms.ranas){
-                        /* foreach(var cms in rana.caminos){
-                            Console.WriteLine($"fit :{ cms.fitness}");
-                        } */
+                //foreach(var mms in memeplexes){ //ranas
+                for(int j = 0; j < memeplexes.Count; j++){
+                    archivo.WriteLine($"    Memeplex : {j}");
+                    //Console.WriteLine($"memeplex nuevo");
+                    var mms = memeplexes[j];
+                    //foreach(var rana in mms.ranas){
+                    for(int k = 0; k < mms.ranas.Count; k++){
+                        var rns = mms.ranas[k];
+                        
                         var menosFitness = rana.caminos.OrderBy(x => x.costo);
-                        //var w = menosFitness.First(); //Menor fitness
                         var j = menosFitness.Last();  //Mejor fitness
-                        //mejoresCaminos.Add(j);
                         tmp.Add( new Tuple<int, int[]>(j.costo,j.camino));
                     }
                     var x = tmp.OrderByDescending(z => z.Item1).First();
