@@ -45,7 +45,7 @@ namespace pia
         static List<int> camino = new List<int>();
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
-            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"barrios.txt");
+            string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaExamen.txt");
             string[] lines = File.ReadAllLines(archivoTxt);
             //Console.WriteLine(lines.Length);
             grafo = new AdjacencyList( int.Parse(lines[0]) );
@@ -353,7 +353,7 @@ namespace pia
             int cantIteraciones = 100;
             List<int> costos = new List<int>();
             List<Tuple<int,int[]>> mejor = new List<Tuple<int,int[]>>();
-            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"caminos.txt"),true);
+            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"),true);
             for(int i = 0; i < cantIteraciones; i++){
                 memeplexes = localSearch(memeplexes);
                 archivo.WriteLine($"Iteración : {i}");
@@ -367,15 +367,19 @@ namespace pia
                     //foreach(var rana in mms.ranas){
                     for(int k = 0; k < mms.ranas.Count; k++){
                         var rns = mms.ranas[k];
-                        
-                        var menosFitness = rana.caminos.OrderBy(x => x.costo);
-                        var j = menosFitness.Last();  //Mejor fitness
-                        tmp.Add( new Tuple<int, int[]>(j.costo,j.camino));
+                        archivo.WriteLine($"    Submemeplex : {k}");
+                        for(int w = 0; w < rns.caminos.Count; w++){
+                            archivo.WriteLine($"    Rana : {w} {imprimirCaminoTxt(rns.caminos[w].camino)}");
+                        }
+                        var menosFitness = rns.caminos.OrderBy(x => x.costo);
+                        var mf = menosFitness.Last();  //Mejor fitness
+                        tmp.Add( new Tuple<int, int[]>(mf.costo,mf.camino));
                     }
                     var x = tmp.OrderByDescending(z => z.Item1).First();
                     mejor.Add( x );
                 }
             }
+            archivo.Close();
             
             foreach(var mej in mejor){
                 Console.WriteLine($"r : {mej.Item1}");
