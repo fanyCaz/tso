@@ -197,7 +197,6 @@ namespace pia
                     (indNuevo == 0 || indNuevo2 == 0)){
                 Random rnd = new Random();
                 indNuevo = rnd.Next( cantNodos - 1 ); //tiene que evitar usar el primer y ultimo arco
-                //Console.WriteLine($"xxxxxz {indNuevo2} f {indNuevo}");
                 indNuevo2 = indNuevo + 1;
                 nodoNuevo1 = mejor.camino[indNuevo];
                 nodoNuevo2 = mejor.camino[indNuevo2];
@@ -228,6 +227,7 @@ namespace pia
                     break;
                 }
             }
+            Console.WriteLine($"ind 1: {indNuevo} ind 2: {indNuevo2}");
             int cst = getCosto(nuevoCamino);
             double fit = getFitness(cst);
             Camino c = new Camino(nuevoCamino,fit,cst);
@@ -245,15 +245,16 @@ namespace pia
                     Camino peorRana = ordenados.First();
                     Camino mejorRana = r.caminos.Last();
                     int inx = r.caminos.IndexOf(peorRana);
+                    /* Console.WriteLine("nueva actualizacion");
+                    Console.WriteLine("peor  " + imprimirCaminoTxt(peorRana.camino) );
+                    Console.WriteLine("mejor " + imprimirCaminoTxt(mejorRana.camino) ); */
                     r.caminos[inx].setCamino( ActualizarPeorRana(peorRana,mejorRana) );
                     foreach(Camino c in r.caminos){     //actualiza costo
                         c.setCosto( getCosto(c.camino) );
                         c.setFitness( getFitness(c.costo) );
                     }
-                    Pw = peorRana;
-                    Pb = mejorRana;
-                    Console.WriteLine( imprimirCaminoTxt(Pw.camino) );
-                    Console.WriteLine( imprimirCaminoTxt(Pb.camino) );
+                    //Console.WriteLine(" ya actualizada");
+                    //Console.WriteLine("actz  " + imprimirCaminoTxt(peorRana.camino) );
                 }
             }
             return memes;
@@ -356,13 +357,15 @@ namespace pia
 
             //LOCAL EXPLORATION
             List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
-            int cantIteraciones = 100;
+            int cantIteraciones = 5;
             List<int> costos = new List<int>();
             List<Tuple<int,int[]>> mejor = new List<Tuple<int,int[]>>();
-            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas3.txt"),true);
+            System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"),true);
             for(int i = 0; i < cantIteraciones; i++){
+                //ACTUALIZAR MEMEPLEX
                 memeplexes = localSearch(memeplexes);
                 archivo.WriteLine($"Iteración : {i}");
+                //ACTUALIZA NÚMERO DE RANAS POR MEMEPLEX
                 
                 List<Tuple<int,int[]>> tmp = new List<Tuple<int,int[]>>();
                 //foreach(var mms in memeplexes){ //ranas
@@ -372,19 +375,39 @@ namespace pia
                     var mms = memeplexes[j];
                     //foreach(var rana in mms.ranas){
                     for(int k = 0; k < mms.ranas.Count; k++){
+                        n = mms.ranas.Count;
                         var rns = mms.ranas[k];
-                        archivo.WriteLine($"    Submemeplex : {k}");
+                        archivo.WriteLine($"        Submemeplex : {k}");
+                        //PROBABILIDAD
+                        List<Camino> nuevosCaminos = new List<Camino>();
+                        double pj = 0.0; int numQuedan = 0;
                         for(int w = 0; w < rns.caminos.Count; w++){
-                            archivo.WriteLine($"        Rana {w} : fitness {rns.caminos[w].fitness} {imprimirCaminoTxt(rns.caminos[w].camino)}");
+                            
+                            //RANDOM PARA OBTENER QUE RANA SE QUEDARÁ
+                            double ranaAQuedarse = rnd.NextDouble();
+                            //Console.WriteLine($"rana a eliminar : {ranaAQuedarse}");
+                            
+                            pj = (double)2*(n+1-w)/(n*(n+1));
+                            
+                            if(pj > ranaAQuedarse){
+                                numQuedan++;
+                                nuevosCaminos.Add(rns.caminos[w]);
+                            }
+                            Console.WriteLine($"probabilidad de rana {w} :  . . ranaqueda  .  . ranas a quedarse {numQuedan}");
+                            archivo.WriteLine($"            Rana {w} : {imprimirCaminoTxt(rns.caminos[w].camino)} fitness {rns.caminos[w].fitness}Probabilidad {pj} Dado : {ranaAQuedarse}");
                         }
-                        //archivo.WriteLine($" Peor Rana {imprimirCaminoTxt(Pw.camino)}");
-                        //archivo.WriteLine($" Mejor Rana {imprimirCaminoTxt(Pb.camino)}");
-                        var menosFitness = rns.caminos.OrderBy(x => x.costo);
-                        var mf = menosFitness.Last();  //Mejor fitness
-                        tmp.Add( new Tuple<int, int[]>(mf.costo,mf.camino));
+                        var rnsDesc = rns.caminos.OrderByDescending(x => x.fitness);
+                        archivo.WriteLine($"        mejor rana : { imprimirCaminoTxt(rnsDesc.First().camino) }");
+                        archivo.WriteLine($"        peor rana  : { imprimirCaminoTxt(rnsDesc.Last().camino) }");
+                        Console.WriteLine($"            probabilidad {pj}");
+                        if(numQuedan > 0){
+                            mms.ranas[k].caminos = nuevosCaminos.ToList();
+                            archivo.WriteLine($"    Rana que se queda ");
+                        }else{
+                            Rana ranaSinSuficienteFitness =mms.ranas[k];
+                            mms.ranas.Remove(ranaSinSuficienteFitness);
+                        }
                     }
-                    var x = tmp.OrderByDescending(z => z.Item1).First();
-                    mejor.Add( x );
                 }
             }
             archivo.Close();

@@ -1,0 +1,128 @@
+Iteración : 0
+    Memeplex : 0
+    Submemeplex : 0
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 1 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 2 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 3 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 4 : fitness 0.012195121951219513 4-2-3-1-0-4-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 1 : fitness 0.012048192771084338 1-4-0-3-2-1-
+        Rana 2 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 3 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 4 : fitness 0.012048192771084338 1-4-0-3-2-1-
+    Submemeplex : 2
+        Rana 0 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 1 : fitness 0.012048192771084338 1-4-0-3-2-1-
+        Rana 2 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 3 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 4 : fitness 0.012195121951219513 4-2-3-1-0-4-
+    Submemeplex : 3
+        Rana 0 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 1 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 2 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 3 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 4 : fitness 0.012658227848101266 0-4-2-1-3-0-
+    Submemeplex : 4
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 1 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 2 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 3 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 4 : fitness 0.013888888888888888 2-4-0-1-3-2-
+    Memeplex : 1
+    Submemeplex : 0
+        Rana 0 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 1 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 2 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 3 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 4 : fitness 0.012658227848101266 3-4-2-1-0-3-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012048192771084338 1-4-0-3-2-1-
+        Rana 1 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 2 : fitness 0.012048192771084338 1-4-0-3-2-1-
+        Rana 3 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 4 : fitness 0.012658227848101266 3-4-2-1-0-3-
+    Submemeplex : 2
+        Rana 0 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 1 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 2 : fitness 0.012048192771084338 1-4-0-3-2-1-
+        Rana 3 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 4 : fitness 0.012658227848101266 3-4-2-1-0-3-
+    Submemeplex : 3
+        Rana 0 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 1 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 2 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 3 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 4 : fitness 0.013888888888888888 2-4-0-1-3-2-
+    Submemeplex : 4
+        Rana 0 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 1 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 2 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 3 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 4 : fitness 0.013888888888888888 2-4-0-1-3-2-
+    Submemeplex : 5
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 1 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 2 : fitness 0.013888888888888888 2-4-0-1-3-2-
+        Rana 3 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 4 : fitness 0.012658227848101266 0-4-2-1-3-0-
+Iteración : 1
+    Memeplex : 0
+    Submemeplex : 0
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012048192771084338 1-4-0-3-2-1-
+    Submemeplex : 2
+        Rana 0 : fitness 0.0136986301369863 2-4-3-1-0-2-
+    Submemeplex : 3
+        Rana 0 : fitness 0.012658227848101266 3-4-2-1-0-3-
+        Rana 1 : fitness 0.0136986301369863 2-4-3-1-0-2-
+        Rana 2 : fitness 0.012658227848101266 0-4-2-1-3-0-
+        Rana 3 : fitness 0.012048192771084338 1-4-0-3-2-1-
+        Rana 4 : fitness 0.0136986301369863 2-4-3-1-0-2-
+    Memeplex : 1
+    Submemeplex : 0
+        Rana 0 : fitness 0.012195121951219513 4-2-3-1-0-4-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012658227848101266 3-4-2-1-0-3-
+    Submemeplex : 2
+        Rana 0 : fitness 0.0136986301369863 2-4-3-1-0-2-
+        Rana 1 : fitness 0.012658227848101266 3-4-2-1-0-3-
+Iteración : 2
+    Memeplex : 0
+    Submemeplex : 0
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012658227848101266 3-4-2-1-0-3-
+    Submemeplex : 2
+        Rana 0 : fitness 0.0136986301369863 2-4-3-1-0-2-
+    Memeplex : 1
+    Submemeplex : 0
+        Rana 0 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 1 : fitness 0.012195121951219513 4-2-3-1-0-4-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012658227848101266 3-4-2-1-0-3-
+Iteración : 3
+    Memeplex : 0
+    Submemeplex : 0
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
+    Submemeplex : 1
+        Rana 0 : fitness 0.0136986301369863 2-4-3-1-0-2-
+    Memeplex : 1
+    Submemeplex : 0
+        Rana 0 : fitness 0.012195121951219513 4-2-3-1-0-4-
+        Rana 1 : fitness 0.012195121951219513 4-2-3-1-0-4-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
+Iteración : 4
+    Memeplex : 0
+    Submemeplex : 0
+        Rana 0 : fitness 0.012658227848101266 3-4-2-1-0-3-
+    Submemeplex : 1
+        Rana 0 : fitness 0.0136986301369863 2-4-3-1-0-2-
+    Memeplex : 1
+    Submemeplex : 0
+        Rana 0 : fitness 0.012195121951219513 4-2-3-1-0-4-
+    Submemeplex : 1
+        Rana 0 : fitness 0.012658227848101266 0-4-2-1-3-0-
