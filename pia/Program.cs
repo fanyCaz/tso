@@ -393,6 +393,7 @@ namespace pia
                                 numQuedan++;
                                 nuevosCaminos.Add(rns.caminos[w]);
                             }
+                            //////HAY QUE PONER SI SE ELIMINA O NO/////////////////////////
                             Console.WriteLine($"probabilidad de rana {w} :  . . ranaqueda  .  . ranas a quedarse {numQuedan}");
                             archivo.WriteLine($"            Rana {w} : {imprimirCaminoTxt(rns.caminos[w].camino)} fitness {rns.caminos[w].fitness}Probabilidad {pj} Dado : {ranaAQuedarse}");
                         }
