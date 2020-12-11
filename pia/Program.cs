@@ -227,7 +227,7 @@ namespace pia
                     break;
                 }
             }
-            Console.WriteLine($"ind 1: {indNuevo} ind 2: {indNuevo2}");
+            //Console.WriteLine($"ind 1: {indNuevo} ind 2: {indNuevo2}");
             int cst = getCosto(nuevoCamino);
             double fit = getFitness(cst);
             Camino c = new Camino(nuevoCamino,fit,cst);
@@ -357,7 +357,7 @@ namespace pia
 
             //LOCAL EXPLORATION
             List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
-            int cantIteraciones = 5;
+            int cantIteraciones = 50;
             List<int> costos = new List<int>();
             List<Tuple<int,int[]>> mejor = new List<Tuple<int,int[]>>();
             System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"),true);
@@ -381,32 +381,35 @@ namespace pia
                         //PROBABILIDAD
                         Dictionary<int,Camino> nuevosCaminos = new Dictionary<int, Camino>();
                         double pj = 0.0; int numQuedan = 0;
+                        List<double> probabilidades = new List<double>();
+                        
                         for(int w = 0; w < rns.caminos.Count; w++){
                             
                             //RANDOM PARA OBTENER QUE RANA SE QUEDARÁ
-                            double ranaAQuedarse = rnd.NextDouble();
+                            
                             //Console.WriteLine($"rana a eliminar : {ranaAQuedarse}");
-                            
+                            double ranaAQuedarse = rnd.NextDouble();
                             pj = (double)2*(n+1-w)/(n*(n+1));
-                            
-                            if(pj > ranaAQuedarse){
+                            probabilidades.Add(pj);
+                            if(pj < ranaAQuedarse){
+                                
                                 numQuedan++;
                                 nuevosCaminos.Add(w,rns.caminos[w]);
                             }
-                            //////HAY QUE PONER SI SE ELIMINA O NO/////////////////////////
-                            Console.WriteLine($"probabilidad de rana {w} :  . . ranaqueda  .  . ranas a quedarse {numQuedan}");
+                            //Console.WriteLine($"probabilidad de rana {w} :  . . ranaqueda  .  . ranas a quedarse {numQuedan}");
                             archivo.WriteLine($"            Rana {w} : {imprimirCaminoTxt(rns.caminos[w].camino)} | Fitness {rns.caminos[w].fitness:#.######} | Probabilidad {pj:#.######} Dado : {ranaAQuedarse:#.######}");
                         }
                         var rnsDesc = rns.caminos.OrderByDescending(x => x.fitness);
                         int ind = mms.ranas[k].caminos.IndexOf(rnsDesc.First());
-                        archivo.WriteLine($"        mejor rana :{ind} -> { imprimirCaminoTxt(rnsDesc.First().camino) }");
+                        archivo.WriteLine($"        mejor rana :{ind} -> { imprimirCaminoTxt(rnsDesc.First().camino) } {rnsDesc.First().costo}");
                         ind = mms.ranas[k].caminos.IndexOf(rnsDesc.Last());
-                        archivo.WriteLine($"        peor rana  :{ind} -> { imprimirCaminoTxt(rnsDesc.Last().camino) }");
-                        Console.WriteLine($"            probabilidad {pj}");
+                        archivo.WriteLine($"        peor rana  :{ind} -> { imprimirCaminoTxt(rnsDesc.Last().camino) } ");
+                        //Console.WriteLine($"            probabilidad {pj}");
                         if(numQuedan > 0){
                             mms.ranas[k].caminos = nuevosCaminos.Values.ToList();
-                            archivo.WriteLine($"    Rana que se queda  {  imprimirCaminoTxt(nuevosCaminos.Keys.ToArray()) }");
-                        }else{
+                            archivo.WriteLine($"    Rana que se queda  {  imprimirCaminoTxt(nuevosCaminos.Keys.ToArray()) } de submemeplex {k}");
+                        }
+                        else{
                             Rana ranaSinSuficienteFitness =mms.ranas[k];
                             mms.ranas.Remove(ranaSinSuficienteFitness);
                         }
@@ -465,6 +468,15 @@ namespace pia
                 Console.WriteLine($"cst : {i}");
             } */
             #region verificar resultados
+            
+            /////LISTA DE MEJORA DE SOLUCIONES EN EL MISMO ARCHIVO,
+            //REPORTE DE MEJORA (GRAFICA)
+            //EVOLUCIÓN DE MEJORA (TXT)
+            //MANTENER LA MEJOR SOLUCION GLOBAL COMO ELEMENTO QUE NO SE PUEDE QUITAR
+            //EN LUGAR DE FOR, MIENTRAS LA MEJOR SOLUCION GLOBAL SIGA SIENDO MEJORADA, SEGUIR CON EL PROGRAMA,
+                    //SINO, DETENER WHILE
+            //AGREGAR EN UN RANDOM VALORES DE TIEMPO DE COMPUTADORA COMO SEMILLA (SEGUNDOS)
+
             /* List<Camino> mejoresCaminos = new List<Camino>();
             foreach(var mms in memeplexes){ //ranas
                 //Console.WriteLine($"memeplex nuevo");

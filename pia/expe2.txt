@@ -1,0 +1,1246 @@
+Iteración : 0
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .285714 Dado : .910823
+            Rana 1 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .25 Dado : .910823
+            Rana 2 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .214286 Dado : .910823
+            Rana 3 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .178571 Dado : .910823
+            Rana 4 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .142857 Dado : .910823
+        mejor rana :2 -> 2-4-3-0-1-2-
+        peor rana  :3 -> 4-2-0-3-1-4-
+        Submemeplex : 1
+            Rana 0 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .333333 Dado : .457055
+            Rana 1 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .285714 Dado : .457055
+            Rana 2 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .238095 Dado : .457055
+            Rana 3 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .190476 Dado : .457055
+            Rana 4 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .142857 Dado : .457055
+        mejor rana :1 -> 2-4-3-0-1-2-
+        peor rana  :2 -> 4-2-0-3-1-4-
+        Submemeplex : 2
+            Rana 0 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .4 Dado : .682005
+            Rana 1 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .333333 Dado : .682005
+            Rana 2 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .266667 Dado : .682005
+            Rana 3 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .2 Dado : .682005
+            Rana 4 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .133333 Dado : .682005
+        mejor rana :0 -> 2-4-3-0-1-2-
+        peor rana  :2 -> 4-2-0-3-1-4-
+        Submemeplex : 3
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .5 Dado : .435475
+            Rana 1 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .4 Dado : .435475
+            Rana 2 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .3 Dado : .435475
+            Rana 3 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .2 Dado : .435475
+            Rana 4 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .1 Dado : .435475
+        mejor rana :2 -> 2-4-3-0-1-2-
+        peor rana  :4 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 3
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .285714 Dado : .388916
+            Rana 1 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .25 Dado : .388916
+            Rana 2 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .214286 Dado : .388916
+            Rana 3 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .178571 Dado : .388916
+            Rana 4 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .142857 Dado : .388916
+        mejor rana :3 -> 2-4-3-0-1-2-
+        peor rana  :1 -> 1-0-4-3-2-1-
+        Submemeplex : 1
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .333333 Dado : .730644
+            Rana 1 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .285714 Dado : .730644
+            Rana 2 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .238095 Dado : .730644
+            Rana 3 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .190476 Dado : .730644
+            Rana 4 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .142857 Dado : .730644
+        mejor rana :4 -> 3-2-0-1-4-3-
+        peor rana  :0 -> 4-2-0-3-1-4-
+        Submemeplex : 2
+            Rana 0 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .4 Dado : .180427
+            Rana 1 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .333333 Dado : .180427
+            Rana 2 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .266667 Dado : .180427
+            Rana 3 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .2 Dado : .180427
+            Rana 4 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .133333 Dado : .180427
+        mejor rana :1 -> 3-2-0-1-4-3-
+        peor rana  :0 -> 0-4-3-1-2-0-
+    Rana que se queda  0-1-2-3- de submemeplex 2
+        Submemeplex : 3
+            Rana 0 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .4 Dado : .070863
+            Rana 1 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .333333 Dado : .070863
+            Rana 2 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .266667 Dado : .070863
+            Rana 3 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .2 Dado : .070863
+            Rana 4 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .133333 Dado : .070863
+        mejor rana :0 -> 0-4-3-1-2-0-
+        peor rana  :2 -> 4-2-0-3-1-4-
+    Rana que se queda  0-1-2-3-4- de submemeplex 3
+        Submemeplex : 4
+            Rana 0 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .4 Dado : .749989
+            Rana 1 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .333333 Dado : .749989
+            Rana 2 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .266667 Dado : .749989
+            Rana 3 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .2 Dado : .749989
+            Rana 4 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .133333 Dado : .749989
+        mejor rana :0 -> 3-2-0-1-4-3-
+        peor rana  :4 -> 4-2-0-3-1-4-
+Iteración : 1
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .5 Dado : .490491
+            Rana 1 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .4 Dado : .490491
+            Rana 2 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .3 Dado : .490491
+            Rana 3 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .2 Dado : .490491
+            Rana 4 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .1 Dado : .490491
+        mejor rana :4 -> 2-4-3-0-1-2-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .5 Dado : .956175
+            Rana 1 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .4 Dado : .956175
+            Rana 2 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .3 Dado : .956175
+            Rana 3 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .2 Dado : .956175
+            Rana 4 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .1 Dado : .956175
+        mejor rana :2 -> 2-4-3-0-1-2-
+        peor rana  :3 -> 4-2-0-3-1-4-
+        Submemeplex : 2
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .666667 Dado : .128101
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 2
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .5 Dado : .102955
+            Rana 1 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .4 Dado : .102955
+            Rana 2 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .3 Dado : .102955
+            Rana 3 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .2 Dado : .102955
+            Rana 4 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .1 Dado : .102955
+        mejor rana :3 -> 2-4-3-0-1-2-
+        peor rana  :1 -> 4-2-0-3-1-4-
+    Rana que se queda  0-1-2-3- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .5 Dado : .913937
+            Rana 1 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .4 Dado : .913937
+            Rana 2 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .3 Dado : .913937
+            Rana 3 : 2-4-3-0-1-2- | Fitness .014925 | Probabilidad .2 Dado : .913937
+            Rana 4 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .1 Dado : .913937
+        mejor rana :0 -> 2-4-3-0-1-2-
+        peor rana  :2 -> 0-4-3-1-2-0-
+        Submemeplex : 2
+            Rana 0 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .666667 Dado : .168738
+            Rana 1 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .5 Dado : .168738
+            Rana 2 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .333333 Dado : .168738
+            Rana 3 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad .166667 Dado : .168738
+            Rana 4 : 0-4-3-1-2-0- | Fitness .0125 | Probabilidad  Dado : .168738
+        mejor rana :0 -> 0-4-3-1-2-0-
+        peor rana  :2 -> 4-2-0-3-1-4-
+    Rana que se queda  0-1-2- de submemeplex 2
+Iteración : 2
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .666667 Dado : .033352
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad .666667 Dado : .828274
+            Rana 1 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .5 Dado : .828274
+            Rana 2 : 2-4-0-3-1-2- | Fitness .013333 | Probabilidad .333333 Dado : .828274
+            Rana 3 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .166667 Dado : .828274
+            Rana 4 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad  Dado : .828274
+        mejor rana :2 -> 2-4-0-3-1-2-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .666667 Dado : .994322
+            Rana 1 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .5 Dado : .994322
+            Rana 2 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad .333333 Dado : .994322
+            Rana 3 : 2-4-0-3-1-2- | Fitness .013333 | Probabilidad .166667 Dado : .994322
+        mejor rana :3 -> 2-4-0-3-1-2-
+        peor rana  :1 -> 4-2-0-3-1-4-
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .132331
+            Rana 1 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad .666667 Dado : .132331
+            Rana 2 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .333333 Dado : .132331
+        mejor rana :2 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0-1-2- de submemeplex 1
+Iteración : 3
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .357186
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .560559
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .610459
+            Rana 1 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .666667 Dado : .610459
+            Rana 2 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .333333 Dado : .610459
+            Rana 3 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad  Dado : .610459
+        mejor rana :1 -> 3-2-0-1-4-3-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0-1- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .865028
+            Rana 1 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad .666667 Dado : .865028
+            Rana 2 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad .333333 Dado : .865028
+        mejor rana :2 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 4
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .849896
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .827986
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .75529
+            Rana 1 : 3-2-0-1-4-3- | Fitness .012987 | Probabilidad .666667 Dado : .75529
+        mejor rana :1 -> 3-2-0-1-4-3-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .563893
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 5
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .236499
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .410469
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .768701
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .648332
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 6
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .557772
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .259956
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .932984
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .677606
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 7
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .746066
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .100729
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .992234
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .627776
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 8
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .293443
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .561627
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .538861
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .816316
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 9
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .856185
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .566007
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .042258
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .345497
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 10
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .42716
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .819708
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .631098
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .247224
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 11
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .130704
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .659588
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .259158
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .791837
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 12
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .300364
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .592027
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .83211
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .607489
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 13
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .633626
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .166751
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .943928
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .660394
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 14
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .981288
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .842159
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .398403
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .868145
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 15
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .16997
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .236331
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .422671
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .932624
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 16
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .83604
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .366546
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .838888
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .795559
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 17
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .021699
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .794143
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .008843
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .283888
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 18
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .785728
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .409792
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .136733
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .416791
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 19
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .779371
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .521477
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .517627
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .898185
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 20
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .000797
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .141147
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .377242
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .15404
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 21
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .268619
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .384745
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .994149
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .126692
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 22
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .6177
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .878467
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .835028
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .014026
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 23
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .167605
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .174113
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .175527
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .19083
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 24
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .397037
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .698474
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .411183
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .764158
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 25
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .8207
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .463599
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .770138
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .506221
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 26
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .583184
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .548221
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .821761
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .223834
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 27
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .030018
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .527137
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .881023
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .459811
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 28
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .324532
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .500218
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .867348
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .028823
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 29
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .859088
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .268632
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .664004
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .451295
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 30
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .372397
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .712196
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .177859
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .143232
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 31
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .959115
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .994817
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .116284
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .611615
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 32
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .234265
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .945904
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .019754
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .080897
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 33
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .110294
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .753469
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .077485
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .537198
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 34
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .371009
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .871022
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .570856
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .720398
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 35
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .562984
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .770315
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .096674
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .090563
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 36
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .997444
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .375217
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .689494
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .667386
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 37
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .306765
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .146704
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .331741
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .128405
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 38
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .03447
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .959888
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .391761
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .108504
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 39
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .28574
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .626906
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .547106
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .588367
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 40
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .431938
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .210146
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .989569
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .084114
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 41
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .507383
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .800126
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .349517
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .571063
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 42
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .422734
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .33015
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .657814
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .988067
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 43
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .697776
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .943607
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .888311
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .602081
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 44
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .615522
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .087296
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .145788
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .583898
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 45
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .305322
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .448897
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .304849
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .087561
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 46
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .614162
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .891349
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .046427
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .150406
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 47
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .361708
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .968981
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .251457
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .744103
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 48
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .323916
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .982488
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .28846
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .352838
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
+Iteración : 49
+    Memeplex : 0
+        Submemeplex : 0
+            Rana 0 : 4-2-0-3-1-4- | Fitness .012346 | Probabilidad 1 Dado : .780747
+        mejor rana :0 -> 4-2-0-3-1-4-
+        peor rana  :0 -> 4-2-0-3-1-4-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 1-0-4-3-2-1- | Fitness .0125 | Probabilidad 1 Dado : .01256
+        mejor rana :0 -> 1-0-4-3-2-1-
+        peor rana  :0 -> 1-0-4-3-2-1-
+    Rana que se queda  0- de submemeplex 1
+    Memeplex : 1
+        Submemeplex : 0
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .58318
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 0
+        Submemeplex : 1
+            Rana 0 : 0-4-2-3-1-0- | Fitness .012195 | Probabilidad 1 Dado : .197318
+        mejor rana :0 -> 0-4-2-3-1-0-
+        peor rana  :0 -> 0-4-2-3-1-0-
+    Rana que se queda  0- de submemeplex 1
