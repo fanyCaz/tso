@@ -396,6 +396,9 @@ namespace pia
                         if(nuevosCaminos.Count > 0){
                             memeplexes[me].ranas[r].caminos = nuevosCaminos;
                         }
+                        //archivo.WriteLine($"        mejor rana :{ind} -> { imprimirCaminoTxt(rnsDesc.First().camino) } Costo: {rnsDesc.First().costo}");
+                        //ind = mms.ranas[k].caminos.IndexOf(rnsDesc.Last());
+                        //archivo.WriteLine($"        peor rana  :{ind} -> { imprimirCaminoTxt(rnsDesc.Last().camino) } ");
                         mejorSubmemeplex.Add(new Tuple<int, Camino>(r, ranasOrdenadas.First()));
                     }
                     var delSubmemeplx = mejorSubmemeplex.OrderByDescending(x => x.Item2.fitness).First();
