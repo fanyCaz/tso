@@ -373,7 +373,7 @@ namespace pia
                     var rOrd = ranas[cont].caminos.OrderByDescending(x => x.fitness).ToList();
                     ranasSub.Add(new Rana(rOrd));
                     cont++;
-                    mejorCaminoGlobal = rOrd[3];
+                    mejorCaminoGlobal = rOrd[4];
                 }
                 memeplexes.Add(new Mememplex( ranasSub ) );
             }
@@ -390,8 +390,8 @@ namespace pia
             Rana nuevoSubmemeplex;
             //for(int i = 0; i < cantIteraciones; i++){
                 int iteracion = 0;
-            //while(mejorCaminoGlobal.fitness > mejorFitness){
-            while(iteracion < 1){
+            while(mejorCaminoGlobal.fitness > mejorFitness){
+            //while(iteracion < 1){
                 mejorFitness = mejorCaminoGlobal.fitness;
                 Console.WriteLine($"mejor : {mejorCaminoGlobal.fitness}");
                 //ACTUALIZAR MEMEPLEX
@@ -441,6 +441,7 @@ namespace pia
                 mejorCaminoGlobal = mejor.OrderByDescending(x => x.Item3.fitness).First().Item3;
                 
                 iteracion++;
+                Console.WriteLine(iteracion);
             }
             archivo.Close();
             //GUARDA EN EL ARCHIVO REPORTE LAS MEJORES RANAS POR ITERACION
