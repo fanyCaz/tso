@@ -1,0 +1,284 @@
+Iteración 0
+    Memeplex 0
+        SubMemeplex 0
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.23809523809523808 | Costo 77
+            Rana 3 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.19047619047619047 | Costo 77
+            Rana 4 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 1
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.2857142857142857 | Costo 77
+            Rana 2 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 2
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.2857142857142857 | Costo 77
+            Rana 2 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.23809523809523808 | Costo 77
+            Rana 3 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.19047619047619047 | Costo 79
+            Rana 4 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 3
+            Rana 0 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.3333333333333333 | Costo 77
+            Rana 1 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.2857142857142857 | Costo 77
+            Rana 2 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.23809523809523808 | Costo 77
+            Rana 3 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.19047619047619047 | Costo 79
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 4
+            Rana 0 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.3333333333333333 | Costo 77
+            Rana 1 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.2857142857142857 | Costo 77
+            Rana 2 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.23809523809523808 | Costo 77
+            Rana 3 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+    Memeplex 1
+        SubMemeplex 0
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 1
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.2857142857142857 | Costo 77
+            Rana 2 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 2
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 3
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.2857142857142857 | Costo 77
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 4
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 2-3-0-1-4-2- | Fitness .01299 | Probabilidad 0.23809523809523808 | Costo 77
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-2-0-1-3-4- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 1-2-0-3-4-1- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+Iteración 1
+    Memeplex 0
+        SubMemeplex 0
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.19047619047619047 | Costo 79
+            Rana 4 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 1
+            Rana 0 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.19047619047619047 | Costo 85
+        SubMemeplex 2
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 3
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.23809523809523808 | Costo 76
+        SubMemeplex 4
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.23809523809523808 | Costo 76
+            Rana 3 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+    Memeplex 1
+        SubMemeplex 0
+            Rana 0 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.19047619047619047 | Costo 85
+        SubMemeplex 1
+            Rana 0 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 2
+            Rana 0 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.19047619047619047 | Costo 85
+        SubMemeplex 3
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 4
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+            Rana 4 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 4-3-0-2-1-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+Iteración 2
+    Memeplex 0
+        SubMemeplex 0
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.19047619047619047 | Costo 79
+            Rana 4 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.14285714285714285 | Costo 82
+        SubMemeplex 1
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.19047619047619047 | Costo 85
+        SubMemeplex 2
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 3
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.23809523809523808 | Costo 76
+        SubMemeplex 4
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+    Memeplex 1
+        SubMemeplex 0
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.19047619047619047 | Costo 85
+        SubMemeplex 1
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 2
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.19047619047619047 | Costo 85
+        SubMemeplex 3
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+        SubMemeplex 4
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+Iteración 3
+    Memeplex 0
+        SubMemeplex 0
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.23809523809523808 | Costo 79
+            Rana 3 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+        SubMemeplex 1
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.23809523809523808 | Costo 85
+        SubMemeplex 2
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+        SubMemeplex 3
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.2857142857142857 | Costo 76
+            Rana 2 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.23809523809523808 | Costo 76
+        SubMemeplex 4
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+    Memeplex 1
+        SubMemeplex 0
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 1
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+        SubMemeplex 2
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.23809523809523808 | Costo 85
+        SubMemeplex 3
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+        SubMemeplex 4
+            Rana 0 : 2-0-1-3-4-2- | Fitness .01316 | Probabilidad 0.3333333333333333 | Costo 76
+            Rana 1 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-0-1-2-3-4- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+Iteración 4
+    Memeplex 0
+        SubMemeplex 0
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
+            Rana 1 : 2-1-0-3-4-2- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+        SubMemeplex 1
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 1-4-0-2-3-1- | Fitness .01176 | Probabilidad 0.23809523809523808 | Costo 85
+        SubMemeplex 2
+            Rana 0 : 2-1-0-3-4-2- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+        SubMemeplex 3
+            Rana 0 : 2-1-0-3-4-2- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+        SubMemeplex 4
+            Rana 0 : 2-1-0-3-4-2- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
+    Memeplex 1
+        SubMemeplex 0
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
+            Rana 1 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 3-4-0-2-1-3- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 1
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+        SubMemeplex 2
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+        SubMemeplex 3
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
+            Rana 1 : 2-1-0-3-4-2- | Fitness .01266 | Probabilidad 0.2857142857142857 | Costo 79
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+            Rana 3 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.19047619047619047 | Costo 82
+        SubMemeplex 4
+            Rana 0 : 2-1-0-3-4-2- | Fitness .01266 | Probabilidad 0.3333333333333333 | Costo 79
+            Rana 1 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.2857142857142857 | Costo 82
+            Rana 2 : 0-2-1-3-4-0- | Fitness .0122 | Probabilidad 0.23809523809523808 | Costo 82
+        SubMemeplex 5
+            Rana 0 : 4-0-1-3-2-4- | Fitness .01389 | Probabilidad 0.3333333333333333 | Costo 72
