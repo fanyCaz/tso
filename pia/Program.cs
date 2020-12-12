@@ -238,28 +238,43 @@ namespace pia
             Camino c = new Camino(nuevoCamino,fit,cst);
             return nuevoCamino;
         }
-        static List<Mememplex> localSearch(List<Mememplex> memes){
+        static List<Mememplex> localSearch(List<Mememplex> memes, Camino Pglobal){
             //BUSCAR POR MEMEPLEX, HACER UNA BUSQUEDA DE LAS RANAS
                 //ORDENAR POR FITNESS
                 //LA PEOR, TIENE QUE SER ACTUALIZADA
             foreach(Mememplex meme in memes){
-                //Console.WriteLine("memeplex otro");
+                Console.WriteLine("memeplex otro");
                 foreach(Rana r in meme.ranas){
                     //A cada rana le acomoda sus caminos por fitness
-                    var ordenados = r.caminos.OrderByDescending(y => y.fitness);
-                    Camino peorRana = ordenados.First();
-                    Camino mejorRana = r.caminos.Last();
-                    int inx = r.caminos.IndexOf(peorRana);
-                    Console.WriteLine($"nueva actualizacion {inx}");
-                    Console.WriteLine("peor  " + peorRana.fitness );
-                    Console.WriteLine("mejor " + mejorRana.fitness );
-                    r.caminos[inx].setCamino( ActualizarPeorRana(peorRana,mejorRana) );
+                    Console.WriteLine("rana otra");
+                    int inx = r.caminos.Count-1;
+/*                     Console.WriteLine(r.caminos[0].fitness);
+                    Console.WriteLine(r.caminos[inx].fitness); */
+                    Camino mejorRana = r.caminos[0];
+                    Camino peorRana = r.caminos[inx];
+                    Console.WriteLine(mejorRana.fitness);
+                    Console.WriteLine(peorRana.fitness);
+                    
+                    int[] newCamnio = ActualizarPeorRana(peorRana,mejorRana);
+                    
+                    int newCosto = getCosto(newCamnio);
+                    double newFit = getFitness(newCosto);
+                    //ACTUALIZA A LA PEOR RANA
+                    if(newFit < peorRana.fitness){
+                        r.caminos[inx] = Pglobal;
+                    }else{
+                        r.caminos[inx] = new Camino(newCamnio,newFit,newCosto);
+                    }
+                    r.caminos = r.caminos.OrderByDescending(x => x.fitness).ToList();
+                    Console.WriteLine($"nuevo costo {newCosto} nuevo fit {newFit}");
+                    
                     foreach(Camino c in r.caminos){     //actualiza costo
+                        Console.WriteLine(c.fitness);
                         c.setCosto( getCosto(c.camino) );
                         c.setFitness( getFitness(c.costo) );
                     }
                     Console.WriteLine(" ya actualizada");
-                    Console.WriteLine("actz  " + r.caminos[inx].fitness );
+                    //Console.WriteLine("actz  " + r.caminos[inx].fitness );
                 }
             }
             return memes;
@@ -349,6 +364,7 @@ namespace pia
             List<Mememplex> memeplexes = new List<Mememplex>();
             
             //CONSTRUIR M MEMEPLEXES
+            Camino mejorCaminoGlobal = new Camino(caminos[0].camino,1,0) ;
             int cont = 0;
             for(int i = 0; i < m; i++){
                 List<Rana> ranasSub = new List<Rana>();
@@ -357,14 +373,11 @@ namespace pia
                     var rOrd = ranas[cont].caminos.OrderByDescending(x => x.fitness).ToList();
                     ranasSub.Add(new Rana(rOrd));
                     cont++;
-                    Console.WriteLine("nuevo");
-                    foreach(var ww in rOrd){
-                        Console.WriteLine( ww.fitness );
-                    }
+                    mejorCaminoGlobal = rOrd[0];
                 }
                 memeplexes.Add(new Mememplex( ranasSub ) );
             }
-            return;
+
             //LOCAL EXPLORATION
             List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
             
@@ -372,17 +385,17 @@ namespace pia
             List<int> costos = new List<int>();
             List<Tuple<int,int,Camino>> mejor = new List<Tuple<int,int,Camino>>();
             System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"));
-            Camino mejorCaminoGlobal = new Camino(caminos[0].camino,1,0) ;
+            
             double mejorFitness = 0.0;
             Rana nuevoSubmemeplex;
             //for(int i = 0; i < cantIteraciones; i++){
                 int iteracion = 0;
             //while(mejorCaminoGlobal.fitness > mejorFitness){
-            while(iteracion < 2){
+            while(iteracion < 1){
                 mejorFitness = mejorCaminoGlobal.fitness;
                 Console.WriteLine($"mejor : {mejorCaminoGlobal.fitness}");
                 //ACTUALIZAR MEMEPLEX
-                memeplexes = localSearch(memeplexes);
+                memeplexes = localSearch(memeplexes,mejorCaminoGlobal);
                 //BUSCA MEJOR RANA
                 archivo.WriteLine($"Iteración {iteracion}");
                 List<Tuple<int,int,Camino>> mejorMemeplex = new List<Tuple<int, int, Camino>>();
