@@ -391,7 +391,7 @@ namespace pia
             //for(int i = 0; i < cantIteraciones; i++){
                 int iteracion = 0;
             //while(mejorCaminoGlobal.fitness > mejorFitness){
-            while(iteracion < 1){
+            while(iteracion < 2){
                 mejorFitness = mejorCaminoGlobal.fitness;
                 Console.WriteLine($"mejor : {mejorCaminoGlobal.fitness}");
                 //ACTUALIZAR MEMEPLEX
@@ -410,7 +410,7 @@ namespace pia
                             double dado = numAzar();
                             Camino at = memeplexes[me].ranas[r].caminos[cm];
                             double pj = (double)2*(n+1-cm)/(n*(n+1));
-                            archivo.WriteLine($"            Rana {cm} : {imprimirCaminoTxt(at.camino)} | Fitness {at.fitness:#.#####} | Probabilidad {pj} | Costo {at.costo} | Dado {dado}");
+                            archivo.WriteLine($"            Rana {cm} : {imprimirCaminoTxt(at.camino)} | Fitness {at.fitness:#.#####} | Costo {at.costo} | Probabilidad {pj:#.#####} | Dado {dado}");
                             if( dado > pj || cm == 0){      //la mejor
                                 nuevosCaminos.Add( memeplexes[me].ranas[r].caminos[cm] );
                                 //nuevosCaminos.Add( ranasOrdenadas[cm] );
