@@ -44,8 +44,6 @@ namespace pia
         static AdjacencyList grafo;
         static List<Tuple<int,int>> arcs = new List<Tuple<int, int>>();
         static List<int> camino = new List<int>();
-        static Camino Pw;
-        static Camino Pb;
         static AdjacencyList leerGrafo(){
             AdjacencyList grafo;
             string archivoTxt = Path.Combine(Directory.GetCurrentDirectory(),"adyacenciaExamen.txt");
@@ -186,9 +184,7 @@ namespace pia
                 return new int[]{500,0};
             }
             costo += costoMinimo;   //PARA COSTO TOTAL
-            //costos.Add(costoMinimo);//PARA COSTO DE ARCO
             var a = new Tuple<int, int>(nodoInicial,nodoSiguiente);//ARCO POR EL QUE ESTA PASANDO
-            arcs.Add( a );
             return busqueda(raiz,nodoSiguiente,visitados,costo);
         }
         static int[] ActualizarPeorRana(Camino peor, Camino mejor){
@@ -215,7 +211,6 @@ namespace pia
                 if(peor.camino[i] == nodoNuevo1){
                     tmpInd1 = i;
                     nObj = nuevoCamino[indNuevo];
-                    //Console.WriteLine($" nodo obj1 {nObj} temp 1: {tmpInd1}");
                     nuevoCamino[tmpInd1] = nObj;
                     nuevoCamino[indNuevo] = nodoNuevo1;
                     break;
@@ -232,7 +227,6 @@ namespace pia
                     break;
                 }
             }
-            //Console.WriteLine($"ind 1: {indNuevo} ind 2: {indNuevo2}");
             int cst = getCosto(nuevoCamino);
             double fit = getFitness(cst);
             Camino c = new Camino(nuevoCamino,fit,cst);
@@ -246,36 +240,23 @@ namespace pia
                 Console.WriteLine("memeplex otro");
                 foreach(Rana r in meme.ranas){
                     //A cada rana le acomoda sus caminos por fitness
-                    //Console.WriteLine("rana otra");
                     int inx = r.caminos.Count-1;
-/*                     Console.WriteLine(r.caminos[0].fitness);
-                    Console.WriteLine(r.caminos[inx].fitness); */
                     Camino mejorRana = r.caminos[0];
                     Camino peorRana = r.caminos[inx];
-                    /* Console.WriteLine(mejorRana.fitness);
-                    Console.WriteLine(peorRana.fitness); */
-                    
                     int[] newCamnio = ActualizarPeorRana(peorRana,mejorRana);
-                    
                     int newCosto = getCosto(newCamnio);
                     double newFit = getFitness(newCosto);
-                    //ACTUALIZA A LA PEOR RANA
+                    //ACTUALIZA A LA PEOR RANA, SI NO ES MEJOR FIT, SE USA LA MEJOR GLOBAL
                     if(newFit < peorRana.fitness){
                         r.caminos[inx] = Pglobal;
-                        //Console.WriteLine("toma en cuenta global");
                     }else{
                         r.caminos[inx] = new Camino(newCamnio,newFit,newCosto);
                     }
                     r.caminos = r.caminos.OrderByDescending(x => x.fitness).ToList();
-                    //Console.WriteLine($"nuevo costo {newCosto} nuevo fit {newFit}");
-                    
-                    foreach(Camino c in r.caminos){     //actualiza costo
-                        //Console.WriteLine(c.fitness);
+                    foreach(Camino c in r.caminos){
                         c.setCosto( getCosto(c.camino) );
                         c.setFitness( getFitness(c.costo) );
                     }
-                    //Console.WriteLine(" ya actualizada");
-                    //Console.WriteLine("actz  " + r.caminos[inx].fitness );
                 }
             }
             return memes;
@@ -316,9 +297,6 @@ namespace pia
             //Variables miscelaneas
             grafo = leerGrafo();
             bool[] visitados = fillArrayBool(grafo.tamanioGrafo());
-            List<Camino> caminos = new List<Camino>();
-            //List<int> costos = new List<int>();
-            //List<CaminoOptimo> caminos = new List<CaminoOptimo>();
             /*Variables algoritmo*/
             Random rnd = new Random();
             int numRnd = rnd.Next(10,20);
@@ -332,10 +310,10 @@ namespace pia
 
             //3.1 POSITION OF INDIVIDUAL FROG
             //CAMINOS OPTIMOS POSIBLES
-            //int[] camino = new int[cantNodos];
-            //OBTENER TODOS LOS CAMINOS POSIBLES
+            //OBTENER TODOS LOS CAMINOS INICIALES POSIBLES
             //DE MANERA ALEATORIA ASIGNARLOS A DIFERENTES RANAS
             //CADA RANA AL PRINCIPIO TENDRÁ UN CAMINO IGUAL ->CADA SUBMEMEPLEX SERÁ IGUAL
+            List<Camino> caminos = new List<Camino>();
             caminos.Clear();
             for(int i = 0; i < cantNodos; i++){
                 camino.Clear();
@@ -360,10 +338,8 @@ namespace pia
             for(int i = 0; i < f; i++){
                 //a cada rana, asignarle una lista de caminos
                 ranas.Add(new Rana(obtenerCaminos(q,caminos)) );
-                //EVALUAR EL FITNESS ??? aqui ya hice el fitness de cada camino
             }
             List<Mememplex> memeplexes = new List<Mememplex>();
-            
             //CONSTRUIR M MEMEPLEXES
             Camino mejorCaminoGlobal = new Camino(caminos[0].camino,1,0) ;
             int cont = 0;
@@ -374,25 +350,18 @@ namespace pia
                     var rOrd = ranas[cont].caminos.OrderByDescending(x => x.fitness).ToList();
                     ranasSub.Add(new Rana(rOrd));
                     cont++;
+                    //Obtener peor camino de una rana cualquiera
                     mejorCaminoGlobal = rOrd[4];
                 }
                 memeplexes.Add(new Mememplex( ranasSub ) );
             }
 
             //LOCAL EXPLORATION
-            List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
-            
-            int cantIteraciones = 5;
-            List<int> costos = new List<int>();
             List<Tuple<int,int,Camino>> mejor = new List<Tuple<int,int,Camino>>();
             System.IO.StreamWriter archivo = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"ranas.txt"));
-            
             double mejorFitness = 0.0;
-            Rana nuevoSubmemeplex;
-            //for(int i = 0; i < cantIteraciones; i++){
-                int iteracion = 0;
+            int iteracion = 0;
             while(mejorCaminoGlobal.fitness > mejorFitness){
-            //while(iteracion < 1){
                 mejorFitness = mejorCaminoGlobal.fitness;
                 Console.WriteLine($"mejor fitness {mejorFitness}");
                 //ACTUALIZAR MEMEPLEX
@@ -406,17 +375,13 @@ namespace pia
                     for(int r = 0; r < memeplexes[me].ranas.Count; r++){    //SUBMEMEPLEXES
                         archivo.WriteLine($"        SubMemeplex {r}");
                         List<Camino> nuevosCaminos = new List<Camino>();
-                        //List<Camino> ranasOrdenadas = memeplexes[me].ranas[r].caminos.OrderByDescending(z => z.fitness).ToList();
                         for(int cm = 0; cm < memeplexes[me].ranas[r].caminos.Count; cm++){  //RANAS aka CAMINOS
                             double dado = numAzar();
                             Camino at = memeplexes[me].ranas[r].caminos[cm];
                             double pj = (double)2*(n+1-cm)/(n*(n+1));
                             archivo.WriteLine($"            Rana {cm} : {imprimirCaminoTxt(at.camino)} | Fitness {at.fitness:#.#####} | Costo {at.costo} | Probabilidad {pj:#.#####} | Dado {dado}");
-                            //Console.WriteLine("nueva rana");
-                            if( dado > pj || cm == 0){      //la mejor
+                            if( dado > pj || cm == 0){//Rana que entra con la probabilidad
                                 nuevosCaminos.Add( memeplexes[me].ranas[r].caminos[cm] );
-                                //Console.WriteLine( memeplexes[me].ranas[r].caminos[cm].fitness );
-                                //nuevosCaminos.Add( ranasOrdenadas[cm] );
                             }
                             Thread.Sleep(1);
                         }
@@ -425,31 +390,19 @@ namespace pia
                             memeplexes[me].ranas[r].caminos = nuevosCaminos;
                         }
                         memeplexes[me].ranas[r].caminos = memeplexes[me].ranas[r].caminos.OrderBy(z => z.fitness).ToList();
-                        //archivo.WriteLine($"        mejor rana :{ind} -> { imprimirCaminoTxt(rnsDesc.First().camino) } Costo: {rnsDesc.First().costo}");
-                        //ind = mms.ranas[k].caminos.IndexOf(rnsDesc.Last());
-                        //archivo.WriteLine($"        peor rana  :{ind} -> { imprimirCaminoTxt(rnsDesc.Last().camino) } ");
                         mejorSubmemeplex.Add(new Tuple<int, Camino>(r, nuevosCaminos.First()));
                     }
                     var delSubmemeplx = mejorSubmemeplex.OrderByDescending(x => x.Item2.fitness).First();
                     mejorMemeplex.Add( new Tuple<int, int, Camino>(me,delSubmemeplx.Item1,delSubmemeplx.Item2));
-                    
-                    
                 }
-                /* Console.WriteLine($"Mejor de Memeplex");
-                    Console.WriteLine(paraArchivo.fitness); */
                 archivo.WriteLine($"            Mejor de Memeplex");
                 Tuple<int,int,Camino> mejorMemeplexes = mejorMemeplex.OrderByDescending(x => x.Item3.fitness).First();
                 archivo.WriteLine("             " + imprimirCaminoTxt(mejorMemeplexes.Item3.camino) );
-                Console.WriteLine($"mejor de ambos memeplexes");
-                Console.WriteLine($"del mejor :fit {mejorMemeplexes.Item3.fitness} camino {imprimirCaminoTxt(mejorMemeplexes.Item3.camino)}");
                 mejor.Add( mejorMemeplexes );
                 Console.WriteLine($"mejor global ant: {mejorCaminoGlobal.fitness} camino { imprimirCaminoTxt(mejorCaminoGlobal.camino) }");
-                //Console.WriteLine( imprimirCaminoTxt(mejor.OrderByDescending(x => x.Item3.fitness).First().Item3.camino)  + "s");
                 mejorCaminoGlobal = mejorMemeplexes.Item3;
                 Console.WriteLine($"mejor global aft: {mejorCaminoGlobal.fitness} camino { imprimirCaminoTxt(mejorCaminoGlobal.camino) }");
-                //Console.WriteLine(imprimirCaminoTxt(mejorCaminoGlobal.camino));
                 iteracion++;
-                Console.WriteLine(iteracion);
             }
             archivo.Close();
             //GUARDA EN EL ARCHIVO REPORTE LAS MEJORES RANAS POR ITERACION
@@ -460,7 +413,7 @@ namespace pia
                     for(int i = 0; i < mejor.Count; i++)
                     {
                         file.Write($"Iteración {i} -> ");
-                        file.WriteLine($"Camino: {mejor[i].Item3.camino} Costo {mejor[i].Item3.costo}");
+                        file.WriteLine($"Camino: { imprimirCaminoTxt(mejor[i].Item3.camino)} Costo {mejor[i].Item3.costo}");
                     }
                     file.Close();
                 }
@@ -468,88 +421,6 @@ namespace pia
 
                 Console.WriteLine("No se ha guardado el archivo" + e);
             }
-            
-            /* foreach(var mej in mejor){
-                Console.WriteLine($"r : {mej.Item1}");
-            } */
-            
-            // return;
-            /* List<string> mejoresCaminos = new List<string>();
-            double[] cstsY  = new double[mejor.Count];
-            //var ordenados = mejor.OrderBy(x => x.Item1).Take(cantIteraciones).ToList();
-            for(int i = 0; i < mejor.Count; i++){
-                //Console.WriteLine(mejor[i]);
-                cstsY[i] = mejor[i].Item3.costo;
-                var cam = imprimirCaminoTxt(mejor[i].Item3.camino);
-                mejoresCaminos.Add(cam);
-            }
-            #region Guardar Caminos y Costos en TXT de Reporte
-            
-            try{
-                using(System.IO.StreamWriter file = new System.IO.StreamWriter(Path.Combine(Directory.GetCurrentDirectory(),"caminos.txt")))
-                {
-                    for(int i = 0; i < mejor.Count; i++)
-                    {
-                        file.WriteLine($"Iteración {i}");
-                        file.WriteLine($"Camino: {mejoresCaminos[i]} Costo {cstsY[i]}");
-                    }
-                    file.Close();
-                }
-            }catch(Exception){
-                Console.WriteLine("No se ha guardado el archivo");
-            }
-            #endregion
-            //Crear Gráfica
-            var plt = new ScottPlot.Plot(600,400);
-            
-            int lenCostos = cstsY.Length;
-            double[] iterX = Enumerable.Range(0,lenCostos).Select(x=>(double)x).ToArray();
-            plt.PlotScatter(iterX,cstsY);
-            plt.Legend();
-            plt.Title("Costos por Iteración");
-            plt.XLabel("Número de Iteración");
-            plt.YLabel("Costo");
-            string nombreImagen = string.Format("grafica.png");
-            try{
-                plt.SaveFig(nombreImagen);
-                Console.WriteLine("Se ha guardado la gráfica");
-            }catch(Exception e){
-                Console.WriteLine("No se pudo guardar la gráfica");
-                Console.WriteLine(e.Message);
-            } */
-            
-            /* foreach(var i in costos){
-                Console.WriteLine($"cst : {i}");
-            } */
-            #region verificar resultados
-            
-            /////LISTA DE MEJORA DE SOLUCIONES EN EL MISMO ARCHIVO,
-            //REPORTE DE MEJORA (GRAFICA)
-            //EVOLUCIÓN DE MEJORA (TXT)
-            //MANTENER LA MEJOR SOLUCION GLOBAL COMO ELEMENTO QUE NO SE PUEDE QUITAR
-            //ELIMINAR MEMEPLEXES VACÍOS
-            //EN LUGAR DE FOR, MIENTRAS LA MEJOR SOLUCION GLOBAL SIGA SIENDO MEJORADA, SEGUIR CON EL PROGRAMA,
-                    // Y SI SIGUEN HABIENDO MEMEPLEXES, CONTINUAR, SI SOLO HAY UNO, DETENERLO
-                    //SINO, DETENER WHILE
-            //AGREGAR EN UN RANDOM VALORES DE TIEMPO DE COMPUTADORA COMO SEMILLA (SEGUNDOS)
-
-            /* List<Camino> mejoresCaminos = new List<Camino>();
-            foreach(var mms in memeplexes){ //ranas
-                //Console.WriteLine($"memeplex nuevo");
-                foreach(var rana in mms.ranas){
-                    var menosFitness = rana.caminos.OrderBy(x => x.costo);
-                    //var i = menosFitness.First(); //Menor fitness
-                    var j = menosFitness.Last();  //Mejor fitness
-                    mejoresCaminos.Add(j);
-                }
-            } */
-            //Console.WriteLine($"cant de mejores caminos {mejoresCaminos.Count}");
-            /* foreach(var i in mejoresCaminos){
-                Console.WriteLine("Camino :");
-                imprimirArray(i.camino);
-                Console.WriteLine($" costo camino {i.costo}");
-            } */
-            #endregion
         }
     }
 }
