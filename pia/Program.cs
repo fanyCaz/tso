@@ -394,7 +394,7 @@ namespace pia
             while(mejorCaminoGlobal.fitness > mejorFitness){
             //while(iteracion < 1){
                 mejorFitness = mejorCaminoGlobal.fitness;
-                Console.WriteLine($"mejor global aft: {mejorCaminoGlobal.fitness} camino { imprimirCaminoTxt(mejorCaminoGlobal.camino) }");
+                Console.WriteLine($"mejor fitness {mejorFitness}");
                 //ACTUALIZAR MEMEPLEX
                 memeplexes = localSearch(memeplexes,mejorCaminoGlobal);
                 //BUSCA MEJOR RANA
