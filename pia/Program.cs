@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using ScottPlot;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace pia
 {
@@ -103,7 +104,11 @@ namespace pia
                 Console.WriteLine($"{array[i]}");
             }
         }
-
+        static double numAzar(){
+            //Xn+1=(2xo + c)mod m
+            int seg = DateTime.Now.Millisecond;
+            return (double)((8*seg + 16)%100)*.01;  //ejemplo valido
+        }
         public static void imprimirCamino(Camino camino){
             char[] letras = new char[]{'A','B','C','D','E','F','G','H','I'};
             Console.WriteLine($"camino{camino.ToString()}");
@@ -355,7 +360,6 @@ namespace pia
                 }
                 memeplexes.Add(new Mememplex( ranasSub ) );
             }
-
             //LOCAL EXPLORATION
             List<Tuple<int,int[]>> posibles = new List<Tuple<int, int[]>>();
             
@@ -384,13 +388,14 @@ namespace pia
                         List<Camino> nuevosCaminos = new List<Camino>();
                         List<Camino> ranasOrdenadas = memeplexes[me].ranas[r].caminos.OrderByDescending(z => z.fitness).ToList();
                         for(int cm = 0; cm < ranasOrdenadas.Count; cm++){  //RANAS aka CAMINOS
-                            double dado = rnd.NextDouble();
+                            double dado = numAzar();
                             Camino at = ranasOrdenadas[cm];
                             double pj = (double)2*(n+1-cm)/(n*(n+1));
-                            archivo.WriteLine($"            Rana {cm} : {imprimirCaminoTxt(at.camino)} | Fitness {at.fitness:#.#####} | Probabilidad {pj} | Costo {at.costo}");
+                            archivo.WriteLine($"            Rana {cm} : {imprimirCaminoTxt(at.camino)} | Fitness {at.fitness:#.#####} | Probabilidad {pj} | Costo {at.costo} | Dado {dado}");
                             if( dado > pj || cm == 0){      //la mejor
                                 nuevosCaminos.Add( ranasOrdenadas[cm] );
                             }
+                            Thread.Sleep(1);
                         }
                         //AGREGAR A ESTA RANA LAS QUE QUEDARON
                         if(nuevosCaminos.Count > 0){

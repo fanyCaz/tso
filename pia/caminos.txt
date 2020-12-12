@@ -1,5 +1,1 @@
-Iteración 0 -> Camino: System.Int32[] Costo 83
-Iteración 1 -> Camino: System.Int32[] Costo 83
-Iteración 2 -> Camino: System.Int32[] Costo 77
-Iteración 3 -> Camino: System.Int32[] Costo 82
-Iteración 4 -> Camino: System.Int32[] Costo 77
+Iteración 0 -> Camino: System.Int32[] Costo 67
