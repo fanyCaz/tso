@@ -368,7 +368,7 @@ namespace pia
             Rana nuevoSubmemeplex;
             //for(int i = 0; i < cantIteraciones; i++){
                 int iteracion = 0;
-            while(mejorCaminoGlobal.fitness > mejorFitness || iteracion < 5){
+            while(mejorCaminoGlobal.fitness > mejorFitness){
                 mejorFitness = mejorCaminoGlobal.fitness;
                 Console.WriteLine($"mejor : {mejorCaminoGlobal.fitness}");
                 //ACTUALIZAR MEMEPLEX
