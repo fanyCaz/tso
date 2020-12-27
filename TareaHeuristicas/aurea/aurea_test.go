@@ -23,14 +23,5 @@ func TestX2Value(t *testing.T){
 	got := xValue(xmax,xmin,r,false)
 	if got != want{
 		t.Errorf("Result : %f . Wanted : %f",got,want)
-	}	
-}
-
-func TestFuncX(t *testing.T){
-	var want float64 = 1.764690354
-	var x float64 = 1.528
-	got := funcOfX(x)
-	if got != want{
-		t.Errorf("Result : %f . Wanted : %f",got,want)
 	}
 }
